@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Azure Status Feed</title>
+    <link>https://azure.status.microsoft/en-us/status/feed/</link>
+    <description>Current status of Microsoft Azure services</description>
+    <item>
+      <title>Virtual Machines - East US 2 - Investigating</title>
+      <link>https://azure.status.microsoft/en-us/status/incident-001</link>
+      <description>&lt;p&gt;&lt;strong&gt;Investigating&lt;/strong&gt;: A subset of customers using Virtual Machines in East US 2 may experience connectivity issues.&lt;/p&gt;</description>
+      <pubDate>Mon, 01 Mar 2026 14:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Cosmos DB - West Europe - Resolved</title>
+      <link>https://azure.status.microsoft/en-us/status/incident-002</link>
+      <description>&lt;p&gt;&lt;strong&gt;Resolved&lt;/strong&gt;: The connectivity disruption affecting Cosmos DB requests in West Europe has been mitigated.&lt;/p&gt;</description>
+      <pubDate>Mon, 01 Mar 2026 10:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

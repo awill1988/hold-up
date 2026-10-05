@@ -1,0 +1,20 @@
+[
+  {
+    "service_name": "Amazon Elastic Compute Cloud",
+    "summary": "Increased API Error Rates in us-east-1",
+    "date": 1740000000,
+    "status_description": "Degraded",
+    "description": "We are investigating increased API error rates and launch latencies for EC2 instances in the US-EAST-1 Region.",
+    "service": "ec2",
+    "region": "us-east-1"
+  },
+  {
+    "service_name": "Amazon Simple Storage Service",
+    "summary": "Elevated Error Rates in eu-west-1 [Resolved]",
+    "date": 1739900000,
+    "status_description": "Operating normally",
+    "description": "Between 10:00 AM and 11:30 AM UTC, S3 requests in eu-west-1 experienced elevated errors. The issue has been resolved and the service is operating normally.",
+    "service": "s3",
+    "region": "eu-west-1"
+  }
+]

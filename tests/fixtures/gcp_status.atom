@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Google Cloud Status Feed</title>
+  <updated>2026-03-01T15:00:00Z</updated>
+  <entry>
+    <title>Google Kubernetes Engine - Degraded Performance in us-central1</title>
+    <id>tag:status.cloud.google.com,2026:incident-gke-01</id>
+    <updated>2026-03-01T14:30:00Z</updated>
+    <link href="https://status.cloud.google.com/incidents/gke-01"/>
+    <summary>Our engineering team is investigating GKE control plane latencies in us-central1.</summary>
+  </entry>
+  <entry>
+    <title>[Resolved] Cloud Storage Latency in europe-west1</title>
+    <id>tag:status.cloud.google.com,2026:incident-gcs-02</id>
+    <updated>2026-03-01T12:00:00Z</updated>
+    <link href="https://status.cloud.google.com/incidents/gcs-02"/>
+    <summary>The incident is closed. Cloud Storage latency has been restored to normal levels.</summary>
+  </entry>
+</feed>

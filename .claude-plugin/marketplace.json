@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "awill1988",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Adam Williams",
+    "url": "https://github.com/awill1988"
+  },
+  "metadata": {
+    "description": "Developer infrastructure, cloud intelligence, and productivity plugins for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "provider-status",
+      "description": "Real-time VCS and Cloud infrastructure status awareness for Claude Code with curated feeds for AWS, GCP, Azure, GitHub, GitLab, and more",
+      "version": "1.0.0",
+      "source": {
+        "source": "git",
+        "url": "https://github.com/awill1988/claude-provider-status.git"
+      }
+    }
+  ]
+}

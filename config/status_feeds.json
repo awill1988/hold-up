@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "version": 1,
+  "description": "Curated status feeds for cloud and VCS infrastructure monitoring in Claude Code",
+  "cache_ttl_seconds": 300,
+  "timeout_seconds": 2.5,
+  "max_incident_age_hours": 72,
+  "feeds": [
+    {
+      "name": "AWS",
+      "category": "cloud",
+      "url": "https://health.aws.amazon.com/public/currentevents",
+      "format": "aws-json",
+      "enabled": true,
+      "tool_matchers": [
+        "aws",
+        "terraform",
+        "tofu",
+        "cdk",
+        "serverless",
+        "sam",
+        "pulumi"
+      ],
+      "keywords": [
+        "ec2",
+        "s3",
+        "lambda",
+        "ecs",
+        "eks",
+        "rds",
+        "dynamodb",
+        "iam",
+        "cloudformation",
+        "route53",
+        "vpc"
+      ]
+    },
+    {
+      "name": "Google Cloud",
+      "category": "cloud",
+      "url": "https://status.cloud.google.com/feed.atom",
+      "format": "atom",
+      "enabled": true,
+      "tool_matchers": [
+        "gcloud",
+        "gsutil",
+        "bq",
+        "terraform",
+        "tofu",
+        "kubectl",
+        "helm"
+      ],
+      "keywords": [
+        "compute engine",
+        "gke",
+        "cloud storage",
+        "cloud run",
+        "networking",
+        "iam",
+        "bigquery"
+      ]
+    },
+    {
+      "name": "Microsoft Azure",
+      "category": "cloud",
+      "url": "https://azure.status.microsoft/en-us/status/feed/",
+      "format": "rss",
+      "enabled": true,
+      "tool_matchers": [
+        "az",
+        "terraform",
+        "tofu",
+        "bicep",
+        "arm",
+        "kubectl",
+        "helm"
+      ],
+      "keywords": [
+        "virtual machines",
+        "aks",
+        "storage",
+        "entra",
+        "functions",
+        "cosmos"
+      ]
+    },
+    {
+      "name": "GitHub",
+      "category": "vcs",
+      "url": "https://www.githubstatus.com/history.rss",
+      "format": "rss",
+      "enabled": true,
+      "tool_matchers": [
+        "git",
+        "gh"
+      ],
+      "keywords": [
+        "actions",
+        "git operations",
+        "api requests",
+        "webhooks",
+        "codespaces",
+        "pull requests"
+      ]
+    },
+    {
+      "name": "GitLab",
+      "category": "vcs",
+      "url": "https://status.gitlab.com/pages/5b36dc6502d06804c08349f7/rss",
+      "format": "rss",
+      "enabled": true,
+      "tool_matchers": [
+        "git",
+        "gitlab",
+        "glab"
+      ],
+      "keywords": [
+        "ci/cd",
+        "git operations",
+        "runners",
+        "api",
+        "repositories"
+      ]
+    },
+    {
+      "name": "Bitbucket",
+      "category": "vcs",
+      "url": "https://bitbucket.status.atlassian.com/history.rss",
+      "format": "rss",
+      "enabled": true,
+      "tool_matchers": [
+        "git",
+        "bb"
+      ],
+      "keywords": [
+        "pipelines",
+        "git",
+        "api",
+        "cloud"
+      ]
+    },
+    {
+      "name": "Cloudflare",
+      "category": "network",
+      "url": "https://www.cloudflarestatus.com/history.rss",
+      "format": "rss",
+      "enabled": false,
+      "tool_matchers": [
+        "wrangler",
+        "cloudflared",
+        "curl"
+      ],
+      "keywords": [
+        "workers",
+        "dns",
+        "cdn",
+        "pages",
+        "r2"
+      ]
+    },
+    {
+      "name": "Docker",
+      "category": "containers",
+      "url": "https://www.dockerstatus.com/history.rss",
+      "format": "rss",
+      "enabled": false,
+      "tool_matchers": [
+        "docker",
+        "docker-compose"
+      ],
+      "keywords": [
+        "docker hub",
+        "builds",
+        "authentication"
+      ]
+    },
+    {
+      "name": "Datadog",
+      "category": "observability",
+      "url": "https://status.datadoghq.com/history.rss",
+      "format": "rss",
+      "enabled": false,
+      "tool_matchers": [
+        "datadog",
+        "dog"
+      ],
+      "keywords": [
+        "intake",
+        "alerts",
+        "metrics",
+        "logs",
+        "traces"
+      ]
+    }
+  ]
+}

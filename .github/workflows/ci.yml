@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.10", "3.11", "3.12", "3.13" ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run unit test suite
+        run: |
+          python3 -m unittest discover -s tests -p "test_*.py" -v
+
+  lint-and-validate:
+    name: Lint & Schema Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JSON syntax
+        run: |
+          python3 -c "import json, glob; [json.load(open(f)) for f in glob.glob('**/*.json', recursive=True)]"
+
+      - name: Verify Python syntax
+        run: |
+          python3 -m py_compile scripts/provider_status.py tests/test_engine.py
+
+      - name: Test hook CLI flags
+        run: |
+          python3 scripts/provider_status.py --list-feeds
+          python3 scripts/provider_status.py --event SessionStart
