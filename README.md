@@ -260,7 +260,7 @@ poetry run hold-up retry DECISION_ID
 poetry run hold-up wait DECISION_ID
 ```
 
-Qualification runs the separately frozen 48-case `qualification-v1.json` corpus
+Qualification runs the separately frozen 48-case `qualification-v2.json` corpus
 three times. The exposed 120-case development corpus remains available through
 `hold-up-evaluate` without `--qualification`; it cannot grant readiness.
 Enforcement requires pause
@@ -272,6 +272,23 @@ corpus hash. Changes invalidate readiness and cached pauses. Evaluation records
 the corpus hash before inference; tuning after qualification requires a new
 qualification version. These synthetic cases do not establish production
 reliability. The current model has not qualified for enforcement.
+
+Version `2` normalizes raw AWS event logs and supplies acquisition time at each
+evaluation, separately from deliberately old publication/update timestamps.
+Version `1` is retained as diagnostic evidence because its zero acquisition
+timestamps made the fresh-evidence labels invalid.
+
+The October 5, 2026 v2 run failed qualification: 144 attempts across three
+repetitions produced 119 inference timeouts and no pause predictions. Recall
+was `0%`; protected-action pauses were `0`. Attempt-duration p95 was `4.012 s`,
+including timed-out requests, so this is not a successful-inference latency
+claim. Both native clients passed deterministic contracts and permitted all
+sentinel actions in separately captured and live AWS tests. Complete real-model
+hook invocations remained below the five-second deadline, with a maximum of
+`4.557 s`. Real-model blocking verification was unsuccessful.
+
+See the [verification record](verification/2026-10-05/README.md) for raw synthetic
+responses, validation categories, acquisition metadata, and runner measurements.
 
 ### AWS evidence contract
 

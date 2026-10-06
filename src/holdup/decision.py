@@ -19,6 +19,8 @@ MAX_INPUT_BYTES = 16384  # 16 KiB
 MAX_RESPONSE_BYTES = 16384  # 16 KiB
 LEASE_SECONDS = 300
 POLICY_VERSION = 2
+QUALIFICATION_VERSION = 2
+QUALIFICATION_CORPUS = "qualification-v2.json"
 INFERENCE_SETTINGS = {
     "temperature": 0,
     "max_tokens": 512,
@@ -366,7 +368,7 @@ def enforcement_ready(root):
             and ready.get("policy_digest") == policy_digest()
             and ready.get("runtime_fingerprint") == runtime_fingerprint(root)
             and ready.get("corpus_hash") == corpus_hash()
-            and ready.get("qualification_version") == 1
+            and ready.get("qualification_version") == QUALIFICATION_VERSION
             and ready.get("passed") is True
         )
     except (ValueError, OSError, AttributeError, KeyError):
@@ -391,7 +393,7 @@ def policy_digest():
 
 def corpus_hash():
     return hashlib.sha256(
-        Path(__file__).with_name("data").joinpath("qualification-v1.json").read_bytes()
+        Path(__file__).with_name("data").joinpath(QUALIFICATION_CORPUS).read_bytes()
     ).hexdigest()
 
 

@@ -1,0 +1,49 @@
+{
+  "applied_template_sha256": "00d28aaf797be3635e16f2c2698aaaaef4cf0eb92716a2b798f2d006b078d449",
+  "suffix": "mes and evidence IDs must be copied exactly from referenced supplied reports.\n<|im_end|>\n<|im_start|>user\n{\"action\":{},\"reports\":[]}<|im_end|>\n<|im_start|>assistant\n<think></think>",
+  "settings": {
+    "temperature": 0,
+    "max_tokens": 512,
+    "response_format": {
+      "type": "json_object"
+    },
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "decision": {
+        "type": "string",
+        "enum": [
+          "allow",
+          "advise",
+          "pause"
+        ]
+      },
+      "reason": {
+        "type": "string"
+      },
+      "evidence_ids": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "providers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "decision",
+      "reason",
+      "evidence_ids",
+      "providers"
+    ]
+  }
+}

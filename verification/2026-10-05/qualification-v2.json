@@ -1,0 +1,2798 @@
+{
+  "model_sha256": "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2",
+  "policy_version": 2,
+  "policy_digest": "8a9f0d7081f76fd4a2700b97d208555fabf70f4d610b80c7bd64f7146209c323",
+  "runtime_fingerprint": "9066d2d980f8e7e1b228eda3b66a294e478f8803d67695498c9df1b01ce9b719",
+  "corpus_hash": "178bc57dd7b6f165da3bc07125d790892777cabcf8070fad233835ab61191f00",
+  "qualification_version": 2,
+  "passed": false,
+  "precision": 0,
+  "recall": 0.0,
+  "protected_pauses": 0,
+  "p95_seconds": 4.012072500016075,
+  "cases": 144,
+  "outcomes": [
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0085815830098
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 721,
+          "total_tokens": 778
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 409,
+          "prompt_ms": 1274.452,
+          "prompt_per_token_ms": 3.1160195599022007,
+          "prompt_per_second": 320.9222473659267,
+          "predicted_n": 57,
+          "predicted_ms": 1743.513,
+          "predicted_per_token_ms": 30.58794736842105,
+          "predicted_per_second": 32.69261542644075
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.0806646250130143
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in eu-central-1, but the Lambda invoke may not depend on EC2 launches. No direct dependency confirmed.",
+        "evidence_ids": [
+          "a6694d89e9960561e456342e"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in eu-central-1, but the Lambda invoke may not depend on EC2 launches. No direct dependency confirmed.\",\n  \"evidence_ids\": [\"a6694d89e9960561e456342e\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 87,
+          "prompt_tokens": 712,
+          "total_tokens": 799
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 400,
+          "prompt_ms": 1292.948,
+          "prompt_per_token_ms": 3.2323700000000004,
+          "prompt_per_second": 309.3705237952338,
+          "predicted_n": 87,
+          "predicted_ms": 2668.823,
+          "predicted_per_token_ms": 30.676126436781608,
+          "predicted_per_second": 32.59863992479082
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.987293625017628
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00668950000545
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007992666010978
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "EC2 service in eu-central-1 is fully recovered; no current impairment.",
+        "evidence_ids": [
+          "a6694d89e9960561e456342e"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"EC2 service in eu-central-1 is fully recovered; no current impairment.\",\n  \"evidence_ids\": [\"a6694d89e9960561e456342e\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 73,
+          "prompt_tokens": 691,
+          "total_tokens": 764
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 379,
+          "prompt_ms": 1323.841,
+          "prompt_per_token_ms": 3.4929841688654353,
+          "prompt_per_second": 286.28815696144784,
+          "predicted_n": 73,
+          "predicted_ms": 2391.476,
+          "predicted_per_token_ms": 32.759945205479454,
+          "predicted_per_second": 30.525081581416664
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.76305991600384
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007517749996623
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0076412499765866
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007913042005384
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007699292007601
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007667500001844
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage reported but not affecting EC2 service.",
+        "evidence_ids": [
+          "0669fb0d0537d6422d64bd36"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage reported but not affecting EC2 service.\",\n  \"evidence_ids\": [\"0669fb0d0537d6422d64bd36\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 74,
+          "prompt_tokens": 713,
+          "total_tokens": 787
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 401,
+          "prompt_ms": 1433.193,
+          "prompt_per_token_ms": 3.5740473815461344,
+          "prompt_per_second": 279.7948357269398,
+          "predicted_n": 74,
+          "predicted_ms": 2428.518,
+          "predicted_per_token_ms": 32.81781081081081,
+          "predicted_per_second": 30.471258602983383
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.9042839579924475
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 702,
+          "total_tokens": 747
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 390,
+          "prompt_ms": 1438.349,
+          "prompt_per_token_ms": 3.688074358974359,
+          "prompt_per_second": 271.1442076992441,
+          "predicted_n": 45,
+          "predicted_ms": 1445.392,
+          "predicted_per_token_ms": 32.119822222222226,
+          "predicted_per_second": 31.133422628601792
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8981797080195975
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0091927079774905
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.010767959000077
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008461958001135
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009044792008353
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 722,
+          "total_tokens": 779
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 410,
+          "prompt_ms": 1567.494,
+          "prompt_per_token_ms": 3.8231560975609753,
+          "prompt_per_second": 261.56399960701606,
+          "predicted_n": 57,
+          "predicted_ms": 1868.672,
+          "predicted_per_token_ms": 32.783719298245614,
+          "predicted_per_second": 30.502945407219674
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.492651084001409
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007692290993873
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007718165987171
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are unavailable in ap-northeast-1, but the action is local git status, which is unrelated.",
+        "evidence_ids": [
+          "66b8f2fe5c2352dc545b8fa3"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are unavailable in ap-northeast-1, but the action is local git status, which is unrelated.\",\n  \"evidence_ids\": [\"66b8f2fe5c2352dc545b8fa3\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 80,
+          "prompt_tokens": 700,
+          "total_tokens": 780
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 388,
+          "prompt_ms": 1428.915,
+          "prompt_per_token_ms": 3.682770618556701,
+          "prompt_per_second": 271.5346959056347,
+          "predicted_n": 80,
+          "predicted_ms": 2460.339,
+          "predicted_per_token_ms": 30.7542375,
+          "predicted_per_second": 32.51584436128517
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.91442591699888
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0079895420058165
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007923083991045
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007611208013259
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0078275830019265
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007705625001108
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00688604201423
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008278416004032
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 707,
+          "total_tokens": 752
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 395,
+          "prompt_ms": 1475.367,
+          "prompt_per_token_ms": 3.735106329113924,
+          "prompt_per_second": 267.7299953164196,
+          "predicted_n": 45,
+          "predicted_ms": 1459.662,
+          "predicted_per_token_ms": 32.436933333333336,
+          "predicted_per_second": 30.829054945596997
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.942788082989864
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007830749993445
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007724750001216
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008010874997126
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008239042013884
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0072186249890365
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008211375010433
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008470084023429
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in me-south-1, but the action is local git status which is unrelated.",
+        "evidence_ids": [
+          "0b3eff9891ee50255110d532"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in me-south-1, but the action is local git status which is unrelated.\",\n  \"evidence_ids\": [\"0b3eff9891ee50255110d532\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 78,
+          "prompt_tokens": 698,
+          "total_tokens": 776
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 386,
+          "prompt_ms": 1387.965,
+          "prompt_per_token_ms": 3.595764248704663,
+          "prompt_per_second": 278.1049954429687,
+          "predicted_n": 78,
+          "predicted_ms": 2545.716,
+          "predicted_per_token_ms": 32.63738461538461,
+          "predicted_per_second": 30.639710006929292
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.983461083000293
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0077399169967975
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008479082986014
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0068945410021115
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007638500013854
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007744165981421
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008001667010831
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0086033749976195
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired services; action is local and unrelated to reported outages.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired services; action is local and unrelated to reported outages.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 48,
+          "prompt_tokens": 700,
+          "total_tokens": 748
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 388,
+          "prompt_ms": 1506.306,
+          "prompt_per_token_ms": 3.882231958762887,
+          "prompt_per_second": 257.58378443689395,
+          "predicted_n": 48,
+          "predicted_ms": 1708.386,
+          "predicted_per_token_ms": 35.591375,
+          "predicted_per_second": 28.096694775068396
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.2392634580028243
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007720958004938
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008071334013948
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007402542018099
+    },
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.015552625001874
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 720,
+          "total_tokens": 777
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 408,
+          "prompt_ms": 1561.345,
+          "prompt_per_token_ms": 3.8268259803921567,
+          "prompt_per_second": 261.31316268986035,
+          "predicted_n": 57,
+          "predicted_ms": 1984.371,
+          "predicted_per_token_ms": 34.813526315789474,
+          "predicted_per_second": 28.724467350107414
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.602037709002616
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007340749987634
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007629749976331
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008494540990796
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007762916007778
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008400457998505
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.013429042010102
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.013838709011907
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00785154098412
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0082602909824345
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.012072500016075
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 701,
+          "total_tokens": 746
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 389,
+          "prompt_ms": 1539.382,
+          "prompt_per_token_ms": 3.957280205655527,
+          "prompt_per_second": 252.6988103017964,
+          "predicted_n": 45,
+          "predicted_ms": 1658.594,
+          "predicted_per_token_ms": 36.857644444444446,
+          "predicted_per_second": 27.13141371547226
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.267059750010958
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008776167000178
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00791487499373
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00829800000065
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009462916990742
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 723,
+          "total_tokens": 780
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 411,
+          "prompt_ms": 1583.105,
+          "prompt_per_token_ms": 3.85183698296837,
+          "prompt_per_second": 259.6163867841994,
+          "predicted_n": 57,
+          "predicted_ms": 1902.474,
+          "predicted_per_token_ms": 33.37673684210526,
+          "predicted_per_second": 29.96098764030415
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.5382265410153195
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008413875009865
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007875791983679
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006864833994769
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008191916975193
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008105209009955
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0076978339930065
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008298291999381
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0079006669984665
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007717625005171
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0076025830057915
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 707,
+          "total_tokens": 752
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 395,
+          "prompt_ms": 1425.671,
+          "prompt_per_token_ms": 3.609293670886076,
+          "prompt_per_second": 277.0625200344259,
+          "predicted_n": 45,
+          "predicted_ms": 1418.572,
+          "predicted_per_token_ms": 31.52382222222222,
+          "predicted_per_second": 31.722041602400164
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8712515830120537
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009660916985013
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0078994579962455
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007990124984644
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.010120000020834
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007800249994034
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007852624985389
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.017592625023099
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in me-south-1, but the action is local git status which is unrelated.",
+        "evidence_ids": [
+          "0b3eff9891ee50255110d532"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in me-south-1, but the action is local git status which is unrelated.\",\n  \"evidence_ids\": [\"0b3eff9891ee50255110d532\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 78,
+          "prompt_tokens": 697,
+          "total_tokens": 775
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 385,
+          "prompt_ms": 1376.404,
+          "prompt_per_token_ms": 3.575075324675325,
+          "prompt_per_second": 279.71438618312646,
+          "predicted_n": 78,
+          "predicted_ms": 2391.589,
+          "predicted_per_token_ms": 30.661397435897435,
+          "predicted_per_second": 32.61429953056315
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.81287737499224
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007782458997099
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0080596250190865
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007906041981187
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007897875009803
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007885875005741
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007931416010251
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007408500008751
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired services; action is local and unrelated to reported outages.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired services; action is local and unrelated to reported outages.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 48,
+          "prompt_tokens": 700,
+          "total_tokens": 748
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 388,
+          "prompt_ms": 1517.575,
+          "prompt_per_token_ms": 3.9112757731958765,
+          "prompt_per_second": 255.67105414888886,
+          "predicted_n": 48,
+          "predicted_ms": 1557.382,
+          "predicted_per_token_ms": 32.445458333333335,
+          "predicted_per_second": 30.82095465338626
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.0990393749962095
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007561834005173
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.02512091700919
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007892749999883
+    },
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in eu-central-1, but the action is a local EC2 instance launch which may be affected. However, the report indicates ongoing disruption with no recovery. Since the action depends on EC2 service availability, advise.",
+        "evidence_ids": [
+          "a6694d89e9960561e456342e"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in eu-central-1, but the action is a local EC2 instance launch which may be affected. However, the report indicates ongoing disruption with no recovery. Since the action depends on EC2 service availability, advise.\",\n  \"evidence_ids\": [\"a6694d89e9960561e456342e\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 108,
+          "prompt_tokens": 722,
+          "total_tokens": 830
+        },
+        "timings": {
+          "cache_n": 658,
+          "prompt_n": 64,
+          "prompt_ms": 261.976,
+          "prompt_per_token_ms": 4.093375,
+          "prompt_per_second": 244.29718752862857,
+          "predicted_n": 108,
+          "predicted_ms": 3632.847,
+          "predicted_per_token_ms": 33.63747222222222,
+          "predicted_per_second": 29.728749930839363
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.9379227079916745
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are failing in eu-central-1, but the action is in us-west-2; no dependency evidence.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 718,
+          "total_tokens": 775
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 406,
+          "prompt_ms": 1560.618,
+          "prompt_per_token_ms": 3.843886699507389,
+          "prompt_per_second": 260.1533495064135,
+          "predicted_n": 57,
+          "predicted_ms": 1878.788,
+          "predicted_per_token_ms": 32.96119298245614,
+          "predicted_per_second": 30.338707720083374
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.4790839159977622
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00747087498894
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007151750003686
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009067875012988
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "EC2 service in eu-central-1 is fully recovered; no current impairment.",
+        "evidence_ids": [
+          "a6694d89e9960561e456342e"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"EC2 service in eu-central-1 is fully recovered; no current impairment.\",\n  \"evidence_ids\": [\"a6694d89e9960561e456342e\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 73,
+          "prompt_tokens": 691,
+          "total_tokens": 764
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 379,
+          "prompt_ms": 1349.346,
+          "prompt_per_token_ms": 3.560279683377309,
+          "prompt_per_second": 280.8768099508947,
+          "predicted_n": 73,
+          "predicted_ms": 2349.453,
+          "predicted_per_token_ms": 32.18428767123287,
+          "predicted_per_second": 31.071062072746294
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.7546657499915455
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007391625025775
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007790584000759
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0068960420030635
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0102475410094485
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007880457997089
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage reported but not affecting EC2 service.",
+        "evidence_ids": [
+          "0669fb0d0537d6422d64bd36"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage reported but not affecting EC2 service.\",\n  \"evidence_ids\": [\"0669fb0d0537d6422d64bd36\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 74,
+          "prompt_tokens": 712,
+          "total_tokens": 786
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 400,
+          "prompt_ms": 1388.432,
+          "prompt_per_token_ms": 3.47108,
+          "prompt_per_second": 288.094771656084,
+          "predicted_n": 74,
+          "predicted_ms": 2254.37,
+          "predicted_per_token_ms": 30.46445945945946,
+          "predicted_per_second": 32.82513518189117
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.671784000005573
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 702,
+          "total_tokens": 747
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 390,
+          "prompt_ms": 1369.163,
+          "prompt_per_token_ms": 3.510674358974359,
+          "prompt_per_second": 284.8455589290683,
+          "predicted_n": 45,
+          "predicted_ms": 1361.189,
+          "predicted_per_token_ms": 30.248644444444444,
+          "predicted_per_second": 33.05933268634995
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7462687080260366
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007406499993522
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007844292005757
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007661208015634
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007653917011339
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are unavailable in ap-northeast-1, but the action is for us-west-2; no dependency.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 722,
+          "total_tokens": 779
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 410,
+          "prompt_ms": 1397.559,
+          "prompt_per_token_ms": 3.4086804878048778,
+          "prompt_per_second": 293.3686520569078,
+          "predicted_n": 57,
+          "predicted_ms": 1732.961,
+          "predicted_per_token_ms": 30.40282456140351,
+          "predicted_per_second": 32.89168077065785
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.171508333995007
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007869875000324
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008349791984074
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 instance launches are unavailable in ap-northeast-1, but the action is local git status, which is unrelated.",
+        "evidence_ids": [
+          "66b8f2fe5c2352dc545b8fa3"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 instance launches are unavailable in ap-northeast-1, but the action is local git status, which is unrelated.\",\n  \"evidence_ids\": [\"66b8f2fe5c2352dc545b8fa3\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 80,
+          "prompt_tokens": 702,
+          "total_tokens": 782
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 390,
+          "prompt_ms": 1352.782,
+          "prompt_per_token_ms": 3.4686717948717947,
+          "prompt_per_second": 288.2947880737621,
+          "predicted_n": 80,
+          "predicted_ms": 2470.804,
+          "predicted_per_token_ms": 30.88505,
+          "predicted_per_second": 32.378124691395996
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.864867083990248
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007758249994367
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007690582977375
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008235750021413
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007786333007971
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006880792003358
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007829292007955
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0078299999877345
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on S3 outage for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 45,
+          "prompt_tokens": 707,
+          "total_tokens": 752
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 395,
+          "prompt_ms": 1417.74,
+          "prompt_per_token_ms": 3.5892151898734177,
+          "prompt_per_second": 278.6124395164135,
+          "predicted_n": 45,
+          "predicted_ms": 1423.584,
+          "predicted_per_token_ms": 31.6352,
+          "predicted_per_second": 31.61035808213635
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8627797919907607
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00722608299111
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007717667001998
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007875125011196
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009036375005962
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009538042009808
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008290917001432
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0122355410130695
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009236625017365
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007768584007863
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.010875041974941
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008692750008777
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008695666998392
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008125334017677
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.024408875004156
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008125916996505
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired services; action is local and unrelated to reported outages.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired services; action is local and unrelated to reported outages.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 48,
+          "prompt_tokens": 700,
+          "total_tokens": 748
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 388,
+          "prompt_ms": 1372.505,
+          "prompt_per_token_ms": 3.537384020618557,
+          "prompt_per_second": 282.69478071118135,
+          "predicted_n": 48,
+          "predicted_ms": 1464.181,
+          "predicted_per_token_ms": 30.503770833333334,
+          "predicted_per_second": 32.782832177169354
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.864105958986329
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007794916018611
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007825290987967
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007917208014987
+    }
+  ]
+}

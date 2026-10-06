@@ -1,0 +1,1 @@
+16012 3484992 /nix/store/6iqk8q0yncs5x2461agij3zzz4ibszab-llama-cpp-6981/bin/llama-server

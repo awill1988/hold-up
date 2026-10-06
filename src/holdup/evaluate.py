@@ -163,10 +163,21 @@ def cases():
 
 
 def qualification_cases():
-    path = Path(__file__).with_name("data") / "qualification-v1.json"
+    from . import evidence
+
+    path = Path(__file__).with_name("data") / d.QUALIFICATION_CORPUS
     for case in json.loads(path.read_text()):
         yield {
             **case,
+            "reports": evidence.parse(
+                json.dumps(case["events"]).encode(),
+                {
+                    "name": "AWS",
+                    "url": "https://health.aws.amazon.com/public/currentevents",
+                    "format": "aws-json",
+                },
+                time.time() - case["acquisition_age_seconds"],
+            ),
             "action": d.normalize_action(
                 {"tool_name": "Bash", "tool_input": {"command": case["command"]}}
             ),
@@ -194,6 +205,9 @@ def run(root, repeats=3, qualification=False):
     outcomes = []
     for repeat in range(repeats):
         for case in corpus:
+            if qualification:
+                for report in case["reports"]:
+                    report["fetched_at"] = time.time() - case.get("acquisition_age_seconds", 0)
             start = time.monotonic()
             error = None
             result = None
@@ -211,6 +225,9 @@ def run(root, repeats=3, qualification=False):
                     "name": case["name"],
                     "repeat": repeat,
                     "expected_pause": case["expected_pause"],
+                    "accepted_decisions": ["pause"]
+                    if case["expected_pause"]
+                    else ["allow", "advise"],
                     "protected": case.get("protected", False),
                     "result": result,
                     "trace": trace,
@@ -248,7 +265,7 @@ def run(root, repeats=3, qualification=False):
         "policy_digest": initial_policy,
         "runtime_fingerprint": fingerprint,
         "corpus_hash": frozen_hash,
-        "qualification_version": 1 if qualification else None,
+        "qualification_version": d.QUALIFICATION_VERSION if qualification else None,
         "passed": qualification
         and fingerprint is not None
         and initial_policy == d.policy_digest()

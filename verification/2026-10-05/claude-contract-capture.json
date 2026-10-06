@@ -1,0 +1,115 @@
+{
+  "client": "claude",
+  "mode": "contract",
+  "source": "synthetic",
+  "model_qualified": null,
+  "exit_code": 0,
+  "model_requests": 5,
+  "hook_calls": 4,
+  "executions": 2,
+  "hook_p95_seconds": 0.005853415990713984,
+  "blocking_verified": false,
+  "records": [
+    {
+      "payload": {
+        "session_id": "bb1ea1ac-6952-40d3-af23-4e171f00b2d6",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-i2uer2tl/bb1ea1ac-6952-40d3-af23-4e171f00b2d6.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl",
+        "prompt_id": "cc3b808a-fde4-4d1d-a693-3377ba594047",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_0",
+        "client": "claude"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: fixture outage; pause 3d523474d6a6219c expires at 1791253917. human retry: hold-up retry 3d523474d6a6219c. diagnostics and unrelated local work remain available."
+        }
+      },
+      "seconds": 0.005853415990713984
+    },
+    {
+      "payload": {
+        "session_id": "bb1ea1ac-6952-40d3-af23-4e171f00b2d6",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-i2uer2tl/bb1ea1ac-6952-40d3-af23-4e171f00b2d6.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl",
+        "prompt_id": "cc3b808a-fde4-4d1d-a693-3377ba594047",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_1",
+        "client": "claude"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "hold-up: one-shot retry approved; provider status is unchanged."
+        }
+      },
+      "seconds": 0.0039082910225261
+    },
+    {
+      "payload": {
+        "session_id": "bb1ea1ac-6952-40d3-af23-4e171f00b2d6",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-i2uer2tl/bb1ea1ac-6952-40d3-af23-4e171f00b2d6.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl",
+        "prompt_id": "cc3b808a-fde4-4d1d-a693-3377ba594047",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_2",
+        "client": "claude"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: fixture outage; pause 3d523474d6a6219c expires at 1791253917. human retry: hold-up retry 3d523474d6a6219c. diagnostics and unrelated local work remain available."
+        }
+      },
+      "seconds": 0.0038049169816076756
+    },
+    {
+      "payload": {
+        "session_id": "bb1ea1ac-6952-40d3-af23-4e171f00b2d6",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-i2uer2tl/bb1ea1ac-6952-40d3-af23-4e171f00b2d6.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl",
+        "prompt_id": "cc3b808a-fde4-4d1d-a693-3377ba594047",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-i2uer2tl/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_3",
+        "client": "claude"
+      },
+      "result": null,
+      "seconds": 0.004999708995455876
+    }
+  ]
+}

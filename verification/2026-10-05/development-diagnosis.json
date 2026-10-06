@@ -1,0 +1,1990 @@
+{
+  "complete": false,
+  "purpose": "development diagnosis before final policy freeze; not qualification",
+  "outcomes": [
+    {
+      "name": "GitHub-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action; GitHub outage does not affect local file operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 3.1347178750147577
+    },
+    {
+      "name": "GitHub-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting evidence: report-1 indicates global GitHub service outage, but action is local git operations which may be unaffected.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 3.3682682500220835
+    },
+    {
+      "name": "GitHub-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated to local operation; GitHub Actions workflow delay is a remote service issue not affecting local file operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 3.0982530420005787
+    },
+    {
+      "name": "GitHub-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "GitHub service is fully restored (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 1.652474208996864
+    },
+    {
+      "name": "GitHub-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for GitHub; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.634171416022582
+    },
+    {
+      "name": "GitHub-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on GitHub service; action may be unrelated.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 2.46790108399
+    },
+    {
+      "name": "GitHub-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local git status command; no evidence of service dependency.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9913332920114044
+    },
+    {
+      "name": "GitHub-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action; no evidence of dependency on impaired GitHub service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9308866659994237
+    },
+    {
+      "name": "GitHub-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no dependency on GitHub outage",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.6940807909995783
+    },
+    {
+      "name": "GitHub-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "GitHub Actions workflow queue delayed (report-1)",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 1.9029517910094
+    },
+    {
+      "name": "GitHub-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 1.7111062920012046
+    },
+    {
+      "name": "GitHub-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "GitHub service is globally impaired (report-1), affecting git operations; action depends on impaired service.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 2.1595300839981064
+    },
+    {
+      "name": "GitHub-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of service dependency for GitHub clone operation; only workflow queue delay reported.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 2.115895917027956
+    },
+    {
+      "name": "GitHub-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "GitHub service is fully restored (report-1). No current outage affecting the action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 1.9383683750056662
+    },
+    {
+      "name": "GitHub-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for GitHub; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.537458415987203
+    },
+    {
+      "name": "GitHub-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.4351144169922918
+    },
+    {
+      "name": "GitHub-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local git status check; global GitHub outage does not affect local file operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 2.20579108298989
+    },
+    {
+      "name": "GitHub-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of GitHub service impairment in the region where the action is being performed.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.90711470801034
+    },
+    {
+      "name": "GitHub-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; GitHub outage does not affect local file modification.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 2.073310457984917
+    },
+    {
+      "name": "GitHub-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "GitHub Actions workflow queue delayed",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitHub"
+        ]
+      },
+      "error": null,
+      "seconds": 1.928772166982526
+    },
+    {
+      "name": "GitLab-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear if the Bash clone operation depends on GitLab; only a global outage is reported, not a specific service dependency.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4656953339872416
+    },
+    {
+      "name": "GitLab-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear if artifact upload depends on clone operations; conflicting evidence",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.059114458010299
+    },
+    {
+      "name": "GitLab-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "GitLab Pages publishing delayed (report-1), but action is local clone, unrelated.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.300160540995421
+    },
+    {
+      "name": "GitLab-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "GitLab service fully restored; no current outage affecting clone operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 1.907794124999782
+    },
+    {
+      "name": "GitLab-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for GitLab; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.7521064169995952
+    },
+    {
+      "name": "GitLab-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on GitLab service; no evidence of local impact.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.129348165995907
+    },
+    {
+      "name": "GitLab-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on Bitbucket/GitHub/GitLab services; only GitLab report indicates investigating outage but no clear link to action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.6685610419954173
+    },
+    {
+      "name": "GitLab-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of local service dependency; only global GitLab outage reported.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2037324999982957
+    },
+    {
+      "name": "GitLab-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no evidence of impaired service affecting this action.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.8597286250151228
+    },
+    {
+      "name": "GitLab-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "GitLab Pages publishing delayed (report-1)",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.0875164169992786
+    },
+    {
+      "name": "GitLab-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "GitLab reports global git clone operations unavailable (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2123084999911953
+    },
+    {
+      "name": "GitLab-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "GitLab clone operations are unavailable globally, which may affect the ability to upload artifacts via git operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.233453833992826
+    },
+    {
+      "name": "GitLab-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "GitLab Pages publishing delayed (report-1) may affect repository cloning, but no direct dependency on this action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4528210000135005
+    },
+    {
+      "name": "GitLab-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "GitLab service fully restored; no current outage affecting clone operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.0270298329996876
+    },
+    {
+      "name": "GitLab-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for GitLab; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.7640423339908011
+    },
+    {
+      "name": "GitLab-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of GitLab dependency for the action.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.8001900840026792
+    },
+    {
+      "name": "GitLab-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket or GitHub outage; only GitLab clone operations impacted, unrelated to local git status.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.653094167006202
+    },
+    {
+      "name": "GitLab-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of GitLab service impairment in the local region; action is unrelated.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.0678558749787044
+    },
+    {
+      "name": "GitLab-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of service impairment affecting local file editing or app.py modification.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9233496249944437
+    },
+    {
+      "name": "GitLab-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "GitLab Pages publishing delayed (report-1)",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "GitLab"
+        ]
+      },
+      "error": null,
+      "seconds": 2.1174925419909414
+    },
+    {
+      "name": "Bitbucket-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear if Bitbucket pipelines are impacted; only investigating outage, no confirmed dependency on this action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.483302749984432
+    },
+    {
+      "name": "Bitbucket-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear if Bitbucket pipelines outage affects this operation; no evidence linking to local artifact upload.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.3643386669864412
+    },
+    {
+      "name": "Bitbucket-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Bitbucket wiki search delayed (report-1) may affect pipeline execution; no evidence of local-only impact.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4983582079876214
+    },
+    {
+      "name": "Bitbucket-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Bitbucket pipeline service is fully restored (report-1). No current impairment.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.020849124994129
+    },
+    {
+      "name": "Bitbucket-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for Bitbucket; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.6687393329921179
+    },
+    {
+      "name": "Bitbucket-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency; Bitbucket pipeline outage may affect action but no evidence links to specific action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.323009124986129
+    },
+    {
+      "name": "Bitbucket-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local action; no evidence of impaired service affecting git status.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.0216932079929393
+    },
+    {
+      "name": "Bitbucket-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action; no evidence of Bitbucket outage affecting local file system.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.097956959012663
+    },
+    {
+      "name": "Bitbucket-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no evidence of Bitbucket outage affecting this action.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9908688750001602
+    },
+    {
+      "name": "Bitbucket-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Bitbucket wiki search delayed (report-1) is investigating; no evidence of impact on pipeline execution.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.477049540990265
+    },
+    {
+      "name": "Bitbucket-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on Bitbucket pipelines",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.041422041016631
+    },
+    {
+      "name": "Bitbucket-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on Bitbucket pipelines",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 1.9612479170027655
+    },
+    {
+      "name": "Bitbucket-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Bitbucket wiki search delayed (report-1)",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.0416481670108624
+    },
+    {
+      "name": "Bitbucket-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Bitbucket pipeline service is fully restored (report-1). No current impairment.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2764857499860227
+    },
+    {
+      "name": "Bitbucket-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for Bitbucket; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.6940061670029536
+    },
+    {
+      "name": "Bitbucket-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on Bitbucket pipelines; no evidence of local impact.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.151902041019639
+    },
+    {
+      "name": "Bitbucket-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local operation; no evidence of service impairment affecting Bitbucket, GitHub, or GitLab.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.3156821250158828
+    },
+    {
+      "name": "Bitbucket-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.7214817079948261
+    },
+    {
+      "name": "Bitbucket-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; Bitbucket pipeline outage does not affect app.py edit.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.253888083010679
+    },
+    {
+      "name": "Bitbucket-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "Bitbucket wiki search delayed (report-1)",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Bitbucket"
+        ]
+      },
+      "error": null,
+      "seconds": 2.0962449999933597
+    },
+    {
+      "name": "AWS-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear if S3 write failure affects this operation; no evidence of dependency or local-only impact.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.603812957997434
+    },
+    {
+      "name": "AWS-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency; S3 outage in us-east-1 may affect S3 writes but not confirmed for this operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.6435418750043027
+    },
+    {
+      "name": "AWS-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of S3 outage in us-east-1; only EC2 launch issue in us-west-2.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.6469543749990407
+    },
+    {
+      "name": "AWS-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in us-east-1 is fully restored (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.3838100409775507
+    },
+    {
+      "name": "AWS-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of AWS S3 outage in us-east-1; action depends on local computation and remote S3 availability.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.236145375005435
+    },
+    {
+      "name": "AWS-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency; only AWS S3 outage in us-east-1 is reported, but action does not specify AWS S3 dependency.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.618473875016207
+    },
+    {
+      "name": "AWS-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on AWS S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.1218500419927295
+    },
+    {
+      "name": "AWS-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency; AWS S3 outage in us-east-1 may affect local file operations if they rely on AWS services.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.724765249993652
+    },
+    {
+      "name": "AWS-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no evidence of AWS outage affecting this action.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.0471409169840626
+    },
+    {
+      "name": "AWS-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of S3 outage in us-east-1; only EC2 launch issue in us-west-2.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.659026832989184
+    },
+    {
+      "name": "AWS-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 writes failing in us-east-1 (report-1) may affect the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.5275645419897046
+    },
+    {
+      "name": "AWS-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 object writes failing in us-east-1 (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4836653749807738
+    },
+    {
+      "name": "AWS-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of S3 outage in us-east-1; only EC2 launch failure reported in us-west-2.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.7982856250018813
+    },
+    {
+      "name": "AWS-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in us-east-1 is fully restored (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4804960420005955
+    },
+    {
+      "name": "AWS-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of AWS S3 outage in us-east-1; action depends on local computation and remote S3 availability.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.2818611669936217
+    },
+    {
+      "name": "AWS-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on AWS S3 in us-east-1; action may be unrelated.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.476672624994535
+    },
+    {
+      "name": "AWS-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on AWS S3 outage for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.344681082991883
+    },
+    {
+      "name": "AWS-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 object writes failing in us-east-1 (report-1) may impact the Bash 'ls' operation if it relies on S3, but no direct dependency is confirmed.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 3.2366595000203233
+    },
+    {
+      "name": "AWS-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Local edit does not depend on AWS S3 service impairment; AWS S3 is a remote service.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.750675333023537
+    },
+    {
+      "name": "AWS-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of S3 outage in us-east-1; only EC2 launch failure in us-west-2.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "error": null,
+      "seconds": 2.9601437080127653
+    },
+    {
+      "name": "Google Cloud-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action; local file operation does not depend on Cloud Storage service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.223169292003149
+    },
+    {
+      "name": "Google Cloud-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.213537166971946
+    },
+    {
+      "name": "Google Cloud-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated to Cloud Storage; BigQuery interactive queries delayed (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.5894626670051366
+    },
+    {
+      "name": "Google Cloud-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Cloud Storage is fully restored; no current outage affecting the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.1371687079954427
+    },
+    {
+      "name": "Google Cloud-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No evidence of Google Cloud storage outage; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.951606000016909
+    },
+    {
+      "name": "Google Cloud-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on Google Cloud Cloud Storage for the action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.3151924580160994
+    },
+    {
+      "name": "Google Cloud-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outages; only Google Cloud outage reported, unrelated to local git status.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.575911374995485
+    },
+    {
+      "name": "Google Cloud-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action; no evidence of dependency on impaired Google Cloud service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.086328958015656
+    },
+    {
+      "name": "Google Cloud-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no dependency on Google Cloud outage.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.097663292021025
+    },
+    {
+      "name": "Google Cloud-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated event: BigQuery interactive queries delayed (report-1) does not affect Cloud Storage or local file operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.7362601250060834
+    },
+    {
+      "name": "Google Cloud-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Cloud Storage uploads are globally impaired (report-1), affecting the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.5401738340151496
+    },
+    {
+      "name": "Google Cloud-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Cloud Storage uploads are unavailable globally per report-1; action depends on impaired service.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.5968105840147473
+    },
+    {
+      "name": "Google Cloud-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Cloud Storage outage; only BigQuery interactive queries delayed (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.8248141670192126
+    },
+    {
+      "name": "Google Cloud-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Cloud Storage is fully restored; no current outage affecting the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2149118339875713
+    },
+    {
+      "name": "Google Cloud-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No evidence of Google Cloud storage outage; action is unrelated to impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.931315750000067
+    },
+    {
+      "name": "Google Cloud-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.6750569579889998
+    },
+    {
+      "name": "Google Cloud-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outage; only Google Cloud Cloud Storage outage reported, unrelated to local git status.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.965762250008993
+    },
+    {
+      "name": "Google Cloud-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.785790249996353
+    },
+    {
+      "name": "Google Cloud-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no dependency on Google Cloud Cloud Storage outage.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.273593999998411
+    },
+    {
+      "name": "Google Cloud-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated event: BigQuery interactive queries delayed (report-1) does not affect Cloud Storage or local file operations.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Google Cloud"
+        ]
+      },
+      "error": null,
+      "seconds": 3.2906279579910915
+    },
+    {
+      "name": "Microsoft Azure-0-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Azure Blob Storage uploads are failing globally (report-1), which directly impacts the storage service required for the upload.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 3.340090500016231
+    },
+    {
+      "name": "Microsoft Azure-0-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting evidence: report-1 indicates a global outage affecting Azure Blob Storage uploads, but the action is a local storage upload which may be unrelated.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 3.0971947090001777
+    },
+    {
+      "name": "Microsoft Azure-0-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated to Azure storage; only virtual machine creation delayed in westus.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.506138708005892
+    },
+    {
+      "name": "Microsoft Azure-0-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Blob Storage uploads are resolved; no current outage affecting the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4561668340174947
+    },
+    {
+      "name": "Microsoft Azure-0-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for Microsoft Azure storage service in the provided reports.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.8869872089999262
+    },
+    {
+      "name": "Microsoft Azure-0-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency; only Azure Blob Storage outage reported, action may not depend on it.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.445108750020154
+    },
+    {
+      "name": "Microsoft Azure-0-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outages; Azure report is unrelated to local git status.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.596142249996774
+    },
+    {
+      "name": "Microsoft Azure-0-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.8009243329870515
+    },
+    {
+      "name": "Microsoft Azure-0-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated local edit; no evidence of dependency on Azure Blob Storage outage.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.0989653330179863
+    },
+    {
+      "name": "Microsoft Azure-0-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "Azure virtual machine creation delayed in westus",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.24138941601268
+    },
+    {
+      "name": "Microsoft Azure-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Blob Storage uploads failing globally (report-1) affects the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.4317111669806764
+    },
+    {
+      "name": "Microsoft Azure-1-mcp",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Azure Blob Storage uploads failing globally (report-1).",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2422796669998206
+    },
+    {
+      "name": "Microsoft Azure-1-unrelated",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of storage service outage; only VM creation delay in westus.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.319258791016182
+    },
+    {
+      "name": "Microsoft Azure-1-resolved",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "Blob Storage uploads are resolved; no current outage affecting the operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.0411674169881735
+    },
+    {
+      "name": "Microsoft Azure-1-empty",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "No outage evidence for Microsoft Azure storage service in the provided reports.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9436615000013262
+    },
+    {
+      "name": "Microsoft Azure-1-unknown",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unclear dependency on Azure Blob Storage for the action.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.091735666996101
+    },
+    {
+      "name": "Microsoft Azure-1-git status",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outage; Azure report is unrelated to local git status.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 2.4938656660087872
+    },
+    {
+      "name": "Microsoft Azure-1-ls",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Azure Blob Storage uploads failing globally (report-1) may affect the action, but no evidence links this to the specific operation.",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.726490749977529
+    },
+    {
+      "name": "Microsoft Azure-1-edit",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on Azure Blob Storage for local file edit.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "error": null,
+      "seconds": 1.9335385419835802
+    },
+    {
+      "name": "Microsoft Azure-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "pause",
+        "reason": "Azure virtual machine creation delayed in westus",
+        "evidence_ids": [
+          "report-1"
+        ],
+        "providers": [
+          "Microsoft Azure"
+        ]
+      },
+      "error": null,
+      "seconds": 2.2308679159905296
+    }
+  ]
+}

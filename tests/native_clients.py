@@ -1,7 +1,4 @@
-"""Native pre-tool denial, one-shot retry, and recovery against a loopback model stub.
-
-Only temporary homes, synthetic reports, and a harmless local gh stub are used.
-"""
+"""Separate native client contracts from real-model AWS evidence qualification."""
 
 import argparse
 import json
@@ -55,7 +52,7 @@ def hook(root):
                 "policy_digest": d.policy_digest(),
                 "runtime_fingerprint": d.runtime_fingerprint(root),
                 "corpus_hash": d.corpus_hash(),
-                "qualification_version": 1,
+                "qualification_version": d.QUALIFICATION_VERSION,
             },
         )
     predictor = (
@@ -135,7 +132,15 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                     "source": source,
                 },
             )
-        regions = sorted({r["region"] for r in reports if r["region"] and not r["scope_uncertain"]})
+        regions = sorted(
+            {
+                r["region"]
+                for r in reports
+                if r["region"]
+                and not r["scope_uncertain"]
+                and r["status"] not in ("resolved", "closed", "monitoring")
+            }
+        )
         if not regions:
             print(
                 json.dumps({"client": client, "mode": mode, "source": source, "available": False})
@@ -157,7 +162,12 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
             "--instance-type",
             "t3.micro",
         ]
-        other_arguments = ["--region", "us-west-2", *arguments[2:]]
+        unaffected_region = next(
+            candidate
+            for candidate in ("us-west-2", "us-east-1", "eu-west-1", "ap-southeast-2")
+            if candidate not in {report.get("region") for report in reports}
+        )
+        other_arguments = ["--region", unaffected_region, *arguments[2:]]
         diagnostic = ["--region", region, "ec2", "describe-instances"]
         allowed = [arguments, other_arguments, diagnostic]
         stub.write_text(
@@ -439,6 +449,18 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                 "model_requests": len(calls),
                 "hook_calls": len(records),
                 "executions": len(executions),
+                "hook_p95_seconds": sorted(r["seconds"] for r in records)[int(len(records) * 0.95)]
+                if records
+                else None,
+                "blocking_verified": bool(
+                    mode == "real"
+                    and d.enforcement_ready(root)
+                    and records
+                    and (records[0]["result"] or {})
+                    .get("hookSpecificOutput", {})
+                    .get("permissionDecision")
+                    == "deny"
+                ),
             }
             print(json.dumps(summary))
             if output_dir:

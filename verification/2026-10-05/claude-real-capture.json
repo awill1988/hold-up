@@ -1,0 +1,103 @@
+{
+  "client": "claude",
+  "mode": "real",
+  "source": "capture",
+  "model_qualified": false,
+  "exit_code": 0,
+  "model_requests": 5,
+  "hook_calls": 4,
+  "executions": 4,
+  "hook_p95_seconds": 4.119572958006756,
+  "blocking_verified": false,
+  "records": [
+    {
+      "payload": {
+        "session_id": "1954aa51-82dc-46e0-a0b3-12db0a6c7a62",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-e726btqz/1954aa51-82dc-46e0-a0b3-12db0a6c7a62.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz",
+        "prompt_id": "14e61f06-2004-48ad-bccc-e56143c88265",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_0",
+        "client": "claude"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "hold-up: decision unavailable (model\\_output\\_invalid); continuing without outage protection"
+        }
+      },
+      "seconds": 4.119572958006756
+    },
+    {
+      "payload": {
+        "session_id": "1954aa51-82dc-46e0-a0b3-12db0a6c7a62",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-e726btqz/1954aa51-82dc-46e0-a0b3-12db0a6c7a62.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz",
+        "prompt_id": "14e61f06-2004-48ad-bccc-e56143c88265",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/bin/aws --region us-west-2 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_1",
+        "client": "claude"
+      },
+      "result": null,
+      "seconds": 4.117291333008325
+    },
+    {
+      "payload": {
+        "session_id": "1954aa51-82dc-46e0-a0b3-12db0a6c7a62",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-e726btqz/1954aa51-82dc-46e0-a0b3-12db0a6c7a62.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz",
+        "prompt_id": "14e61f06-2004-48ad-bccc-e56143c88265",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/bin/git status"
+        },
+        "tool_use_id": "call_2",
+        "client": "claude"
+      },
+      "result": null,
+      "seconds": 3.9659114580135792
+    },
+    {
+      "payload": {
+        "session_id": "1954aa51-82dc-46e0-a0b3-12db0a6c7a62",
+        "transcript_path": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/claude/projects/-private-var-folders-vp-knh6hvc50js11s6mgy6z9pc80000gn-T-hold-up-native-e726btqz/1954aa51-82dc-46e0-a0b3-12db0a6c7a62.jsonl",
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz",
+        "prompt_id": "14e61f06-2004-48ad-bccc-e56143c88265",
+        "permission_mode": "bypassPermissions",
+        "effort": {
+          "level": "high"
+        },
+        "hook_event_name": "PreToolUse",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-e726btqz/bin/aws --region me-central-1 ec2 describe-instances"
+        },
+        "tool_use_id": "call_3",
+        "client": "claude"
+      },
+      "result": null,
+      "seconds": 4.116961415973492
+    }
+  ]
+}

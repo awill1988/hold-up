@@ -1,0 +1,5524 @@
+{
+  "model_sha256": "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2",
+  "policy_version": 2,
+  "policy_digest": "9044426923116cc1fe10c934f6e77650b6a6ec8c7758a072df802f56571b12e3",
+  "runtime_fingerprint": "9066d2d980f8e7e1b228eda3b66a294e478f8803d67695498c9df1b01ce9b719",
+  "corpus_hash": "bb8aac3bfceb9ddd66aec4763fe7d9109e608c2f2ea39571367ae584a07775d2",
+  "qualification_version": 1,
+  "passed": false,
+  "precision": 0,
+  "recall": 0.0,
+  "protected_pauses": 0,
+  "p95_seconds": 3.0636913329944946,
+  "cases": 144,
+  "outcomes": [
+    {
+      "name": "ec2-eu-west-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 77,
+          "prompt_tokens": 490,
+          "total_tokens": 567
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 790.159,
+          "prompt_per_token_ms": 4.439095505617978,
+          "prompt_per_second": 225.27111631962683,
+          "predicted_n": 77,
+          "predicted_ms": 2538.741,
+          "predicted_per_token_ms": 32.97066233766234,
+          "predicted_per_second": 30.329994276690687
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.3366875420033466
+    },
+    {
+      "name": "ec2-eu-west-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 490,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 745.973,
+          "prompt_per_token_ms": 4.190859550561798,
+          "prompt_per_second": 238.61453430620142,
+          "predicted_n": 64,
+          "predicted_ms": 2102.599,
+          "predicted_per_token_ms": 32.853109375,
+          "predicted_per_second": 30.43851918506572
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.856232124991948
+    },
+    {
+      "name": "ec2-eu-west-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 480,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 751.287,
+          "prompt_per_token_ms": 4.471946428571429,
+          "prompt_per_second": 223.6162744730043,
+          "predicted_n": 67,
+          "predicted_ms": 2245.699,
+          "predicted_per_token_ms": 33.51789552238806,
+          "predicted_per_second": 29.834808672043756
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.004588041017996
+    },
+    {
+      "name": "ec2-eu-west-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 479,
+          "total_tokens": 535
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 780.778,
+          "prompt_per_token_ms": 4.6753173652694615,
+          "prompt_per_second": 213.88922331315686,
+          "predicted_n": 56,
+          "predicted_ms": 1902.937,
+          "predicted_per_token_ms": 33.98101785714285,
+          "predicted_per_second": 29.42819441736642
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.695158167014597
+    },
+    {
+      "name": "ec2-eu-west-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 470,
+          "total_tokens": 516
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 675.646,
+          "prompt_per_token_ms": 4.276240506329113,
+          "prompt_per_second": 233.85027070388932,
+          "predicted_n": 46,
+          "predicted_ms": 1483.897,
+          "predicted_per_token_ms": 32.25863043478261,
+          "predicted_per_second": 30.99945616171473
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.1676138330076355
+    },
+    {
+      "name": "ec2-eu-west-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 484,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 745.447,
+          "prompt_per_token_ms": 4.333994186046511,
+          "prompt_per_second": 230.734042795799,
+          "predicted_n": 69,
+          "predicted_ms": 2236.128,
+          "predicted_per_token_ms": 32.40765217391304,
+          "predicted_per_second": 30.856909801227836
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9892638330056798
+    },
+    {
+      "name": "ec2-eu-west-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 499,
+          "total_tokens": 566
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 79,
+          "prompt_ms": 391.635,
+          "prompt_per_token_ms": 4.957405063291139,
+          "prompt_per_second": 201.7184368097846,
+          "predicted_n": 67,
+          "predicted_ms": 2149.747,
+          "predicted_per_token_ms": 32.085776119402986,
+          "predicted_per_second": 31.166458192522192
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.5490097910223994
+    },
+    {
+      "name": "ec2-eu-west-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 488,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 68,
+          "prompt_ms": 334.074,
+          "prompt_per_token_ms": 4.912852941176471,
+          "prompt_per_second": 203.54771697288623,
+          "predicted_n": 53,
+          "predicted_ms": 1822.248,
+          "predicted_per_token_ms": 34.38203773584906,
+          "predicted_per_second": 29.08495440796203
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.163964125007624
+    },
+    {
+      "name": "s3-eu-west-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 485,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 796.291,
+          "prompt_per_token_ms": 4.602838150289018,
+          "prompt_per_second": 217.2572589668852,
+          "predicted_n": 56,
+          "predicted_ms": 1921.858,
+          "predicted_per_token_ms": 34.318892857142856,
+          "predicted_per_second": 29.13846912727163
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.725737582979491
+    },
+    {
+      "name": "s3-eu-west-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 485,
+          "total_tokens": 548
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 747.761,
+          "prompt_per_token_ms": 4.322317919075144,
+          "prompt_per_second": 231.35734546198586,
+          "predicted_n": 63,
+          "predicted_ms": 2087.932,
+          "predicted_per_token_ms": 33.141777777777776,
+          "predicted_per_second": 30.173396451608582
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8431934579857625
+    },
+    {
+      "name": "s3-eu-west-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 61,
+          "prompt_tokens": 480,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 752.005,
+          "prompt_per_token_ms": 4.476220238095238,
+          "prompt_per_second": 223.40276992839145,
+          "predicted_n": 61,
+          "predicted_ms": 1930.947,
+          "predicted_per_token_ms": 31.654868852459014,
+          "predicted_per_second": 31.590716886584666
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.690768542001024
+    },
+    {
+      "name": "s3-eu-west-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 479,
+          "total_tokens": 542
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 719.433,
+          "prompt_per_token_ms": 4.307982035928144,
+          "prompt_per_second": 232.127244649606,
+          "predicted_n": 63,
+          "predicted_ms": 2055.59,
+          "predicted_per_token_ms": 32.6284126984127,
+          "predicted_per_second": 30.648135085303974
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7826542500115465
+    },
+    {
+      "name": "s3-eu-west-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 470,
+          "total_tokens": 538
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 617.17,
+          "prompt_per_token_ms": 3.9061392405063287,
+          "prompt_per_second": 256.0072589400003,
+          "predicted_n": 68,
+          "predicted_ms": 2156.9,
+          "predicted_per_token_ms": 31.719117647058823,
+          "predicted_per_second": 31.52672817469516
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.781451625021873
+    },
+    {
+      "name": "s3-eu-west-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 in eu-west-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 in eu-west-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 479,
+          "total_tokens": 532
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 723.877,
+          "prompt_per_token_ms": 4.334592814371257,
+          "prompt_per_second": 230.70217730360272,
+          "predicted_n": 53,
+          "predicted_ms": 1795.384,
+          "predicted_per_token_ms": 33.87516981132075,
+          "predicted_per_second": 29.520147221987052
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.5300247080158442
+    },
+    {
+      "name": "s3-eu-west-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 494,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 79,
+          "prompt_ms": 384.236,
+          "prompt_per_token_ms": 4.863746835443038,
+          "prompt_per_second": 205.60280660843858,
+          "predicted_n": 60,
+          "predicted_ms": 2003.646,
+          "predicted_per_token_ms": 33.3941,
+          "predicted_per_second": 29.945409518447867
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.395053125015693
+    },
+    {
+      "name": "s3-eu-west-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 483,
+          "total_tokens": 536
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 68,
+          "prompt_ms": 325.377,
+          "prompt_per_token_ms": 4.784955882352941,
+          "prompt_per_second": 208.98834275317554,
+          "predicted_n": 53,
+          "predicted_ms": 1755.403,
+          "predicted_per_token_ms": 33.12081132075472,
+          "predicted_per_second": 30.19249710750181
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.088304583012359
+    },
+    {
+      "name": "ec2-ap-southeast-2-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 499,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 187,
+          "prompt_ms": 754.055,
+          "prompt_per_token_ms": 4.032379679144385,
+          "prompt_per_second": 247.9925204394905,
+          "predicted_n": 69,
+          "predicted_ms": 2285.814,
+          "predicted_per_token_ms": 33.12773913043478,
+          "predicted_per_second": 30.18618312776105
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.0472499579773284
+    },
+    {
+      "name": "ec2-ap-southeast-2-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 183,
+          "prompt_ms": 711.735,
+          "prompt_per_token_ms": 3.8892622950819673,
+          "prompt_per_second": 257.1181689814327,
+          "predicted_n": 65,
+          "predicted_ms": 2214.312,
+          "predicted_per_token_ms": 34.06633846153846,
+          "predicted_per_second": 29.35449024347066
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9336521250079386
+    },
+    {
+      "name": "ec2-ap-southeast-2-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 489,
+          "total_tokens": 559
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 734.406,
+          "prompt_per_token_ms": 4.1491864406779655,
+          "prompt_per_second": 241.01110285046693,
+          "predicted_n": 70,
+          "predicted_ms": 2307.355,
+          "predicted_per_token_ms": 32.96221428571429,
+          "predicted_per_second": 30.33776770371269
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.0495185420149937
+    },
+    {
+      "name": "ec2-ap-southeast-2-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 488,
+          "total_tokens": 551
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 722.82,
+          "prompt_per_token_ms": 4.106931818181819,
+          "prompt_per_second": 243.49077225311973,
+          "predicted_n": 63,
+          "predicted_ms": 2060.513,
+          "predicted_per_token_ms": 32.70655555555555,
+          "predicted_per_second": 30.574910228666358
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7910940000147093
+    },
+    {
+      "name": "ec2-ap-southeast-2-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 706.279,
+          "prompt_per_token_ms": 4.333,
+          "prompt_per_second": 230.78698361412415,
+          "predicted_n": 46,
+          "predicted_ms": 1513.33,
+          "predicted_per_token_ms": 32.89847826086957,
+          "predicted_per_second": 30.39654272366239
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.227078750001965
+    },
+    {
+      "name": "ec2-ap-southeast-2-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"]\n,\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 491,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 179,
+          "prompt_ms": 725.586,
+          "prompt_per_token_ms": 4.053553072625698,
+          "prompt_per_second": 246.6971523706356,
+          "predicted_n": 64,
+          "predicted_ms": 2110.4,
+          "predicted_per_token_ms": 32.975,
+          "predicted_per_second": 30.32600454890068
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8435154159960803
+    },
+    {
+      "name": "ec2-ap-southeast-2-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 76,
+          "prompt_tokens": 508,
+          "total_tokens": 584
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 81,
+          "prompt_ms": 371.588,
+          "prompt_per_token_ms": 4.587506172839507,
+          "prompt_per_second": 217.98335791252677,
+          "predicted_n": 76,
+          "predicted_ms": 2425.616,
+          "predicted_per_token_ms": 31.916,
+          "predicted_per_second": 31.33224714876551
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8049656249932013
+    },
+    {
+      "name": "ec2-ap-southeast-2-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 68,
+          "prompt_ms": 311.966,
+          "prompt_per_token_ms": 4.587735294117647,
+          "prompt_per_second": 217.97247135905835,
+          "predicted_n": 65,
+          "predicted_ms": 2126.294,
+          "predicted_per_token_ms": 32.712215384615384,
+          "predicted_per_second": 30.569620193632677
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.445914999989327
+    },
+    {
+      "name": "s3-ap-southeast-2-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 59,
+          "prompt_tokens": 494,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 728.946,
+          "prompt_per_token_ms": 4.005197802197802,
+          "prompt_per_second": 249.67555895772801,
+          "predicted_n": 59,
+          "predicted_ms": 1915.988,
+          "predicted_per_token_ms": 32.47437288135593,
+          "predicted_per_second": 30.79351227669484
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.652822207979625
+    },
+    {
+      "name": "s3-ap-southeast-2-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 490,
+          "total_tokens": 556
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 709.066,
+          "prompt_per_token_ms": 3.9835168539325845,
+          "prompt_per_second": 251.0344594156256,
+          "predicted_n": 66,
+          "predicted_ms": 2116.427,
+          "predicted_per_token_ms": 32.06707575757576,
+          "predicted_per_second": 31.184633346673426
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.832742166996468
+    },
+    {
+      "name": "s3-ap-southeast-2-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 489,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 694.39,
+          "prompt_per_token_ms": 3.9231073446327684,
+          "prompt_per_second": 254.89998415875806,
+          "predicted_n": 64,
+          "predicted_ms": 1965.736,
+          "predicted_per_token_ms": 30.714625,
+          "predicted_per_second": 32.55777988498964
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.669950124982279
+    },
+    {
+      "name": "s3-ap-southeast-2-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 488,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 692.427,
+          "prompt_per_token_ms": 3.9342443181818183,
+          "prompt_per_second": 254.17841880804764,
+          "predicted_n": 66,
+          "predicted_ms": 2060.127,
+          "predicted_per_token_ms": 31.214045454545452,
+          "predicted_per_second": 32.03685986349385
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.759732749982504
+    },
+    {
+      "name": "s3-ap-southeast-2-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 674.734,
+          "prompt_per_token_ms": 4.139472392638037,
+          "prompt_per_second": 241.57668058820215,
+          "predicted_n": 46,
+          "predicted_ms": 1398.502,
+          "predicted_per_token_ms": 30.402217391304347,
+          "predicted_per_second": 32.892337658437384
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0805433749919757
+    },
+    {
+      "name": "s3-ap-southeast-2-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in ap-southeast-2 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in ap-southeast-2 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 486,
+          "total_tokens": 543
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 174,
+          "prompt_ms": 696.335,
+          "prompt_per_token_ms": 4.001925287356322,
+          "prompt_per_second": 249.87972743004443,
+          "predicted_n": 57,
+          "predicted_ms": 1761.1,
+          "predicted_per_token_ms": 30.896491228070175,
+          "predicted_per_second": 32.36613480211232
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.464788707991829
+    },
+    {
+      "name": "s3-ap-southeast-2-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 503,
+          "total_tokens": 565
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 81,
+          "prompt_ms": 354.319,
+          "prompt_per_token_ms": 4.3743086419753086,
+          "prompt_per_second": 228.60755420962465,
+          "predicted_n": 62,
+          "predicted_ms": 1931.476,
+          "predicted_per_token_ms": 31.15283870967742,
+          "predicted_per_second": 32.099803466364584
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2932564159855247
+    },
+    {
+      "name": "s3-ap-southeast-2-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 54,
+          "prompt_tokens": 490,
+          "total_tokens": 544
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 68,
+          "prompt_ms": 327.164,
+          "prompt_per_token_ms": 4.811235294117647,
+          "prompt_per_second": 207.8468291132276,
+          "predicted_n": 54,
+          "predicted_ms": 1850.921,
+          "predicted_per_token_ms": 34.27631481481482,
+          "predicted_per_second": 29.174664937077267
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.186508209008025
+    },
+    {
+      "name": "ec2-me-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 74,
+          "prompt_tokens": 494,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 746.597,
+          "prompt_per_token_ms": 4.1021813186813185,
+          "prompt_per_second": 243.7727448677131,
+          "predicted_n": 74,
+          "predicted_ms": 2405.558,
+          "predicted_per_token_ms": 32.50754054054054,
+          "predicted_per_second": 30.76209345191428
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.1617235830053687
+    },
+    {
+      "name": "ec2-me-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 492,
+          "total_tokens": 561
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 180,
+          "prompt_ms": 735.067,
+          "prompt_per_token_ms": 4.0837055555555555,
+          "prompt_per_second": 244.87563718681426,
+          "predicted_n": 69,
+          "predicted_ms": 2175.614,
+          "predicted_per_token_ms": 31.53063768115942,
+          "predicted_per_second": 31.715184770827914
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9191187499964144
+    },
+    {
+      "name": "ec2-me-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 484,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 708.065,
+          "prompt_per_token_ms": 4.116656976744187,
+          "prompt_per_second": 242.91555153834744,
+          "predicted_n": 68,
+          "predicted_ms": 2171.53,
+          "predicted_per_token_ms": 31.934264705882356,
+          "predicted_per_second": 31.31432676499979
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8873052910203114
+    },
+    {
+      "name": "ec2-me-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 483,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 718.557,
+          "prompt_per_token_ms": 4.2020877192982455,
+          "prompt_per_second": 237.97694546152914,
+          "predicted_n": 69,
+          "predicted_ms": 2172.427,
+          "predicted_per_token_ms": 31.48444927536232,
+          "predicted_per_second": 31.761711670863967
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.898461834003683
+    },
+    {
+      "name": "ec2-me-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 608.936,
+          "prompt_per_token_ms": 3.8058500000000004,
+          "prompt_per_second": 262.75339280318457,
+          "predicted_n": 46,
+          "predicted_ms": 1459.783,
+          "predicted_per_token_ms": 31.73441304347826,
+          "predicted_per_second": 31.511532878516878
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0765594999829773
+    },
+    {
+      "name": "ec2-me-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 73,
+          "prompt_tokens": 487,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 709.435,
+          "prompt_per_token_ms": 4.053914285714286,
+          "prompt_per_second": 246.6751710868508,
+          "predicted_n": 73,
+          "predicted_ms": 2324.778,
+          "predicted_per_token_ms": 31.846273972602738,
+          "predicted_per_second": 31.400847736859177
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.044615207996685
+    },
+    {
+      "name": "ec2-me-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 503,
+          "total_tokens": 563
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 80,
+          "prompt_ms": 363.536,
+          "prompt_per_token_ms": 4.5442,
+          "prompt_per_second": 220.06073676334668,
+          "predicted_n": 60,
+          "predicted_ms": 1947.929,
+          "predicted_per_token_ms": 32.46548333333333,
+          "predicted_per_second": 30.80194401335983
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.3210160419985186
+    },
+    {
+      "name": "ec2-me-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 491,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 68,
+          "prompt_ms": 309.932,
+          "prompt_per_token_ms": 4.557823529411765,
+          "prompt_per_second": 219.4029658118555,
+          "predicted_n": 62,
+          "predicted_ms": 1965.078,
+          "predicted_per_token_ms": 31.6948064516129,
+          "predicted_per_second": 31.550910447320668
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2827284579980187
+    },
+    {
+      "name": "s3-me-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 489,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 702.972,
+          "prompt_per_token_ms": 3.971593220338983,
+          "prompt_per_second": 251.78812242877385,
+          "predicted_n": 66,
+          "predicted_ms": 2104.107,
+          "predicted_per_token_ms": 31.88040909090909,
+          "predicted_per_second": 31.367226096391487
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.8158009159960784
+    },
+    {
+      "name": "s3-me-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 487,
+          "total_tokens": 557
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 709.726,
+          "prompt_per_token_ms": 4.0555771428571425,
+          "prompt_per_second": 246.5740299777661,
+          "predicted_n": 70,
+          "predicted_ms": 2225.481,
+          "predicted_per_token_ms": 31.792585714285718,
+          "predicted_per_second": 31.45387446578964
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.942715415993007
+    },
+    {
+      "name": "s3-me-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 484,
+          "total_tokens": 546
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 699.433,
+          "prompt_per_token_ms": 4.066470930232558,
+          "prompt_per_second": 245.91347562954567,
+          "predicted_n": 62,
+          "predicted_ms": 1979.003,
+          "predicted_per_token_ms": 31.91940322580645,
+          "predicted_per_second": 31.328906525154338
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.6887770000030287
+    },
+    {
+      "name": "s3-me-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 483,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 718.516,
+          "prompt_per_token_ms": 4.201847953216374,
+          "prompt_per_second": 237.99052491524196,
+          "predicted_n": 64,
+          "predicted_ms": 2063.792,
+          "predicted_per_token_ms": 32.24675,
+          "predicted_per_second": 31.010877065130597
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.789724500005832
+    },
+    {
+      "name": "s3-me-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 607.893,
+          "prompt_per_token_ms": 3.7993312500000003,
+          "prompt_per_second": 263.2042152155067,
+          "predicted_n": 46,
+          "predicted_ms": 1442.586,
+          "predicted_per_token_ms": 31.360565217391304,
+          "predicted_per_second": 31.88718038300663
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.058063125004992
+    },
+    {
+      "name": "s3-me-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in me-central-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in me-central-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 55,
+          "prompt_tokens": 482,
+          "total_tokens": 537
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 170,
+          "prompt_ms": 695.866,
+          "prompt_per_token_ms": 4.093329411764706,
+          "prompt_per_second": 244.29990831568148,
+          "predicted_n": 55,
+          "predicted_ms": 1731.233,
+          "predicted_per_token_ms": 31.476963636363635,
+          "predicted_per_second": 31.769265026717953
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.4345014999853447
+    },
+    {
+      "name": "s3-me-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 498,
+          "total_tokens": 558
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 80,
+          "prompt_ms": 356.248,
+          "prompt_per_token_ms": 4.4531,
+          "prompt_per_second": 224.5626642114482,
+          "predicted_n": 60,
+          "predicted_ms": 1915.054,
+          "predicted_per_token_ms": 31.91756666666667,
+          "predicted_per_second": 31.3307092123773
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2785890410013963
+    },
+    {
+      "name": "s3-me-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in me-central-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in me-central-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 486,
+          "total_tokens": 539
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 68,
+          "prompt_ms": 305.942,
+          "prompt_per_token_ms": 4.49914705882353,
+          "prompt_per_second": 222.26435075929425,
+          "predicted_n": 53,
+          "predicted_ms": 1658.46,
+          "predicted_per_token_ms": 31.29169811320755,
+          "predicted_per_second": 31.957358030944373
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.973057750001317
+    },
+    {
+      "name": "ec2-eu-west-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 77,
+          "prompt_tokens": 490,
+          "total_tokens": 567
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 694.712,
+          "prompt_per_token_ms": 3.902876404494382,
+          "prompt_per_second": 256.2212830640611,
+          "predicted_n": 77,
+          "predicted_ms": 2406.362,
+          "predicted_per_token_ms": 31.251454545454546,
+          "predicted_per_second": 31.998510614778656
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.109738458006177
+    },
+    {
+      "name": "ec2-eu-west-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 490,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 706.845,
+          "prompt_per_token_ms": 3.9710393258426966,
+          "prompt_per_second": 251.82324271940806,
+          "predicted_n": 64,
+          "predicted_ms": 2087.496,
+          "predicted_per_token_ms": 32.617125,
+          "predicted_per_second": 30.658741382019414
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8059502500109375
+    },
+    {
+      "name": "ec2-eu-west-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 480,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 694.488,
+          "prompt_per_token_ms": 4.133857142857143,
+          "prompt_per_second": 241.9048277292048,
+          "predicted_n": 67,
+          "predicted_ms": 2173.026,
+          "predicted_per_token_ms": 32.43322388059701,
+          "predicted_per_second": 30.832580926321178
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.87498074999894
+    },
+    {
+      "name": "ec2-eu-west-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 479,
+          "total_tokens": 535
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 709.421,
+          "prompt_per_token_ms": 4.2480299401197605,
+          "prompt_per_second": 235.40323728787277,
+          "predicted_n": 56,
+          "predicted_ms": 1752.867,
+          "predicted_per_token_ms": 31.301196428571426,
+          "predicted_per_second": 31.947660604027575
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.4709907500073314
+    },
+    {
+      "name": "ec2-eu-west-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 470,
+          "total_tokens": 516
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 604.359,
+          "prompt_per_token_ms": 3.8250569620253168,
+          "prompt_per_second": 261.4340152128122,
+          "predicted_n": 46,
+          "predicted_ms": 1477.361,
+          "predicted_per_token_ms": 32.11654347826087,
+          "predicted_per_second": 31.136601006795225
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0892192909959704
+    },
+    {
+      "name": "ec2-eu-west-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 484,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 700.546,
+          "prompt_per_token_ms": 4.072941860465116,
+          "prompt_per_second": 245.52277794748665,
+          "predicted_n": 69,
+          "predicted_ms": 2270.921,
+          "predicted_per_token_ms": 32.911898550724636,
+          "predicted_per_second": 30.384148105548366
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.982444207998924
+    },
+    {
+      "name": "ec2-eu-west-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 499,
+          "total_tokens": 566
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 79,
+          "prompt_ms": 373.954,
+          "prompt_per_token_ms": 4.733594936708861,
+          "prompt_per_second": 211.25592987372778,
+          "predicted_n": 67,
+          "predicted_ms": 2159.504,
+          "predicted_per_token_ms": 32.231402985074624,
+          "predicted_per_second": 31.025642925412505
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.5411817920103204
+    },
+    {
+      "name": "ec2-eu-west-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 488,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 68,
+          "prompt_ms": 302.357,
+          "prompt_per_token_ms": 4.446426470588236,
+          "prompt_per_second": 224.8997046537702,
+          "predicted_n": 53,
+          "predicted_ms": 1688.823,
+          "predicted_per_token_ms": 31.86458490566038,
+          "predicted_per_second": 31.382803289628335
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.010300833004294
+    },
+    {
+      "name": "s3-eu-west-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 485,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 712.732,
+          "prompt_per_token_ms": 4.119838150289017,
+          "prompt_per_second": 242.7279819062425,
+          "predicted_n": 56,
+          "predicted_ms": 1832.429,
+          "predicted_per_token_ms": 32.72194642857143,
+          "predicted_per_second": 30.56052922105031
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.552587041980587
+    },
+    {
+      "name": "s3-eu-west-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 485,
+          "total_tokens": 548
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 698.623,
+          "prompt_per_token_ms": 4.03828323699422,
+          "prompt_per_second": 247.62998069058705,
+          "predicted_n": 63,
+          "predicted_ms": 2025.595,
+          "predicted_per_token_ms": 32.15230158730159,
+          "predicted_per_second": 31.101972506843666
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.732291958993301
+    },
+    {
+      "name": "s3-eu-west-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 61,
+          "prompt_tokens": 480,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 701.536,
+          "prompt_per_token_ms": 4.175809523809524,
+          "prompt_per_second": 239.4745244720157,
+          "predicted_n": 61,
+          "predicted_ms": 1966.082,
+          "predicted_per_token_ms": 32.2308524590164,
+          "predicted_per_second": 31.026172865628183
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.6751286670041736
+    },
+    {
+      "name": "s3-eu-west-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 479,
+          "total_tokens": 542
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 709.542,
+          "prompt_per_token_ms": 4.248754491017964,
+          "prompt_per_second": 235.3630933757269,
+          "predicted_n": 63,
+          "predicted_ms": 2054.391,
+          "predicted_per_token_ms": 32.60938095238095,
+          "predicted_per_second": 30.666022193438344
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.771713374997489
+    },
+    {
+      "name": "s3-eu-west-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 470,
+          "total_tokens": 538
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 631.471,
+          "prompt_per_token_ms": 3.9966518987341773,
+          "prompt_per_second": 250.2094316286892,
+          "predicted_n": 68,
+          "predicted_ms": 2217.525,
+          "predicted_per_token_ms": 32.61066176470588,
+          "predicted_per_second": 30.664817758537108
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8563727920118254
+    },
+    {
+      "name": "s3-eu-west-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 in eu-west-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 in eu-west-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 479,
+          "total_tokens": 532
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 728.129,
+          "prompt_per_token_ms": 4.360053892215569,
+          "prompt_per_second": 229.35496320020215,
+          "predicted_n": 53,
+          "predicted_ms": 1808.71,
+          "predicted_per_token_ms": 34.126603773584904,
+          "predicted_per_second": 29.302652166461183
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.544038249994628
+    },
+    {
+      "name": "s3-eu-west-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 494,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 79,
+          "prompt_ms": 375.901,
+          "prompt_per_token_ms": 4.758240506329114,
+          "prompt_per_second": 210.16171811194968,
+          "predicted_n": 60,
+          "predicted_ms": 1932.921,
+          "predicted_per_token_ms": 32.21535,
+          "predicted_per_second": 31.04110307663893
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.316515582991997
+    },
+    {
+      "name": "s3-eu-west-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 483,
+          "total_tokens": 536
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 68,
+          "prompt_ms": 320.19,
+          "prompt_per_token_ms": 4.708676470588236,
+          "prompt_per_second": 212.37390299509664,
+          "predicted_n": 53,
+          "predicted_ms": 1723.628,
+          "predicted_per_token_ms": 32.521283018867926,
+          "predicted_per_second": 30.74909435214559
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0519135420036037
+    },
+    {
+      "name": "ec2-ap-southeast-2-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 499,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 187,
+          "prompt_ms": 748.844,
+          "prompt_per_token_ms": 4.004513368983957,
+          "prompt_per_second": 249.71823236882446,
+          "predicted_n": 69,
+          "predicted_ms": 2307.166,
+          "predicted_per_token_ms": 33.4371884057971,
+          "predicted_per_second": 29.9068207489188
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.0636913329944946
+    },
+    {
+      "name": "ec2-ap-southeast-2-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 183,
+          "prompt_ms": 744.353,
+          "prompt_per_token_ms": 4.0675027322404365,
+          "prompt_per_second": 245.85109484344122,
+          "predicted_n": 65,
+          "predicted_ms": 2199.042,
+          "predicted_per_token_ms": 33.83141538461538,
+          "predicted_per_second": 29.558325852803176
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.951245915988693
+    },
+    {
+      "name": "ec2-ap-southeast-2-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 489,
+          "total_tokens": 559
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 773.988,
+          "prompt_per_token_ms": 4.372813559322034,
+          "prompt_per_second": 228.68571605761326,
+          "predicted_n": 70,
+          "predicted_ms": 2423.035,
+          "predicted_per_token_ms": 34.61478571428571,
+          "predicted_per_second": 28.88938872116994
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.207888582983287
+    },
+    {
+      "name": "ec2-ap-southeast-2-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 488,
+          "total_tokens": 551
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 779.084,
+          "prompt_per_token_ms": 4.426613636363636,
+          "prompt_per_second": 225.90632075617006,
+          "predicted_n": 63,
+          "predicted_ms": 2119.963,
+          "predicted_per_token_ms": 33.65020634920635,
+          "predicted_per_second": 29.717499786552874
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.90746049999143
+    },
+    {
+      "name": "ec2-ap-southeast-2-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 734.194,
+          "prompt_per_token_ms": 4.504257668711656,
+          "prompt_per_second": 222.01216572186644,
+          "predicted_n": 46,
+          "predicted_ms": 1509.531,
+          "predicted_per_token_ms": 32.81589130434782,
+          "predicted_per_second": 30.473040964379006
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2512059590080753
+    },
+    {
+      "name": "ec2-ap-southeast-2-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"]\n,\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 491,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 179,
+          "prompt_ms": 733.778,
+          "prompt_per_token_ms": 4.09931843575419,
+          "prompt_per_second": 243.94299093186223,
+          "predicted_n": 64,
+          "predicted_ms": 2098.622,
+          "predicted_per_token_ms": 32.79096875,
+          "predicted_per_second": 30.49620179336727
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.839628207992064
+    },
+    {
+      "name": "ec2-ap-southeast-2-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 76,
+          "prompt_tokens": 508,
+          "total_tokens": 584
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 81,
+          "prompt_ms": 377.894,
+          "prompt_per_token_ms": 4.665358024691358,
+          "prompt_per_second": 214.34582184422084,
+          "predicted_n": 76,
+          "predicted_ms": 2521.528,
+          "predicted_per_token_ms": 33.178,
+          "predicted_per_second": 30.140454518054135
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9068874590157066
+    },
+    {
+      "name": "ec2-ap-southeast-2-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 68,
+          "prompt_ms": 315.939,
+          "prompt_per_token_ms": 4.646161764705883,
+          "prompt_per_second": 215.2314212553689,
+          "predicted_n": 65,
+          "predicted_ms": 2122.379,
+          "predicted_per_token_ms": 32.65198461538461,
+          "predicted_per_second": 30.626009774879982
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.448814790986944
+    },
+    {
+      "name": "s3-ap-southeast-2-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 59,
+          "prompt_tokens": 494,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 712.466,
+          "prompt_per_token_ms": 3.914648351648352,
+          "prompt_per_second": 255.45078642349247,
+          "predicted_n": 59,
+          "predicted_ms": 1855.036,
+          "predicted_per_token_ms": 31.441288135593222,
+          "predicted_per_second": 31.805312673177234
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.575516417011386
+    },
+    {
+      "name": "s3-ap-southeast-2-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 490,
+          "total_tokens": 556
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 682.525,
+          "prompt_per_token_ms": 3.8344101123595506,
+          "prompt_per_second": 260.7963078275521,
+          "predicted_n": 66,
+          "predicted_ms": 2026.337,
+          "predicted_per_token_ms": 30.702075757575756,
+          "predicted_per_second": 32.57108763251127
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.716375499992864
+    },
+    {
+      "name": "s3-ap-southeast-2-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 489,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 675.852,
+          "prompt_per_token_ms": 3.818372881355932,
+          "prompt_per_second": 261.8916567532537,
+          "predicted_n": 64,
+          "predicted_ms": 2020.589,
+          "predicted_per_token_ms": 31.571703125,
+          "predicted_per_second": 31.673932699821687
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.703678999998374
+    },
+    {
+      "name": "s3-ap-southeast-2-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 488,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 734.659,
+          "prompt_per_token_ms": 4.174198863636364,
+          "prompt_per_second": 239.56692833001435,
+          "predicted_n": 66,
+          "predicted_ms": 2162.657,
+          "predicted_per_token_ms": 32.767530303030306,
+          "predicted_per_second": 30.518015570661458
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9050242500088643
+    },
+    {
+      "name": "s3-ap-southeast-2-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 668.517,
+          "prompt_per_token_ms": 4.101331288343559,
+          "prompt_per_second": 243.82326851822765,
+          "predicted_n": 46,
+          "predicted_ms": 1488.856,
+          "predicted_per_token_ms": 32.36643478260869,
+          "predicted_per_second": 30.896204871391188
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.16520220800885
+    },
+    {
+      "name": "s3-ap-southeast-2-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in ap-southeast-2 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in ap-southeast-2 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 486,
+          "total_tokens": 543
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 174,
+          "prompt_ms": 698.421,
+          "prompt_per_token_ms": 4.013913793103448,
+          "prompt_per_second": 249.13340234614938,
+          "predicted_n": 57,
+          "predicted_ms": 1862.134,
+          "predicted_per_token_ms": 32.66901754385965,
+          "predicted_per_second": 30.61004202705068
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.568165417003911
+    },
+    {
+      "name": "s3-ap-southeast-2-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 503,
+          "total_tokens": 565
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 81,
+          "prompt_ms": 348.251,
+          "prompt_per_token_ms": 4.2993950617283945,
+          "prompt_per_second": 232.59086118919976,
+          "predicted_n": 62,
+          "predicted_ms": 1924.209,
+          "predicted_per_token_ms": 31.035629032258065,
+          "predicted_per_second": 32.221032122809945
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2801117500057444
+    },
+    {
+      "name": "s3-ap-southeast-2-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 54,
+          "prompt_tokens": 490,
+          "total_tokens": 544
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 68,
+          "prompt_ms": 298.197,
+          "prompt_per_token_ms": 4.38525,
+          "prompt_per_second": 228.03717005871957,
+          "predicted_n": 54,
+          "predicted_ms": 1683.114,
+          "predicted_per_token_ms": 31.168777777777777,
+          "predicted_per_second": 32.083388290989205
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9897604169964325
+    },
+    {
+      "name": "ec2-me-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 74,
+          "prompt_tokens": 494,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 686.476,
+          "prompt_per_token_ms": 3.7718461538461536,
+          "prompt_per_second": 265.12216013378475,
+          "predicted_n": 74,
+          "predicted_ms": 2355.147,
+          "predicted_per_token_ms": 31.82631081081081,
+          "predicted_per_second": 31.420544025489708
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.049115041998448
+    },
+    {
+      "name": "ec2-me-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 492,
+          "total_tokens": 561
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 180,
+          "prompt_ms": 698.947,
+          "prompt_per_token_ms": 3.8830388888888887,
+          "prompt_per_second": 257.5302562282977,
+          "predicted_n": 69,
+          "predicted_ms": 2146.262,
+          "predicted_per_token_ms": 31.105246376811596,
+          "predicted_per_second": 32.14891751333248
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8548299169924576
+    },
+    {
+      "name": "ec2-me-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 484,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 661.692,
+          "prompt_per_token_ms": 3.847046511627907,
+          "prompt_per_second": 259.93966981616825,
+          "predicted_n": 68,
+          "predicted_ms": 2073.588,
+          "predicted_per_token_ms": 30.493941176470592,
+          "predicted_per_second": 32.79339965316157
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.743748917011544
+    },
+    {
+      "name": "ec2-me-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 483,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 654.35,
+          "prompt_per_token_ms": 3.8266081871345032,
+          "prompt_per_second": 261.3280354550317,
+          "predicted_n": 69,
+          "predicted_ms": 2128.363,
+          "predicted_per_token_ms": 30.845840579710142,
+          "predicted_per_second": 32.419281861223865
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.790042459004326
+    },
+    {
+      "name": "ec2-me-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 573.618,
+          "prompt_per_token_ms": 3.5851125,
+          "prompt_per_second": 278.9312748205251,
+          "predicted_n": 46,
+          "predicted_ms": 1406.049,
+          "predicted_per_token_ms": 30.56628260869565,
+          "predicted_per_second": 32.71578728764076
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9868815419904422
+    },
+    {
+      "name": "ec2-me-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 73,
+          "prompt_tokens": 487,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 655.325,
+          "prompt_per_token_ms": 3.744714285714286,
+          "prompt_per_second": 267.04307023232747,
+          "predicted_n": 73,
+          "predicted_ms": 2249.852,
+          "predicted_per_token_ms": 30.8198904109589,
+          "predicted_per_second": 32.44657870828837
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9127570419805124
+    },
+    {
+      "name": "ec2-me-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 503,
+          "total_tokens": 563
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 80,
+          "prompt_ms": 337.448,
+          "prompt_per_token_ms": 4.2181,
+          "prompt_per_second": 237.07356392688652,
+          "predicted_n": 60,
+          "predicted_ms": 1875.827,
+          "predicted_per_token_ms": 31.263783333333333,
+          "predicted_per_second": 31.98589208919586
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.220910957985325
+    },
+    {
+      "name": "ec2-me-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 491,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 68,
+          "prompt_ms": 312.467,
+          "prompt_per_token_ms": 4.595102941176471,
+          "prompt_per_second": 217.62298098679221,
+          "predicted_n": 62,
+          "predicted_ms": 2004.559,
+          "predicted_per_token_ms": 32.33159677419355,
+          "predicted_per_second": 30.929496213381597
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.3251337919791695
+    },
+    {
+      "name": "s3-me-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 489,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 671.363,
+          "prompt_per_token_ms": 3.7930112994350287,
+          "prompt_per_second": 263.6427685171807,
+          "predicted_n": 66,
+          "predicted_ms": 2116.47,
+          "predicted_per_token_ms": 32.06772727272727,
+          "predicted_per_second": 31.183999773207276
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.795431250007823
+    },
+    {
+      "name": "s3-me-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 487,
+          "total_tokens": 557
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 720.295,
+          "prompt_per_token_ms": 4.115971428571428,
+          "prompt_per_second": 242.9560110787941,
+          "predicted_n": 70,
+          "predicted_ms": 2482.748,
+          "predicted_per_token_ms": 35.46782857142857,
+          "predicted_per_second": 28.19456505452829
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.21819441698608
+    },
+    {
+      "name": "s3-me-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 484,
+          "total_tokens": 546
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 772.606,
+          "prompt_per_token_ms": 4.491895348837209,
+          "prompt_per_second": 222.62317403696062,
+          "predicted_n": 62,
+          "predicted_ms": 2179.042,
+          "predicted_per_token_ms": 35.14583870967742,
+          "predicted_per_second": 28.45287057339877
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.959480457997415
+    },
+    {
+      "name": "s3-me-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 483,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 735.226,
+          "prompt_per_token_ms": 4.299567251461989,
+          "prompt_per_second": 232.58154635445428,
+          "predicted_n": 64,
+          "predicted_ms": 2096.458,
+          "predicted_per_token_ms": 32.75715625,
+          "predicted_per_second": 30.527680497295915
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.83932733401889
+    },
+    {
+      "name": "s3-me-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 621.301,
+          "prompt_per_token_ms": 3.8831312500000004,
+          "prompt_per_second": 257.52413081582034,
+          "predicted_n": 46,
+          "predicted_ms": 1541.236,
+          "predicted_per_token_ms": 33.50513043478261,
+          "predicted_per_second": 29.84617540727053
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.1705374169978313
+    },
+    {
+      "name": "s3-me-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in me-central-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in me-central-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 55,
+          "prompt_tokens": 482,
+          "total_tokens": 537
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 170,
+          "prompt_ms": 712.004,
+          "prompt_per_token_ms": 4.188258823529412,
+          "prompt_per_second": 238.76270358031695,
+          "predicted_n": 55,
+          "predicted_ms": 1789.519,
+          "predicted_per_token_ms": 32.53670909090909,
+          "predicted_per_second": 30.734515811231958
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.5091642499901354
+    },
+    {
+      "name": "s3-me-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 498,
+          "total_tokens": 558
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 80,
+          "prompt_ms": 366.196,
+          "prompt_per_token_ms": 4.577450000000001,
+          "prompt_per_second": 218.4622442626353,
+          "predicted_n": 60,
+          "predicted_ms": 1924.181,
+          "predicted_per_token_ms": 32.06968333333334,
+          "predicted_per_second": 31.18209773404893
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2976674159872346
+    },
+    {
+      "name": "s3-me-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in me-central-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in me-central-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 486,
+          "total_tokens": 539
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 68,
+          "prompt_ms": 314.346,
+          "prompt_per_token_ms": 4.622735294117647,
+          "prompt_per_second": 216.32214184370088,
+          "predicted_n": 53,
+          "predicted_ms": 1702.736,
+          "predicted_per_token_ms": 32.127094339622644,
+          "predicted_per_second": 31.126375433420094
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.024545207998017
+    },
+    {
+      "name": "ec2-eu-west-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but the action is a local EC2 instance launch which may be affected. No clear remote dependency or ongoing incident affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 77,
+          "prompt_tokens": 490,
+          "total_tokens": 567
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 721.498,
+          "prompt_per_token_ms": 4.053359550561798,
+          "prompt_per_second": 246.70893058608613,
+          "predicted_n": 77,
+          "predicted_ms": 2519.335,
+          "predicted_per_token_ms": 32.718636363636364,
+          "predicted_per_second": 30.56362095552993
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.248337375000119
+    },
+    {
+      "name": "ec2-eu-west-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of AWS EC2 outage in us-west-2; only eu-west-1 ec2 impairment reported.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 490,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 724.469,
+          "prompt_per_token_ms": 4.070050561797753,
+          "prompt_per_second": 245.69719339267792,
+          "predicted_n": 64,
+          "predicted_ms": 2192.12,
+          "predicted_per_token_ms": 34.251875,
+          "predicted_per_second": 29.19548199916063
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9385027080134023
+    },
+    {
+      "name": "ec2-eu-west-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in eu-west-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 480,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 753.078,
+          "prompt_per_token_ms": 4.482607142857143,
+          "prompt_per_second": 223.08446137053534,
+          "predicted_n": 67,
+          "predicted_ms": 2260.923,
+          "predicted_per_token_ms": 33.74511940298507,
+          "predicted_per_second": 29.633914998432058
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.0221284170111176
+    },
+    {
+      "name": "ec2-eu-west-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on EC2 service in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 479,
+          "total_tokens": 535
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 711.168,
+          "prompt_per_token_ms": 4.258491017964072,
+          "prompt_per_second": 234.82496400287977,
+          "predicted_n": 56,
+          "predicted_ms": 1792.382,
+          "predicted_per_token_ms": 32.00682142857143,
+          "predicted_per_second": 31.24333986839859
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.5117166670097504
+    },
+    {
+      "name": "ec2-eu-west-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 470,
+          "total_tokens": 516
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 604.312,
+          "prompt_per_token_ms": 3.824759493670886,
+          "prompt_per_second": 261.4543480850951,
+          "predicted_n": 46,
+          "predicted_ms": 1544.572,
+          "predicted_per_token_ms": 33.577652173913044,
+          "predicted_per_second": 29.781712992337038
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.156332750018919
+    },
+    {
+      "name": "ec2-eu-west-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-eu-west-1) indicates all operations have recovered and are operating normally; no current impairment affecting the operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 484,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 690.46,
+          "prompt_per_token_ms": 4.014302325581395,
+          "prompt_per_second": 249.1092894592011,
+          "predicted_n": 69,
+          "predicted_ms": 2230.56,
+          "predicted_per_token_ms": 32.32695652173913,
+          "predicted_per_second": 30.933935872605982
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.928908166999463
+    },
+    {
+      "name": "ec2-eu-west-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.",
+        "evidence_ids": [
+          "ec2-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate EC2 operations are impaired in eu-west-1, but no fresh active incident is confirmed for this operation.\",\n  \"evidence_ids\": [\"ec2-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 499,
+          "total_tokens": 566
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 79,
+          "prompt_ms": 353.933,
+          "prompt_per_token_ms": 4.480164556962025,
+          "prompt_per_second": 223.2060870277708,
+          "predicted_n": 67,
+          "predicted_ms": 2156.471,
+          "predicted_per_token_ms": 32.18613432835821,
+          "predicted_per_second": 31.069279392117956
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.523573625017889
+    },
+    {
+      "name": "ec2-eu-west-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS EC2 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 488,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 420,
+          "prompt_n": 68,
+          "prompt_ms": 313.379,
+          "prompt_per_token_ms": 4.608514705882353,
+          "prompt_per_second": 216.9896515082376,
+          "predicted_n": 53,
+          "predicted_ms": 1718.13,
+          "predicted_per_token_ms": 32.41754716981132,
+          "predicted_per_second": 30.847491167723046
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0392673750175163
+    },
+    {
+      "name": "s3-eu-west-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in eu-west-1; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 56,
+          "prompt_tokens": 485,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 695.604,
+          "prompt_per_token_ms": 4.020832369942196,
+          "prompt_per_second": 248.70472280205402,
+          "predicted_n": 56,
+          "predicted_ms": 1731.49,
+          "predicted_per_token_ms": 30.919464285714287,
+          "predicted_per_second": 32.34208687315549
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.4348687500169035
+    },
+    {
+      "name": "s3-eu-west-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only eu-west-1 S3 outage reported.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 485,
+          "total_tokens": 548
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 173,
+          "prompt_ms": 683.927,
+          "prompt_per_token_ms": 3.953335260115607,
+          "prompt_per_second": 252.95097283774436,
+          "predicted_n": 63,
+          "predicted_ms": 1947.512,
+          "predicted_per_token_ms": 30.912888888888887,
+          "predicted_per_second": 32.34896627081117
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.6390092910150997
+    },
+    {
+      "name": "s3-eu-west-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in eu-west-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 61,
+          "prompt_tokens": 480,
+          "total_tokens": 541
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 168,
+          "prompt_ms": 678.025,
+          "prompt_per_token_ms": 4.035863095238095,
+          "prompt_per_second": 247.77847424504998,
+          "predicted_n": 61,
+          "predicted_ms": 1984.179,
+          "predicted_per_token_ms": 32.527524590163935,
+          "predicted_per_second": 30.74319403642514
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.669431207992602
+    },
+    {
+      "name": "s3-eu-west-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in eu-west-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 479,
+          "total_tokens": 542
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 667.894,
+          "prompt_per_token_ms": 3.999365269461078,
+          "prompt_per_second": 250.03967695472633,
+          "predicted_n": 63,
+          "predicted_ms": 2036.643,
+          "predicted_per_token_ms": 32.327666666666666,
+          "predicted_per_second": 30.933256343895323
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.712084375001723
+    },
+    {
+      "name": "s3-eu-west-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of Bitbucket, GitHub, or GitLab outage; AWS S3 outage is unrelated to local git status command.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 470,
+          "total_tokens": 538
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 158,
+          "prompt_ms": 624.53,
+          "prompt_per_token_ms": 3.9527215189873415,
+          "prompt_per_second": 252.9902486669976,
+          "predicted_n": 68,
+          "predicted_ms": 2254.478,
+          "predicted_per_token_ms": 33.15408823529412,
+          "predicted_per_second": 30.162192755928423
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.887032583996188
+    },
+    {
+      "name": "s3-eu-west-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 in eu-west-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 in eu-west-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 479,
+          "total_tokens": 532
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 167,
+          "prompt_ms": 671.698,
+          "prompt_per_token_ms": 4.0221437125748505,
+          "prompt_per_second": 248.6236374084782,
+          "predicted_n": 53,
+          "predicted_ms": 1665.703,
+          "predicted_per_token_ms": 31.428358490566037,
+          "predicted_per_second": 31.818397397375165
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.3451776670117397
+    },
+    {
+      "name": "s3-eu-west-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.",
+        "evidence_ids": [
+          "s3-eu-west-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Conflicting reports indicate ongoing S3 impairment in eu-west-1; action may be affected.\",\n  \"evidence_ids\": [\"s3-eu-west-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 494,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 79,
+          "prompt_ms": 346.372,
+          "prompt_per_token_ms": 4.384455696202532,
+          "prompt_per_second": 228.0784820943956,
+          "predicted_n": 60,
+          "predicted_ms": 1930.345,
+          "predicted_per_token_ms": 32.17241666666667,
+          "predicted_per_second": 31.082526698595323
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.28405695798574
+    },
+    {
+      "name": "s3-eu-west-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for AWS S3 in eu-west-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 483,
+          "total_tokens": 536
+        },
+        "timings": {
+          "cache_n": 415,
+          "prompt_n": 68,
+          "prompt_ms": 290.409,
+          "prompt_per_token_ms": 4.270720588235294,
+          "prompt_per_second": 234.15252282126244,
+          "predicted_n": 53,
+          "predicted_ms": 1658.878,
+          "predicted_per_token_ms": 31.299584905660375,
+          "predicted_per_second": 31.949305494436604
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9571034999971744
+    },
+    {
+      "name": "ec2-ap-southeast-2-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 499,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 187,
+          "prompt_ms": 712.799,
+          "prompt_per_token_ms": 3.81175935828877,
+          "prompt_per_second": 262.34604706235564,
+          "predicted_n": 69,
+          "predicted_ms": 2232.561,
+          "predicted_per_token_ms": 32.35595652173913,
+          "predicted_per_second": 30.906210401417923
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.952786958980141
+    },
+    {
+      "name": "ec2-ap-southeast-2-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation in us-west-2; only reported impairment is in ap-southeast-2.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 183,
+          "prompt_ms": 711.02,
+          "prompt_per_token_ms": 3.8853551912568305,
+          "prompt_per_second": 257.37672639306913,
+          "predicted_n": 65,
+          "predicted_ms": 2075.214,
+          "predicted_per_token_ms": 31.92636923076923,
+          "predicted_per_second": 31.32207088040077
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.793575541989412
+    },
+    {
+      "name": "ec2-ap-southeast-2-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but Lambda invoke may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 489,
+          "total_tokens": 559
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 694.275,
+          "prompt_per_token_ms": 3.9224576271186438,
+          "prompt_per_second": 254.9422058982392,
+          "predicted_n": 70,
+          "predicted_ms": 2147.786,
+          "predicted_per_token_ms": 30.682657142857142,
+          "predicted_per_second": 32.591701407868385
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8497657499974594
+    },
+    {
+      "name": "ec2-ap-southeast-2-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 63,
+          "prompt_tokens": 488,
+          "total_tokens": 551
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 647.527,
+          "prompt_per_token_ms": 3.679130681818182,
+          "prompt_per_second": 271.80333793031025,
+          "predicted_n": 63,
+          "predicted_ms": 1963.704,
+          "predicted_per_token_ms": 31.16990476190476,
+          "predicted_per_second": 32.082228278803726
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.619015208008932
+    },
+    {
+      "name": "ec2-ap-southeast-2-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 665.518,
+          "prompt_per_token_ms": 4.082932515337424,
+          "prompt_per_second": 244.92200060704593,
+          "predicted_n": 46,
+          "predicted_ms": 1464.575,
+          "predicted_per_token_ms": 31.83858695652174,
+          "predicted_per_second": 31.408429066452722
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.1391048329824116
+    },
+    {
+      "name": "ec2-ap-southeast-2-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 service in ap-southeast-2 is resolved per report ec2-ap-southeast-2\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"]\n,\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 491,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 179,
+          "prompt_ms": 704.581,
+          "prompt_per_token_ms": 3.9362067039106146,
+          "prompt_per_second": 254.05169881106644,
+          "predicted_n": 64,
+          "predicted_ms": 2078.291,
+          "predicted_per_token_ms": 32.473296875,
+          "predicted_per_second": 30.794532623198577
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7921082499960903
+    },
+    {
+      "name": "ec2-ap-southeast-2-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in ap-southeast-2, but the action is a local EC2 instance launch which may be affected. Conflicting reports require clarification.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 76,
+          "prompt_tokens": 508,
+          "total_tokens": 584
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 81,
+          "prompt_ms": 345.764,
+          "prompt_per_token_ms": 4.268691358024691,
+          "prompt_per_second": 234.2638331347393,
+          "predicted_n": 76,
+          "predicted_ms": 2507.279,
+          "predicted_per_token_ms": 32.99051315789474,
+          "predicted_per_second": 30.311744325222683
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8608167080092244
+    },
+    {
+      "name": "ec2-ap-southeast-2-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.",
+        "evidence_ids": [
+          "ec2-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved in ap-southeast-2, but the action depends on EC2 availability.\",\n  \"evidence_ids\": [\"ec2-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 65,
+          "prompt_tokens": 495,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 427,
+          "prompt_n": 68,
+          "prompt_ms": 305.396,
+          "prompt_per_token_ms": 4.491117647058823,
+          "prompt_per_second": 222.66172444956712,
+          "predicted_n": 65,
+          "predicted_ms": 2248.503,
+          "predicted_per_token_ms": 34.59235384615385,
+          "predicted_per_second": 28.908122426343215
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.561602915986441
+    },
+    {
+      "name": "s3-ap-southeast-2-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; investigation ongoing.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 59,
+          "prompt_tokens": 494,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 696.766,
+          "prompt_per_token_ms": 3.828384615384615,
+          "prompt_per_second": 261.20677530189477,
+          "predicted_n": 59,
+          "predicted_ms": 1854.902,
+          "predicted_per_token_ms": 31.439016949152542,
+          "predicted_per_second": 31.80761032119217
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 2.559455834008986
+    },
+    {
+      "name": "s3-ap-southeast-2-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in ap-southeast-2.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 490,
+          "total_tokens": 556
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 178,
+          "prompt_ms": 690.809,
+          "prompt_per_token_ms": 3.880949438202247,
+          "prompt_per_second": 257.66890703508494,
+          "predicted_n": 66,
+          "predicted_ms": 2141.561,
+          "predicted_per_token_ms": 32.44789393939394,
+          "predicted_per_second": 30.818641168754937
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.840251209010603
+    },
+    {
+      "name": "s3-ap-southeast-2-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in ap-southeast-2 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 489,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 671.01,
+          "prompt_per_token_ms": 3.7910169491525423,
+          "prompt_per_second": 263.7814637635803,
+          "predicted_n": 64,
+          "predicted_ms": 2114.96,
+          "predicted_per_token_ms": 33.04625,
+          "predicted_per_second": 30.260619586186028
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7936769160151016
+    },
+    {
+      "name": "s3-ap-southeast-2-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in ap-southeast-2 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 488,
+          "total_tokens": 554
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 176,
+          "prompt_ms": 701.547,
+          "prompt_per_token_ms": 3.9860625,
+          "prompt_per_second": 250.8741395800994,
+          "predicted_n": 66,
+          "predicted_ms": 2103.876,
+          "predicted_per_token_ms": 31.876909090909095,
+          "predicted_per_second": 31.370670134551652
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.8136935000075027
+    },
+    {
+      "name": "s3-ap-southeast-2-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 475,
+          "total_tokens": 521
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 163,
+          "prompt_ms": 677.328,
+          "prompt_per_token_ms": 4.155386503067485,
+          "prompt_per_second": 240.65150119292278,
+          "predicted_n": 46,
+          "predicted_ms": 1683.781,
+          "predicted_per_token_ms": 36.6039347826087,
+          "predicted_per_second": 27.31946731789942
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.368517166003585
+    },
+    {
+      "name": "s3-ap-southeast-2-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in ap-southeast-2 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in ap-southeast-2 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 57,
+          "prompt_tokens": 486,
+          "total_tokens": 543
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 174,
+          "prompt_ms": 726.266,
+          "prompt_per_token_ms": 4.1739425287356315,
+          "prompt_per_second": 239.581640886397,
+          "predicted_n": 57,
+          "predicted_ms": 2015.887,
+          "predicted_per_token_ms": 35.36643859649123,
+          "predicted_per_second": 28.275394404547477
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7502333339944016
+    },
+    {
+      "name": "s3-ap-southeast-2-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-ap-southeast-2"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in ap-southeast-2; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-ap-southeast-2\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 503,
+          "total_tokens": 565
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 81,
+          "prompt_ms": 377.04,
+          "prompt_per_token_ms": 4.654814814814815,
+          "prompt_per_second": 214.83131763208146,
+          "predicted_n": 62,
+          "predicted_ms": 2029.198,
+          "predicted_per_token_ms": 32.729,
+          "predicted_per_second": 30.55394298634239
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.4145573750138283
+    },
+    {
+      "name": "s3-ap-southeast-2-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in ap-southeast-2; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 54,
+          "prompt_tokens": 490,
+          "total_tokens": 544
+        },
+        "timings": {
+          "cache_n": 422,
+          "prompt_n": 68,
+          "prompt_ms": 324.276,
+          "prompt_per_token_ms": 4.7687647058823535,
+          "prompt_per_second": 209.69791165550333,
+          "predicted_n": 54,
+          "predicted_ms": 1875.577,
+          "predicted_per_token_ms": 34.73290740740741,
+          "predicted_per_second": 28.791140006515327
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.214154207991669
+    },
+    {
+      "name": "ec2-me-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 (evidence: ec2-me-central-1). The action depends on EC2 service availability.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 74,
+          "prompt_tokens": 494,
+          "total_tokens": 568
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 182,
+          "prompt_ms": 718.366,
+          "prompt_per_token_ms": 3.947065934065934,
+          "prompt_per_second": 253.35274776367478,
+          "predicted_n": 74,
+          "predicted_ms": 2543.206,
+          "predicted_per_token_ms": 34.367648648648654,
+          "predicted_per_second": 29.09713173057943
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.269120458018733
+    },
+    {
+      "name": "ec2-me-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1, but the requested action is in us-west-2, so no dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 492,
+          "total_tokens": 561
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 180,
+          "prompt_ms": 730.123,
+          "prompt_per_token_ms": 4.056238888888889,
+          "prompt_per_second": 246.53380320850044,
+          "predicted_n": 69,
+          "predicted_ms": 2162.77,
+          "predicted_per_token_ms": 31.34449275362319,
+          "predicted_per_second": 31.90353111981394
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.903691167011857
+    },
+    {
+      "name": "ec2-me-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but Lambda invocation may not depend on EC2. No evidence of Lambda dependency.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 68,
+          "prompt_tokens": 484,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 672.63,
+          "prompt_per_token_ms": 3.910639534883721,
+          "prompt_per_second": 255.7126503426847,
+          "predicted_n": 68,
+          "predicted_ms": 2118.914,
+          "predicted_per_token_ms": 31.160500000000003,
+          "predicted_per_second": 32.09191123377352
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7989939160179347
+    },
+    {
+      "name": "ec2-me-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 operations are impaired in me-central-1, but the action is a local EC2 describe-instances call which may be affected.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 483,
+          "total_tokens": 552
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 664.019,
+          "prompt_per_token_ms": 3.883152046783626,
+          "prompt_per_second": 257.5227516080112,
+          "predicted_n": 69,
+          "predicted_ms": 2133.546,
+          "predicted_per_token_ms": 30.92095652173913,
+          "predicted_per_second": 32.340526053809015
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.806964582996443
+    },
+    {
+      "name": "ec2-me-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS EC2 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS EC2 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 575.673,
+          "prompt_per_token_ms": 3.59795625,
+          "prompt_per_second": 277.9355641136548,
+          "predicted_n": 46,
+          "predicted_ms": 1415.774,
+          "predicted_per_token_ms": 30.77769565217391,
+          "predicted_per_second": 32.491061426470615
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9992464579991065
+    },
+    {
+      "name": "ec2-me-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"ec2 impairment report (ec2-me-central-1) indicates all operations have recovered and are operating normally; no current impairment affecting the requested EC2 instance launch.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 73,
+          "prompt_tokens": 487,
+          "total_tokens": 560
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 665.995,
+          "prompt_per_token_ms": 3.805685714285714,
+          "prompt_per_second": 262.76473547098703,
+          "predicted_n": 73,
+          "predicted_ms": 2242.294,
+          "predicted_per_token_ms": 30.71635616438356,
+          "predicted_per_second": 32.5559449385317
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.915852416976122
+    },
+    {
+      "name": "ec2-me-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 new resource operations are failing in me-central-1 with conflicting updates; investigation continues.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 503,
+          "total_tokens": 563
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 80,
+          "prompt_ms": 332.055,
+          "prompt_per_token_ms": 4.1506875,
+          "prompt_per_second": 240.92394332264234,
+          "predicted_n": 60,
+          "predicted_ms": 1898.595,
+          "predicted_per_token_ms": 31.643250000000002,
+          "predicted_per_second": 31.602316449795772
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.238046000013128
+    },
+    {
+      "name": "ec2-me-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.",
+        "evidence_ids": [
+          "ec2-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"EC2 service is reported as resolved, but the action depends on EC2 availability; no current impairment evidence.\",\n  \"evidence_ids\": [\"ec2-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 491,
+          "total_tokens": 553
+        },
+        "timings": {
+          "cache_n": 423,
+          "prompt_n": 68,
+          "prompt_ms": 308.815,
+          "prompt_per_token_ms": 4.541397058823529,
+          "prompt_per_second": 220.19655780969188,
+          "predicted_n": 62,
+          "predicted_ms": 2132.286,
+          "predicted_per_token_ms": 34.39170967741936,
+          "predicted_per_second": 29.076774879167242
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.453053834004095
+    },
+    {
+      "name": "s3-me-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"AWS S3 reports ongoing impairment in me-central-1, affecting the s3 service. The action depends on s3.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 66,
+          "prompt_tokens": 489,
+          "total_tokens": 555
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 177,
+          "prompt_ms": 688.954,
+          "prompt_per_token_ms": 3.8923954802259884,
+          "prompt_per_second": 256.9112016186857,
+          "predicted_n": 66,
+          "predicted_ms": 2314.314,
+          "predicted_per_token_ms": 35.065363636363635,
+          "predicted_per_second": 28.518169963107862
+        }
+      },
+      "error": null,
+      "failure_category": "classification_error",
+      "seconds": 3.0112880830129143
+    },
+    {
+      "name": "s3-me-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS S3 operation in us-west-2; only s3 impairment reported in me-central-1, not us-west-2.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 70,
+          "prompt_tokens": 487,
+          "total_tokens": 557
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 175,
+          "prompt_ms": 717.436,
+          "prompt_per_token_ms": 4.099634285714286,
+          "prompt_per_second": 243.92419672277387,
+          "predicted_n": 70,
+          "predicted_ms": 2272.114,
+          "predicted_per_token_ms": 32.45877142857143,
+          "predicted_per_second": 30.80831331526499
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.99759012501454
+    },
+    {
+      "name": "s3-me-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS Lambda invocation; S3 outage in me-central-1 does not affect Lambda execution.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 62,
+          "prompt_tokens": 484,
+          "total_tokens": 546
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 172,
+          "prompt_ms": 690.168,
+          "prompt_per_token_ms": 4.012604651162791,
+          "prompt_per_second": 249.2146839610066,
+          "predicted_n": 62,
+          "predicted_ms": 2047.492,
+          "predicted_per_token_ms": 33.02406451612903,
+          "predicted_per_second": 30.280948594670946
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.745579208014533
+    },
+    {
+      "name": "s3-me-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Unrelated AWS EC2 operation; S3 outage in me-central-1 does not affect EC2 service.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 483,
+          "total_tokens": 547
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 171,
+          "prompt_ms": 714.441,
+          "prompt_per_token_ms": 4.178017543859649,
+          "prompt_per_second": 239.34796575224547,
+          "predicted_n": 64,
+          "predicted_ms": 2058.786,
+          "predicted_per_token_ms": 32.16853125,
+          "predicted_per_second": 31.086280944206926
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.7913179580064025
+    },
+    {
+      "name": "s3-me-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": true,
+      "result": {
+        "decision": "advise",
+        "reason": "No evidence of dependency on impaired AWS S3 service for local git status operation.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No evidence of dependency on impaired AWS S3 service for local git status operation.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 46,
+          "prompt_tokens": 472,
+          "total_tokens": 518
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 160,
+          "prompt_ms": 577.732,
+          "prompt_per_token_ms": 3.6108249999999997,
+          "prompt_per_second": 276.94501949000573,
+          "predicted_n": 46,
+          "predicted_ms": 1410.181,
+          "predicted_per_token_ms": 30.656108695652176,
+          "predicted_per_second": 32.61992609459353
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.997622916009277
+    },
+    {
+      "name": "s3-me-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "S3 service in me-central-1 is resolved; no current impairment.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"allow\",\n  \"reason\": \"S3 service in me-central-1 is resolved; no current impairment.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 55,
+          "prompt_tokens": 482,
+          "total_tokens": 537
+        },
+        "timings": {
+          "cache_n": 312,
+          "prompt_n": 170,
+          "prompt_ms": 661.648,
+          "prompt_per_token_ms": 3.8920470588235294,
+          "prompt_per_second": 256.93420066258795,
+          "predicted_n": 55,
+          "predicted_ms": 1741.425,
+          "predicted_per_token_ms": 31.662272727272725,
+          "predicted_per_second": 31.583329744318593
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.4109350829967298
+    },
+    {
+      "name": "s3-me-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.",
+        "evidence_ids": [
+          "s3-me-central-1"
+        ],
+        "providers": [
+          "AWS"
+        ]
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"Uncertain dependency on AWS S3 in me-central-1; conflicting reports and ongoing investigation.\",\n  \"evidence_ids\": [\"s3-me-central-1\"],\n  \"providers\": [\"AWS\"]\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 498,
+          "total_tokens": 558
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 80,
+          "prompt_ms": 363.394,
+          "prompt_per_token_ms": 4.542425,
+          "prompt_per_second": 220.14672779407476,
+          "predicted_n": 60,
+          "predicted_ms": 1894.449,
+          "predicted_per_token_ms": 31.57415,
+          "predicted_per_second": 31.671478092046815
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.2654714999953285
+    },
+    {
+      "name": "s3-me-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "No current outage evidence for S3 in me-central-1; action does not depend on impaired service.",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {
+        "raw": "{\n  \"decision\": \"advise\",\n  \"reason\": \"No current outage evidence for S3 in me-central-1; action does not depend on impaired service.\",\n  \"evidence_ids\": [],\n  \"providers\": []\n}",
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 53,
+          "prompt_tokens": 486,
+          "total_tokens": 539
+        },
+        "timings": {
+          "cache_n": 418,
+          "prompt_n": 68,
+          "prompt_ms": 287.61,
+          "prompt_per_token_ms": 4.229558823529412,
+          "prompt_per_second": 236.431278467369,
+          "predicted_n": 53,
+          "predicted_ms": 1714.209,
+          "predicted_per_token_ms": 32.34356603773585,
+          "predicted_per_second": 30.918050249415327
+        }
+      },
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0094733750156593
+    }
+  ]
+}

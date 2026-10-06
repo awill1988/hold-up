@@ -1,6 +1,7 @@
 """Offline contracts for model authority, leases, redaction, and client denial."""
 
 import concurrent.futures
+import io
 import json
 import sys
 import tempfile
@@ -77,7 +78,7 @@ class Decisions(unittest.TestCase):
                     "policy_digest": d.policy_digest(),
                     "runtime_fingerprint": d.runtime_fingerprint(self.root),
                     "corpus_hash": d.corpus_hash(),
-                    "qualification_version": 1,
+                    "qualification_version": d.QUALIFICATION_VERSION,
                     "passed": passed,
                 }
             )
@@ -239,6 +240,40 @@ class Decisions(unittest.TestCase):
         ):
             with self.subTest(replacement=replacement), self.assertRaises(ValueError):
                 d.validate_decision({**self.result, **replacement}, action, [self.report])
+
+    def test_inference_rejects_truncated_or_missing_finish_reason(self):
+        token = self.root / "fixture-token"
+        token.write_text("test-only")
+        for finish in ("length", None):
+            body = json.dumps(
+                {
+                    "choices": [
+                        {"message": {"content": json.dumps(self.result)}, "finish_reason": finish}
+                    ]
+                }
+            ).encode()
+            with (
+                patch.object(
+                    d.urllib.request.OpenerDirector, "open", return_value=io.BytesIO(body)
+                ),
+                self.assertRaises(d.ModelOutputError),
+            ):
+                d.infer({}, [], {"token_file": str(token)})
+
+    def test_inference_preserves_raw_synthetic_response_and_finish_reason(self):
+        token = self.root / "fixture-token"
+        token.write_text("test-only")
+        raw = json.dumps(self.result)
+        body = json.dumps(
+            {"choices": [{"message": {"content": raw}, "finish_reason": "stop"}]}
+        ).encode()
+        trace = {}
+        with patch.object(d.urllib.request.OpenerDirector, "open", return_value=io.BytesIO(body)):
+            self.assertEqual(
+                d.infer({}, [], {"token_file": str(token), "trace": trace}), self.result
+            )
+        self.assertEqual(trace["raw"], raw)
+        self.assertEqual(trace["finish_reason"], "stop")
 
     def test_stale_and_missing_feeds_only_advise(self):
         self.snapshot(age=301)

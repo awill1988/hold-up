@@ -1,0 +1,14 @@
+{
+  "model_sha256": "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2",
+  "policy_version": 2,
+  "policy_digest": "8a9f0d7081f76fd4a2700b97d208555fabf70f4d610b80c7bd64f7146209c323",
+  "runtime_fingerprint": "9066d2d980f8e7e1b228eda3b66a294e478f8803d67695498c9df1b01ce9b719",
+  "corpus_hash": "178bc57dd7b6f165da3bc07125d790892777cabcf8070fad233835ab61191f00",
+  "qualification_version": 2,
+  "passed": false,
+  "precision": 0,
+  "recall": 0.0,
+  "protected_pauses": 0,
+  "p95_seconds": 4.012072500016075,
+  "cases": 144
+}

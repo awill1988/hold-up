@@ -1,0 +1,17 @@
+{
+  "development_corrections": [
+    {
+      "cases": [
+        "AWS-0-mcp",
+        "AWS-1-mcp"
+      ],
+      "original_expected_pause": true,
+      "corrected_expected_pause": false,
+      "reason": "Regional outage reports cannot establish a dependency for an MCP upload with no supplied region."
+    }
+  ],
+  "baseline_limitations": "Original baseline retains parsed responses, expected pause labels, per-case latency and exception class. Raw response text and specific validation categories were not recorded by that evaluator and cannot be reconstructed exactly.",
+  "qualification_corpus": "qualification-v2.json",
+  "qualification_v1_defect": "Acquisition timestamps were fixed at zero, contradicting the fresh-evidence labels. The v1 run is diagnostic only. V2 uses raw AWS events and rebases acquisition time for each inference while retaining old publication/update timestamps.",
+  "qualification_labels_changed_after_freeze": false
+}

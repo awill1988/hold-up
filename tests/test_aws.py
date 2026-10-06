@@ -1,5 +1,6 @@
 """AWS update selection, encoding, identity, and incomplete evidence contracts."""
 
+import hashlib
 import json
 import sys
 import time
@@ -105,6 +106,11 @@ class AwsEvidence(unittest.TestCase):
 
     def test_public_capture(self):
         root = Path(__file__).with_name("fixtures")
+        metadata = json.loads((root / "aws-public-2026-10-05.metadata.json").read_text())
+        self.assertEqual(
+            hashlib.sha256((root / "aws-public-2026-10-05.bin").read_bytes()).hexdigest(),
+            metadata["sha256"],
+        )
         reports = evidence.parse(
             (root / "aws-public-2026-10-05.bin").read_bytes(), self.feed, time.time()
         )

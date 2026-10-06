@@ -1,0 +1,95 @@
+{
+  "client": "codex",
+  "mode": "real",
+  "source": "capture",
+  "model_qualified": false,
+  "exit_code": 0,
+  "model_requests": 5,
+  "hook_calls": 4,
+  "executions": 4,
+  "hook_p95_seconds": 4.556712041987339,
+  "blocking_verified": false,
+  "records": [
+    {
+      "payload": {
+        "session_id": "01a10f11-3a73-7643-87a6-d98fe169914a",
+        "turn_id": "01a10f11-3a7b-7ac2-8950-2070fa75c9d9",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_0",
+        "client": "codex"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "hold-up: decision unavailable (model\\_output\\_invalid); continuing without outage protection"
+        }
+      },
+      "seconds": 4.556712041987339
+    },
+    {
+      "payload": {
+        "session_id": "01a10f11-3a73-7643-87a6-d98fe169914a",
+        "turn_id": "01a10f11-3a7b-7ac2-8950-2070fa75c9d9",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh/bin/aws --region us-west-2 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_1",
+        "client": "codex"
+      },
+      "result": null,
+      "seconds": 4.179140708991326
+    },
+    {
+      "payload": {
+        "session_id": "01a10f11-3a73-7643-87a6-d98fe169914a",
+        "turn_id": "01a10f11-3a7b-7ac2-8950-2070fa75c9d9",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh/bin/git status"
+        },
+        "tool_use_id": "call_2",
+        "client": "codex"
+      },
+      "result": null,
+      "seconds": 3.911910249997163
+    },
+    {
+      "payload": {
+        "session_id": "01a10f11-3a73-7643-87a6-d98fe169914a",
+        "turn_id": "01a10f11-3a7b-7ac2-8950-2070fa75c9d9",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-5_ywlehh/bin/aws --region me-central-1 ec2 describe-instances"
+        },
+        "tool_use_id": "call_3",
+        "client": "codex"
+      },
+      "result": null,
+      "seconds": 4.115753624995705
+    }
+  ]
+}

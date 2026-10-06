@@ -1,0 +1,107 @@
+{
+  "client": "codex",
+  "mode": "contract",
+  "source": "synthetic",
+  "model_qualified": null,
+  "exit_code": 0,
+  "model_requests": 5,
+  "hook_calls": 4,
+  "executions": 2,
+  "hook_p95_seconds": 0.00805174998822622,
+  "blocking_verified": false,
+  "records": [
+    {
+      "payload": {
+        "session_id": "01a10f09-1ad7-7370-a6fa-ef5fdeffd209",
+        "turn_id": "01a10f09-1ae2-7f80-bed3-f94efba7bc98",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_0",
+        "client": "codex"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: fixture outage; pause b9410ee4701fe924 expires at 1791253918. human retry: hold-up retry b9410ee4701fe924. diagnostics and unrelated local work remain available."
+        }
+      },
+      "seconds": 0.00805174998822622
+    },
+    {
+      "payload": {
+        "session_id": "01a10f09-1ad7-7370-a6fa-ef5fdeffd209",
+        "turn_id": "01a10f09-1ae2-7f80-bed3-f94efba7bc98",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_1",
+        "client": "codex"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "hold-up: one-shot retry approved; provider status is unchanged."
+        }
+      },
+      "seconds": 0.00408062498900108
+    },
+    {
+      "payload": {
+        "session_id": "01a10f09-1ad7-7370-a6fa-ef5fdeffd209",
+        "turn_id": "01a10f09-1ae2-7f80-bed3-f94efba7bc98",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_2",
+        "client": "codex"
+      },
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: fixture outage; pause b9410ee4701fe924 expires at 1791253918. human retry: hold-up retry b9410ee4701fe924. diagnostics and unrelated local work remain available."
+        }
+      },
+      "seconds": 0.0037725000001955777
+    },
+    {
+      "payload": {
+        "session_id": "01a10f09-1ad7-7370-a6fa-ef5fdeffd209",
+        "turn_id": "01a10f09-1ae2-7f80-bed3-f94efba7bc98",
+        "transcript_path": null,
+        "cwd": "/private/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r",
+        "hook_event_name": "PreToolUse",
+        "model": "fixture",
+        "permission_mode": "bypassPermissions",
+        "tool_name": "Bash",
+        "tool_input": {
+          "command": "/var/folders/vp/knh6hvc50js11s6mgy6z9pc80000gn/T/hold-up-native-cdv0v_4r/bin/aws --region me-central-1 ec2 run-instances --image-id fixture --instance-type t3.micro"
+        },
+        "tool_use_id": "call_3",
+        "client": "codex"
+      },
+      "result": null,
+      "seconds": 0.003962999995565042
+    }
+  ]
+}

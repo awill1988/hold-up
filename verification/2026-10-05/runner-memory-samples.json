@@ -1,0 +1,15 @@
+[
+  {
+    "sampled_at": 1791253944.26135,
+    "rss_kib": 5773616
+  },
+  {
+    "sampled_at": 1791254133.497886,
+    "rss_kib": 5271744
+  },
+  {
+    "sampled_at": null,
+    "rss_kib": 7112096,
+    "observation": "ps output during qualification at 80 recorded outcomes; wall-clock timestamp was not retained"
+  }
+]

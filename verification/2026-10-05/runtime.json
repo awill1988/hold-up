@@ -1,0 +1,26 @@
+{
+  "runner": "/nix/store/6iqk8q0yncs5x2461agij3zzz4ibszab-llama-cpp-6981/bin/llama-server",
+  "runner_sha256": "6699f2c60eddd3018c8f9b2163d979a1b8035225d3db8ed031c09c7477fcf0f2",
+  "model_sha256": "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2",
+  "arguments": [
+    "/nix/store/6iqk8q0yncs5x2461agij3zzz4ibszab-llama-cpp-6981/bin/llama-server",
+    "-m",
+    "/tmp/hold-up-runtime.yFfsbH/NVIDIA-Nemotron3-Nano-4B-Q4_K_M.gguf",
+    "--alias",
+    "hold-up",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "18473",
+    "--api-key-file",
+    "/tmp/hold-up-runtime.yFfsbH/inference.key",
+    "--ctx-size",
+    "8192",
+    "--parallel",
+    "1",
+    "--jinja",
+    "--reasoning-budget",
+    "0",
+    "--log-disable"
+  ]
+}

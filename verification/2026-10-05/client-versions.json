@@ -1,0 +1,10 @@
+{
+  "codex": {
+    "binary": "/nix/store/r44s9bh1ivc6j0vxgqp934ag3d59rk79-codex-0.154.0/bin/codex",
+    "version": "codex-cli 0.154.0"
+  },
+  "claude": {
+    "binary": "/nix/store/qy8wpljr5j9f4brvvgprva8831slk3l5-claude-2.1.282/bin/claude",
+    "version": "2.1.282 (Claude Code)"
+  }
+}

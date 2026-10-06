@@ -66,6 +66,16 @@ class EvaluationGate(unittest.TestCase):
             self.assertEqual(evaluate.run(self.root), 1)
         self.assertFalse(d.enforcement_ready(self.root))
 
+    def test_qualification_normalizes_old_updates_with_fresh_acquisition(self):
+        import time
+
+        case = next(evaluate.qualification_cases())
+        report = case["reports"][0]
+        self.assertLess(time.time() - report["fetched_at"], 1)
+        self.assertEqual(report["published_at"], "1000")
+        self.assertIn("ongoing", report["summary"])
+        self.assertEqual(report["region"], "eu-central-1")
+
     def test_invalid_provider_fails_qualification(self):
         status, ready = self.run_gate({**self.result, "providers": ["AWS"]})
         self.assertEqual(status, 1)
