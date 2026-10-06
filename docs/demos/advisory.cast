@@ -1,0 +1,12 @@
+{"version": 2, "width": 82, "height": 18, "title": "hold-up advisory"}
+[0.0, "o", "\u001b[2J\u001b[H\u001b[1;36mhold-up  /  advisory\u001b[0m\r\n"]
+[0.1, "o", "\u001b[90msimulated claude terminal | actual hook + socket\r\n"]
+[0.2, "o", "fixture decisions | AWS execution stubbed\u001b[0m\r\n\r\n"]
+[1.0, "o", "\u001b[36magent >\u001b[0m aws --region us-east-1 ec2 run-instances --image-id fixture\r\n"]
+[2.0, "o", "\u001b[1;33mhold-up: ADVISORY  model_unqualified\u001b[0m\r\n"]
+[3.0, "o", "advice delivered; execution permitted\r\n"]
+[4.0, "o", "\u001b[1mAWS sentinel executions: 1\u001b[0m\r\n\r\n"]
+[5.0, "o", "\u001b[36magent >\u001b[0m inspect a local file\r\n"]
+[6.0, "o", "\u001b[32mlocal action remains available\u001b[0m\r\n\r\n"]
+[7.0, "o", "claude: checks 2 | advice 1 | denials 0\r\n"]
+[8.0, "o", "\u001b[90mblocking shown with fixture readiness only.\r\nlive model is unqualified; production remains advisory.\u001b[0m\r\n"]

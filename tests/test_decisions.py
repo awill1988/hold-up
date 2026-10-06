@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from holdup import decision as d
 from holdup import engine as h
 from holdup import evidence
+from holdup.data import freeze, json_value
 
 
 class Decisions(unittest.TestCase):
@@ -113,8 +114,8 @@ class Decisions(unittest.TestCase):
             "tool_input": {"command": "*** Update File: app.py\n+password=secret"},
         }
         action = d.normalize_action(payload)
-        self.assertEqual(action["paths"], ["app.py"])
-        self.assertNotIn("secret", json.dumps(action))
+        self.assertEqual(action["paths"], ("app.py",))
+        self.assertNotIn("secret", json.dumps(action, default=json_value))
         self.assertNotIn("permissionDecision", self.call(payload=payload)["hookSpecificOutput"])
 
     def test_disabled_feeds_and_off_mode_do_not_infer(self):
@@ -215,7 +216,7 @@ class Decisions(unittest.TestCase):
             "tool_input": {"token": "secret"},
         }
         self.assertFalse(d.normalize_action(payload)["context_complete"])
-        self.assertNotIn("secret", json.dumps(d.normalize_action(payload)))
+        self.assertNotIn("secret", json.dumps(d.normalize_action(payload), default=json_value))
         self.assertNotIn("permissionDecision", self.call(payload=payload)["hookSpecificOutput"])
 
     def test_explicit_mcp_mapping(self):
@@ -227,7 +228,7 @@ class Decisions(unittest.TestCase):
             {"mcp__git__fetch": {"providers": ["GitHub"], "argument_keys": ["region"]}},
         )
         self.assertTrue(action["context_complete"])
-        self.assertNotIn("secret", json.dumps(action))
+        self.assertNotIn("secret", json.dumps(action, default=json_value))
 
     def test_invented_evidence_and_scope_rejected(self):
         action = d.normalize_action(self.payload)
@@ -270,7 +271,7 @@ class Decisions(unittest.TestCase):
         trace = {}
         with patch.object(d.urllib.request.OpenerDirector, "open", return_value=io.BytesIO(body)):
             self.assertEqual(
-                d.infer({}, [], {"token_file": str(token), "trace": trace}), self.result
+                d.infer({}, [], {"token_file": str(token), "trace": trace}), freeze(self.result)
             )
         self.assertEqual(trace["raw"], raw)
         self.assertEqual(trace["finish_reason"], "stop")

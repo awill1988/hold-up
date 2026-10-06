@@ -8,6 +8,8 @@ import time
 from collections import Counter
 from contextlib import contextmanager
 
+from .data import immutable_result, json_value
+
 AGENTS = ("claude", "codex", "antigravity", "unknown")
 
 
@@ -75,6 +77,7 @@ class Telemetry:
         self.stopped.set()
         self.thread.join(timeout=2)
 
+    @immutable_result
     def stats(self, since=86400, agent=None):
         result = []
         with self.connect() as db:
@@ -129,4 +132,4 @@ def render(report):
         print(
             f"{row['agent']:<13} {row['checks']:>6} {row['advisories_emitted']:>6} {row['denials_issued']:>6} {row['retries']:>5} {row['completions']:>9} {row['failures']:>6} {latency:>7} {row['coverage']}"
         )
-    print(json.dumps({k: v for k, v in report.items() if k != "agents"}))
+    print(json.dumps({k: v for k, v in report.items() if k != "agents"}, default=json_value))

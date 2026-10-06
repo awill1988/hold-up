@@ -9,7 +9,9 @@ import socket
 import struct
 import subprocess
 import time
+from collections.abc import Mapping
 
+from .data import freeze, immutable_result, json_value
 from .locations import runtime_directory
 
 VERSION = 1
@@ -19,13 +21,16 @@ INSPECTION_DEADLINE = 2.0
 
 
 def signature(value, secret):
-    content = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    content = json.dumps(
+        value, sort_keys=True, separators=(",", ":"), allow_nan=False, default=json_value
+    ).encode()
     return hmac.new(secret.encode(), content, hashlib.sha256).hexdigest()
 
 
 def authenticate(value, secret):
-    supplied = value.pop("signature", "")
-    return isinstance(supplied, str) and hmac.compare_digest(supplied, signature(value, secret))
+    supplied = value.get("signature", "")
+    unsigned = {key: item for key, item in value.items() if key != "signature"}
+    return isinstance(supplied, str) and hmac.compare_digest(supplied, signature(unsigned, secret))
 
 
 def lock_owner(root):
@@ -74,6 +79,7 @@ def private_directory(root):
         os.chmod(root, 0o700)
 
 
+@immutable_result
 def publish_endpoint(root, port):
     root = runtime_directory(root)
     private_directory(root)
@@ -86,6 +92,7 @@ def publish_endpoint(root, port):
     return endpoint
 
 
+@immutable_result
 def receive(sock, deadline):
     def exact(size):
         result = bytearray()
@@ -104,13 +111,13 @@ def receive(sock, deadline):
     if not 0 < size <= MAX_FRAME:
         raise ValueError("socket_frame_invalid")
     value = json.loads(exact(size))
-    if not isinstance(value, dict):
+    if not isinstance(value, Mapping):
         raise ValueError("socket_frame_invalid")
     return value
 
 
 def send(sock, value, deadline):
-    content = json.dumps(value, separators=(",", ":"), allow_nan=False).encode()
+    content = json.dumps(value, separators=(",", ":"), allow_nan=False, default=json_value).encode()
     if len(content) > MAX_FRAME:
         raise ValueError("socket_frame_oversized")
     remaining = deadline - time.monotonic()
@@ -120,13 +127,14 @@ def send(sock, value, deadline):
     sock.sendall(struct.pack("!I", len(content)) + content)
 
 
+@immutable_result
 def request(root, message):
     budget = INSPECTION_DEADLINE if message.get("event") in ("stats", "status") else DEADLINE
     deadline = time.monotonic() + budget
     path = runtime_directory(root) / "endpoint.json"
     if path.is_symlink() or path.stat().st_size > 1024:
         raise ValueError("socket_endpoint_invalid")
-    endpoint = json.loads(path.read_text(encoding="utf-8"))
+    endpoint = freeze(json.loads(path.read_text(encoding="utf-8")))
     if endpoint.get("version") != VERSION or type(endpoint.get("port")) is not int:
         raise ValueError("socket_endpoint_invalid")
     with socket.create_connection(("127.0.0.1", endpoint["port"]), timeout=DEADLINE) as sock:
@@ -141,5 +149,4 @@ def request(root, message):
         or "error" in reply
     ):
         raise ValueError("socket_response_invalid")
-    reply.pop("nonce")
-    return reply
+    return {key: item for key, item in reply.items() if key not in ("nonce", "signature")}

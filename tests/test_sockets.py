@@ -77,7 +77,13 @@ class SocketContracts(unittest.TestCase):
         self.request(event="retry", decision_id=denied["decision_id"])
         self.assertEqual(self.request()["reason"], "retry_consumed")
         self.assertEqual(self.request()["decision"], "pause")
-        self.runtime.snapshot["rules"][routes.key(self.route)]["decision"] = "allow"
+        self.runtime.snapshot = {
+            **self.runtime.snapshot,
+            "rules": {
+                key: {**rule, "decision": "allow"}
+                for key, rule in self.runtime.snapshot["rules"].items()
+            },
+        }
         self.assertEqual(self.request()["decision"], "allow")
 
     def test_retry_isolation_and_concurrent_consumption(self):
@@ -89,11 +95,11 @@ class SocketContracts(unittest.TestCase):
         self.assertEqual(sum(r["reason"] == "retry_consumed" for r in results), 1)
 
     def test_invalid_readiness_scope_and_freshness_cannot_deny(self):
-        self.runtime.snapshot["qualified"] = False
+        self.runtime.snapshot = {**self.runtime.snapshot, "qualified": False}
         self.assertEqual(self.request()["reason"], "model_unqualified")
         self.assertEqual(self.request(generation="changed")["reason"], "configuration_changed")
         self.assertEqual(self.request(route={"kind": "unknown"})["decision"], "advise")
-        self.runtime.snapshot["fetched_at"] = time.time() - 301
+        self.runtime.snapshot = {**self.runtime.snapshot, "fetched_at": time.time() - 301}
         self.assertEqual(self.request()["reason"], "evidence_incomplete")
         self.assertEqual(self.request(route={"kind": "local"})["decision"], "allow")
 

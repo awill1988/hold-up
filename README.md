@@ -13,9 +13,26 @@ over a local socket. A pause blocks that action, not the session. Blocking requi
 local evaluation; without it, the model can only advise. Provider reports cannot
 reveal outages that providers have not reported.
 
+## Demos
+
+Simulated terminals show actual hook/socket responses with fixture decisions
+and stubbed AWS execution. Blocking is demonstrated with isolated fixture
+readiness; the production model remains unqualified.
+
+**Advisory permits execution**
+
+![Advisory demo](docs/demos/advisory.gif)
+
+**Fixture block prevents execution**
+
+![Block demo](docs/demos/block.gif)
+
+[MP4 files, replayable recordings, and reproduction commands](docs/demos/README.md).
+
 ## Behavior
 
 - Python 3.10 or later; Poetry manages packaging and development dependencies. The Python runtime uses the standard library.
+- Data contracts use standard-library immutable mappings, tuples, and frozensets; JSON conversion stays at I/O boundaries.
 - RSS, Atom, and AWS JSON feeds, configured in [`src/holdup/data/status_feeds.json`](src/holdup/data/status_feeds.json).
 - Socket decisions normalize supported commands, explicit region flags, and inherited region variables.
 - Legacy inspection commands retain broader provider and profile scope discovery.
@@ -322,7 +339,7 @@ Installation does not grant hook trust.
 
 #### Qualification
 
-Qualification v5 evaluates normalization, finite operation classification, and
+Qualification v6 evaluates normalization, finite operation classification, and
 model decisions against a separately frozen corpus. Existing v1/v2 results are
 preserved. Qualification requires three repetitions, precision ≥95%, recall
 ≥90%, zero invalid outputs, zero protected-action pauses, and inference p95
@@ -330,7 +347,7 @@ below five seconds. Readiness binds the checkpoint, runner, inference settings,
 policy source, and corpus; older readiness cannot authorize socket decisions.
 
 The original v2 run failed with 119 timeouts in 144 attempts and zero recall.
-Version 5 also failed: 56 timeouts in 168 attempts, zero pause recall, and no
+Version 6 also failed: 56 timeouts in 168 attempts, zero pause recall, and no
 protected-action pauses. Blocking remains disabled. Moving inference into the
 background does not waive qualification; deterministic socket tests do not
 establish real-model blocking readiness.
@@ -409,7 +426,7 @@ suitable scoped incident is unavailable for the live test, not a passing replay.
 Portable socket tests run on Windows, macOS, and Linux in CI. Native-client
 tests currently use a POSIX sentinel harness; Windows native-client execution
 has not been verified. The [socket architecture decision](docs/adr/0002-use-local-sockets-for-hook-decisions.md)
-records runtime boundaries. [Measured results](verification/2026-10-05-sockets/README.md)
+records runtime boundaries. [Measured results](verification/2026-10-05-immutable/README.md)
 separate client mechanics, process latency, and model qualification.
 
 ## License

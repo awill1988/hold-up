@@ -6,11 +6,13 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 from .aws import VERSION, normalize
+from .data import immutable_result
 from .decision import digest
 
 MAX_BYTES = 1024 * 1024  # 1 MiB
 
 
+@immutable_result
 def parse(content, feed, fetched_at):
     from . import engine
 
@@ -57,12 +59,18 @@ def parse(content, feed, fetched_at):
             raise ValueError("invalid provider report fields")
         summary = engine.clean_html(record["summary"])
         title = engine.clean_html(record["title"])
-        record["truncated"] = False
-        record["summary"] = summary
-        record["title"] = title
-        record.update(provider=feed["name"], source_url=feed["url"], fetched_at=fetched_at)
-        record["id"] = digest([feed["name"], record["source_id"] or record["title"]])[:24]
-        result.append(record)
+        result.append(
+            {
+                **record,
+                "truncated": False,
+                "summary": summary,
+                "title": title,
+                "provider": feed["name"],
+                "source_url": feed["url"],
+                "fetched_at": fetched_at,
+                "id": digest([feed["name"], record["source_id"] or title])[:24],
+            }
+        )
     return result
 
 
@@ -76,6 +84,7 @@ def fetch(feed):
     return parse(content, feed, time.time())
 
 
+@immutable_result
 def collect(config, feeds, root):
     from .engine import atomic_json_write
 

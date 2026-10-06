@@ -11,6 +11,7 @@ import urllib.request
 from pathlib import Path
 
 from . import decision
+from .data import json_value
 
 
 def main(argv):
@@ -55,7 +56,7 @@ def main(argv):
         elif args.command == "stats" and not args.json:
             render(result)
         else:
-            print(json.dumps(result, indent=2))
+            print(json.dumps(result, indent=2, default=json_value))
         return 0
     if args.command == "provision":
         model = root / decision.MODEL_FILE

@@ -30,6 +30,20 @@ See [README.md](README.md) for setup and verification.
 - Telemetry is local, bounded, and content-free. Never persist command arguments,
   prompts, transcripts, tool output, credentials, or resource identifiers.
 
+## Python data contracts
+
+- Use immutable standard-library data structures: `tuple`, `frozenset`, and
+  detached, recursively frozen `types.MappingProxyType` mappings. Do not add
+  third-party collection libraries or custom mutable record types.
+- Configuration, normalized evidence, routes, model decisions, socket messages,
+  and statistics must be immutable when crossing module or thread boundaries.
+- Build replacements instead of editing shared records in place. Freeze owned
+  copies so mutations to an input cannot change an already published snapshot.
+- Confine mutable JSON objects to decoding, validation, and encoding boundaries.
+  Local construction buffers, bounded queues, synchronized owner registries,
+  diagnostic collectors, and transactional database state may mutate internally;
+  they must not expose mutable records to consumers.
+
 ## Verification and publication
 
 - Test Windows, macOS, and Linux socket behavior. Report native-client coverage

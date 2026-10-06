@@ -8,9 +8,11 @@ import subprocess
 import sys
 import threading
 import time
+from collections.abc import Mapping
 
 from . import decision as d
 from . import routes, transport
+from .data import freeze, immutable_result, json_value
 from .telemetry import AGENTS, Telemetry
 
 
@@ -92,7 +94,7 @@ def prepare(config, feeds, root):
 
 class Runtime:
     def __init__(self, root, config):
-        self.root, self.config = root, config
+        self.root, self.config = root, freeze(config)
         transport.private_directory(root)
         self.generation = d.policy_digest()
         self.snapshot = {}
@@ -107,6 +109,14 @@ class Runtime:
         self.pending = {}
         self.notices = {}
         self.correlations = {}
+
+    @property
+    def snapshot(self):
+        return self._snapshot
+
+    @snapshot.setter
+    def snapshot(self, value):
+        self._snapshot = freeze(value)
 
     def close(self):
         self.telemetry.close()
@@ -136,6 +146,7 @@ class Runtime:
         finally:
             self.lock.release()
 
+    @immutable_result
     def handle(self, message):
         event = message.get("event")
         if event == "status":
@@ -199,7 +210,7 @@ class Runtime:
             return {}
         start = time.monotonic()
         route = message.get("route")
-        if not isinstance(route, dict) or len(json.dumps(route)) > 512:
+        if not isinstance(route, Mapping) or len(json.dumps(route, default=json_value)) > 512:
             raise ValueError("invalid_route")
         result = self.decide(message, route, now)
         notice = d.digest([namespace, result.get("reason"), self.snapshot.get("content")])
@@ -208,7 +219,7 @@ class Runtime:
             self.notices[notice] = now
             if agent == "antigravity":
                 self.pending[namespace] = (result["reason"], now)
-        result["emitted"] = emitted
+        result = freeze({**result, "emitted": emitted})
         if correlation:
             self.correlations[agent, correlation] = now
         self.telemetry.emit(
@@ -222,6 +233,7 @@ class Runtime:
         )
         return result
 
+    @immutable_result
     def decide(self, message, route, now):
         def result(decision, reason, **extra):
             return {"decision": decision, "reason": reason, **extra}
@@ -229,7 +241,7 @@ class Runtime:
         mode = message.get("mode", "guard")
         if mode not in ("guard", "advisory", "off"):
             return result("advise", "configuration_invalid")
-        if mode == "off" or self.config.get("feeds") == []:
+        if mode == "off" or ("feeds" in self.config and not self.config["feeds"]):
             return result("allow", "disabled")
         if route.get("kind") in ("local", "diagnostic"):
             return result("allow", "protected_action")

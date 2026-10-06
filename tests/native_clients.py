@@ -16,6 +16,7 @@ from pathlib import Path
 
 from holdup import decision as d
 from holdup import evidence, routes, transport
+from holdup.data import json_value
 from holdup.engine import atomic_json_write, validate_configuration
 from holdup.socket_runtime import Runtime, SocketOwner
 
@@ -568,7 +569,7 @@ def run(client, binary, mode="contract", source="capture", output_dir=None, perm
                 "permission_check": permission_check,
                 "statistics": runtime.telemetry.stats(),
             }
-            print(json.dumps(summary))
+            print(json.dumps(summary, default=json_value))
             if output_dir:
                 output_dir.mkdir(parents=True, exist_ok=True)
                 atomic_json_write(

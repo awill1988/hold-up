@@ -5,10 +5,12 @@ import json
 import subprocess
 import time
 import urllib.request
+from collections.abc import Mapping
 from pathlib import Path
 
 from . import decision as d
 from . import routes
+from .data import freeze
 from .engine import atomic_json_write
 
 
@@ -192,7 +194,7 @@ def run(root, repeats=3, qualification=False):
     if repeats < 3:
         raise ValueError("at least three repetitions required")
     initial_policy = d.policy_digest()
-    corpus = list(qualification_cases() if qualification else cases())
+    corpus = freeze(tuple(qualification_cases() if qualification else cases()))
     frozen_hash = d.corpus_hash() if qualification else d.digest(corpus)
     try:
         fingerprint = d.runtime_fingerprint(root)
@@ -210,8 +212,18 @@ def run(root, repeats=3, qualification=False):
     for repeat in range(repeats):
         for case in corpus:
             if qualification:
-                for report in case["reports"]:
-                    report["fetched_at"] = time.time() - case.get("acquisition_age_seconds", 0)
+                case = freeze(
+                    {
+                        **case,
+                        "reports": tuple(
+                            {
+                                **report,
+                                "fetched_at": time.time() - case.get("acquisition_age_seconds", 0),
+                            }
+                            for report in case["reports"]
+                        ),
+                    }
+                )
             start = time.monotonic()
             error = None
             result = None
@@ -259,7 +271,7 @@ def run(root, repeats=3, qualification=False):
     predicted = [
         r
         for r in outcomes
-        if isinstance(r["result"], dict) and r["result"].get("decision") == "pause"
+        if isinstance(r["result"], Mapping) and r["result"].get("decision") == "pause"
     ]
     true_positives = sum(r["expected_pause"] and not r["error"] for r in predicted)
     precision = true_positives / len(predicted) if predicted else 0

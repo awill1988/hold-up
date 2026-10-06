@@ -31,6 +31,12 @@ Program-specific adapters preserve Claude, Codex, and Antigravity permission
 semantics. Statistics distinguish issued hook decisions from observed execution;
 neither an advisory nor a subsequent action proves that routing succeeded.
 
+Module and thread boundaries carry recursively immutable standard-library
+values: tuples, frozensets, and detached `MappingProxyType` mappings. JSON
+encoding produces boundary objects without changing shared evidence or decisions.
+The socket owner replaces snapshots atomically; its synchronized registries and
+transactional database retain explicit state ownership.
+
 ## Invariants and abstention
 
 - A passing outage check never approves a native permission request.

@@ -20,6 +20,9 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install .
       - run: python -m unittest discover -s tests -p test_sockets.py -v
+      - run: python -m unittest discover -s tests -p test_immutable.py -v
+      - run: python tests/demo_terminal.py advisory
+      - run: python tests/demo_terminal.py block
       - run: hold-up --list-feeds
 
   test:

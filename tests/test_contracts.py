@@ -15,6 +15,8 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import hold_up
 
+from holdup.data import freeze
+
 FEED = {
     "name": "GitHub",
     "url": "https://example.invalid/status",
@@ -132,15 +134,19 @@ class TestContracts(unittest.TestCase):
     def test_configuration_precedence_and_empty_feeds(self):
         self.write_json(".hold-up/status_feeds.json", {"feeds": []})
         with patch.dict(os.environ, {"HOLD_UP_CONFIG": str(self.config)}):
-            self.assertEqual(hold_up.load_configuration(cwd=self.root)[1], [])
-            self.assertEqual(hold_up.load_configuration(str(self.config), self.root)[1], [FEED])
+            self.assertEqual(hold_up.load_configuration(cwd=self.root)[1], ())
+            self.assertEqual(
+                hold_up.load_configuration(str(self.config), self.root)[1], freeze((FEED,))
+            )
 
     def test_neutral_environment_precedes_global_and_legacy(self):
         self.write_json("config/hold-up/status_feeds.json", {"feeds": []})
         self.write_json(".claude/status_feeds.json", {"feeds": [{**FEED, "name": "legacy"}]})
         with patch.dict(os.environ, {"HOLD_UP_CONFIG": str(self.config)}):
-            self.assertEqual(hold_up.load_configuration(cwd=self.root, client="claude")[1], [FEED])
-        self.assertEqual(hold_up.load_configuration(cwd=self.root, client="claude")[1], [])
+            self.assertEqual(
+                hold_up.load_configuration(cwd=self.root, client="claude")[1], freeze((FEED,))
+            )
+        self.assertEqual(hold_up.load_configuration(cwd=self.root, client="claude")[1], ())
         (self.root / "config/hold-up/status_feeds.json").unlink()
         self.assertEqual(
             hold_up.load_configuration(cwd=self.root, client="claude")[1][0]["name"], "legacy"
@@ -158,7 +164,7 @@ class TestContracts(unittest.TestCase):
             hold_up.legacy_process_event(
                 "SessionStart", {"cwd": str(project)}, cwd=self.root, client="codex"
             )
-            self.assertEqual(fetch.call_args.args[0], [])
+            self.assertEqual(fetch.call_args.args[0], ())
 
     def test_invalid_selected_configuration_does_not_fall_back(self):
         invalid = self.root / "invalid.json"

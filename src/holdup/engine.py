@@ -23,6 +23,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from .data import immutable_result, json_value
+
 DEFAULT_CACHE_TTL_SECONDS = 300
 DEFAULT_TIMEOUT_SECONDS = 2.5
 MAX_INCIDENT_AGE_HOURS = 72
@@ -167,7 +169,7 @@ def resolve_cache_paths(
     from .aws import VERSION
 
     digest = hashlib.sha256(
-        json.dumps([VERSION, config or {}], sort_keys=True).encode()
+        json.dumps([VERSION, config or {}], sort_keys=True, default=json_value).encode()
     ).hexdigest()
     return base_dir, base_dir / digest / "status_cache.json"
 
@@ -509,6 +511,7 @@ def read_configuration(path: Path) -> Tuple[Dict[str, Any], List[Dict[str, Any]]
         raise ValueError(f"invalid configuration at {path}: {error}") from error
 
 
+@immutable_result
 def validate_configuration(value: Any) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     if not isinstance(value, dict) or not isinstance(value.get("feeds"), list):
         raise ValueError("configuration must be an object containing a feeds array")
@@ -801,7 +804,7 @@ def atomic_json_write(path: Path, value: Any) -> None:
             mode="w", encoding="utf-8", dir=path.parent, prefix=f".{path.name}.", delete=False
         ) as handle:
             temp_path = Path(handle.name)
-            json.dump(value, handle, indent=2)
+            json.dump(value, handle, indent=2, default=json_value)
             handle.write("\n")
         temp_path.replace(path)
     finally:
@@ -1184,7 +1187,7 @@ def main(default_client: Optional[str] = None) -> int:
                 cache_dir=args.cache_dir,
             )
             if response:
-                print(json.dumps(response))
+                print(json.dumps(response, default=json_value))
             return 0
         if not inspection:
             parser.print_help()
@@ -1217,6 +1220,7 @@ def main(default_client: Optional[str] = None) -> int:
                 json.dumps(
                     fetch_feed(feed, config["timeout_seconds"], config["max_incident_age_hours"]),
                     indent=2,
+                    default=json_value,
                 )
             )
             return 0

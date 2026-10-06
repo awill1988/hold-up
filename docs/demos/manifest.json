@@ -1,0 +1,36 @@
+{
+  "fixture_only": true,
+  "renderer": "agg 1.8.1",
+  "assets": [
+    {
+      "file": "advisory.cast",
+      "bytes": 938,
+      "sha256": "abf1308684587120086f67fb33af1101a3cdcb5d39aa33f57eb6d8a485c3dbc3"
+    },
+    {
+      "file": "advisory.gif",
+      "bytes": 42083,
+      "sha256": "2f12d85c92527c55482777ab4e6fa7fb5f5447a06f1b981f2b29442ff98c1418"
+    },
+    {
+      "file": "advisory.mp4",
+      "bytes": 30937,
+      "sha256": "797a5817db3ffd56903ab0e821a8441e5e2bd76b309cbe1680baa084b157b304"
+    },
+    {
+      "file": "block.cast",
+      "bytes": 914,
+      "sha256": "dbdc56c9e26b39f520e295d1eea7be836c5438da9a1e70c970a642c328ae29b6"
+    },
+    {
+      "file": "block.gif",
+      "bytes": 40113,
+      "sha256": "9d55f8ad4a590155d9b49d2c92918e52e09880c1b8cf81d9550d620ec6375480"
+    },
+    {
+      "file": "block.mp4",
+      "bytes": 29819,
+      "sha256": "43c794a4d890c67f54d59673a6cebf2aed0dfe2970fbd082daaa972a23f5aec2"
+    }
+  ]
+}

@@ -6,12 +6,15 @@ import json
 import os
 import sys
 import time
+from collections.abc import Mapping
 
 from . import decision as d
 from . import routes, transport
+from .data import freeze, immutable_result, json_value
 from .locations import runtime_directory
 
 
+@immutable_result
 def canonical(payload, client):
     if client != "antigravity":
         return payload
@@ -28,6 +31,7 @@ def canonical(payload, client):
     }
 
 
+@immutable_result
 def output(client, event, result):
     reason = "hold-up: " + result.get("reason", "evidence_incomplete")
     if result.get("decision_id"):
@@ -65,14 +69,14 @@ def process(event, payload, client, config, root=None):
     start = time.monotonic()
     try:
         normalized = canonical(payload, client)
-        metadata = json.loads(
-            (runtime_directory(root) / "endpoint.json").read_text(encoding="utf-8")
+        metadata = freeze(
+            json.loads((runtime_directory(root) / "endpoint.json").read_text(encoding="utf-8"))
         )
         salt = metadata["secret"].encode()
 
         def opaque(value):
             return hmac.new(
-                salt, json.dumps(value, sort_keys=True).encode(), hashlib.sha256
+                salt, json.dumps(value, sort_keys=True, default=json_value).encode(), hashlib.sha256
             ).hexdigest()
 
         session = [
@@ -112,7 +116,7 @@ def process(event, payload, client, config, root=None):
                 outcome = "completed"
             else:
                 response = payload.get("tool_response")
-                if isinstance(response, dict):
+                if isinstance(response, Mapping):
                     code = response.get("exit_code")
                     if type(code) is int:
                         outcome = "completed" if code == 0 else "failed"

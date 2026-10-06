@@ -4,23 +4,28 @@ import os
 import re
 import shlex
 import time
+from collections.abc import Mapping
 
 from . import decision as d
+from .data import freeze, immutable_result
 
 VERSION = 1
-OPERATIONS = {
-    "ec2": ("run-instances", "start-instances", "stop-instances", "terminate-instances"),
-    "s3api": ("put-object", "get-object", "delete-object"),
-    "lambda": ("invoke", "update-function-code"),
-    "cloudformation": ("create-stack", "update-stack", "delete-stack"),
-}
+OPERATIONS = freeze(
+    {
+        "ec2": ("run-instances", "start-instances", "stop-instances", "terminate-instances"),
+        "s3api": ("put-object", "get-object", "delete-object"),
+        "lambda": ("invoke", "update-function-code"),
+        "cloudformation": ("create-stack", "update-stack", "delete-stack"),
+    }
+)
 REGION = re.compile(r"[a-z]{2}(?:-[a-z]+)+-\d+")
 
 
+@immutable_result
 def normalize(payload, mappings=None):
     tool, args = payload.get("tool_name"), payload.get("tool_input", {})
     unknown = {"kind": "unknown"}
-    if not isinstance(args, dict):
+    if not isinstance(args, Mapping):
         return unknown
     if tool in ("Read", "Edit", "Write", "apply_patch", "read_file", "write_file"):
         return {"kind": "local"}
@@ -111,6 +116,7 @@ def key(route):
     return d.digest(route)
 
 
+@immutable_result
 def action(route):
     service = "s3" if route["service"] == "s3api" else route["service"]
     return {
@@ -123,6 +129,7 @@ def action(route):
     }
 
 
+@immutable_result
 def classify(route, reports, runtime, predictor=None):
     if route.get("kind") in ("local", "diagnostic"):
         return {

@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 from holdup import routes
+from holdup.data import json_value
 from holdup.engine import validate_configuration
 from holdup.socket_runtime import Runtime, SocketOwner
 
@@ -22,7 +23,7 @@ def benchmark(samples=100, parallel=1):
         config, _ = validate_configuration(
             {"feeds": [{"name": "AWS", "url": "https://example.invalid", "format": "aws-json"}]}
         )
-        (root / "config.json").write_text(json.dumps(config))
+        (root / "config.json").write_text(json.dumps(config, default=json_value))
         runtime = Runtime(root, config)
         payload = {
             "session_id": "benchmark",

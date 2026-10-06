@@ -4,10 +4,14 @@ import json
 import math
 import re
 
+from .data import immutable_result
+
 VERSION = 2
 MAX_BYTES = 1024 * 1024  # 1 MiB
 REGION = re.compile(r"(?:af|ap|ca|cn|eu|il|me|mx|sa|us)(?:-[a-z]+)+-\d+")
-LIFECYCLES = {"open", "active", "investigating", "identified", "monitoring", "resolved", "closed"}
+LIFECYCLES = frozenset(
+    ("open", "active", "investigating", "identified", "monitoring", "resolved", "closed")
+)
 
 
 def timestamp(value):
@@ -22,6 +26,7 @@ def timestamp(value):
     return number
 
 
+@immutable_result
 def normalize(content):
     if len(content) > MAX_BYTES:
         raise ValueError("feed_decode_failed")
@@ -36,6 +41,7 @@ def normalize(content):
         raise ValueError("feed_decode_failed") from error
 
 
+@immutable_result
 def normalize_event(event):
     if not isinstance(event, dict):
         raise ValueError("feed_decode_failed")
