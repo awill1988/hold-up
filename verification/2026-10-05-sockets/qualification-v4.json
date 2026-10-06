@@ -1,0 +1,3070 @@
+{
+  "model_sha256": "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2",
+  "policy_version": 3,
+  "policy_digest": "582157cfdb5ba8adbf57ff339f03a618ad9a128c6c4e5ec476d2970ede5ec88d",
+  "runtime_fingerprint": "d6697180295e5b84e0b65b04cc0b0adf0dce748a9addfaaf7e7de52f79319a8a",
+  "corpus_hash": "768c97f1c3a4a025592ededdab7771c540333f58fd514eae59fa416fdc53fad4",
+  "qualification_version": 4,
+  "passed": false,
+  "precision": 0,
+  "recall": 0.0,
+  "protected_pauses": 0,
+  "p95_seconds": 4.008408624998992,
+  "cases": 168,
+  "outcomes": [
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.1541869590000715
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.5541998436674476e-05
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.416985807940364e-06
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 6.250047590583563e-07
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0800507627427578e-07
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008951083000284
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.58298915065825e-06
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008105499990052
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007703167008003
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.083014447242022e-06
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7080164980143309e-06
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.7500285543501377e-07
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0797597244381905e-07
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007660167000722
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.249983122572303e-06
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007971749990247
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007870540983276
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3416982255876064e-05
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7909915186464787e-06
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.33995558321476e-07
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3750104699283838e-06
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0069547920138575
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.404198701493442e-05
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006920500018168
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008142666978529
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.2458011042326689e-05
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9579892978072166e-06
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.910092007368803e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0797597244381905e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008037207997404
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3457989552989602e-05
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007848332985304
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008361625019461
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.287501072511077e-05
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.8750142771750689e-06
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.329769242554903e-07
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.169996827840805e-07
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0078935000055935
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3375014532357454e-05
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0082849170139525
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008216707996326
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.220798003487289e-05
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9170111045241356e-06
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.169996827840805e-07
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007955334003782
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.070898724719882e-05
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008024292008486
+    },
+    {
+      "name": "unmapped-48",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.5958998119458556e-05
+    },
+    {
+      "name": "unmapped-49",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.2499804142862558e-06
+    },
+    {
+      "name": "unmapped-50",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.540997229516506e-06
+    },
+    {
+      "name": "unmapped-51",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.374981366097927e-06
+    },
+    {
+      "name": "protected-or-custom-endpoint-52",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.080088835209608e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-53",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.089984137564898e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-54",
+      "repeat": 0,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 6.659829523414373e-07
+    },
+    {
+      "name": "multiple-services-affected",
+      "repeat": 0,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008143124985509
+    },
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0087597079982515
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.4833000022917986e-05
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9999937396496534e-06
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.170034900307655e-07
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.916989615187049e-06
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.009975791996112
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.1708005331456661e-05
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008533666987205
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007771000004141
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0457995813339949e-05
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7909915186464787e-06
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.33995558321476e-07
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0800507627427578e-07
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008631875010906
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.4124991139397025e-05
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0079177919833455
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007758459018078
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0624993592500687e-05
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.8329883459955454e-06
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.169996827840805e-07
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0800507627427578e-07
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007423208007822
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0124989785254002e-05
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008408624998992
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006909041985637
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3749988283962011e-05
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.540997229516506e-06
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.3300602808594704e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008984915999463
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 8.707982487976551e-06
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00760966699454
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007271874987055
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.491600414738059e-05
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.667009200900793e-06
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.169996827840805e-07
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.016609874990536
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3958022464066744e-05
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007669500017073
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007731707999483
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.99998883344233e-06
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.8750142771750689e-06
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.7500285543501377e-07
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.079797796905041e-07
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007531917013694
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.18750031106174e-05
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007554500014521
+    },
+    {
+      "name": "unmapped-48",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.1333002476021647e-05
+    },
+    {
+      "name": "unmapped-49",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 6.67001586407423e-07
+    },
+    {
+      "name": "unmapped-50",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.33995558321476e-07
+    },
+    {
+      "name": "unmapped-51",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.580069798976183e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-52",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-53",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.7500285543501377e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-54",
+      "repeat": 1,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.3300602808594704e-07
+    },
+    {
+      "name": "multiple-services-affected",
+      "repeat": 1,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006985875021201
+    },
+    {
+      "name": "ec2-eu-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.008118583005853
+    },
+    {
+      "name": "ec2-eu-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.166992872953415e-06
+    },
+    {
+      "name": "ec2-eu-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7920101527124643e-06
+    },
+    {
+      "name": "ec2-eu-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 6.67001586407423e-07
+    },
+    {
+      "name": "ec2-eu-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0797597244381905e-07
+    },
+    {
+      "name": "ec2-eu-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007779459003359
+    },
+    {
+      "name": "ec2-eu-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0209012543782592e-05
+    },
+    {
+      "name": "ec2-eu-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0077099580084905
+    },
+    {
+      "name": "s3-eu-central-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007563749997644
+    },
+    {
+      "name": "s3-eu-central-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0666990419849753e-05
+    },
+    {
+      "name": "s3-eu-central-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.9170111045241356e-06
+    },
+    {
+      "name": "s3-eu-central-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.3300602808594704e-07
+    },
+    {
+      "name": "s3-eu-central-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "s3-eu-central-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007801416999428
+    },
+    {
+      "name": "s3-eu-central-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3250013580545783e-05
+    },
+    {
+      "name": "s3-eu-central-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006815250002546
+    },
+    {
+      "name": "ec2-ap-northeast-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007647166989045
+    },
+    {
+      "name": "ec2-ap-northeast-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 9.99998883344233e-06
+    },
+    {
+      "name": "ec2-ap-northeast-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.6249832697212696e-06
+    },
+    {
+      "name": "ec2-ap-northeast-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9199873097240925e-07
+    },
+    {
+      "name": "ec2-ap-northeast-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.33995558321476e-07
+    },
+    {
+      "name": "ec2-ap-northeast-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007741875015199
+    },
+    {
+      "name": "ec2-ap-northeast-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.3957993360236287e-05
+    },
+    {
+      "name": "ec2-ap-northeast-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007804416003637
+    },
+    {
+      "name": "s3-ap-northeast-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007717166998191
+    },
+    {
+      "name": "s3-ap-northeast-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.791997632011771e-06
+    },
+    {
+      "name": "s3-ap-northeast-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.834006980061531e-06
+    },
+    {
+      "name": "s3-ap-northeast-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.329769242554903e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 8.330098353326321e-07
+    },
+    {
+      "name": "s3-ap-northeast-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.0075157080136705
+    },
+    {
+      "name": "s3-ap-northeast-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.2999982573091984e-05
+    },
+    {
+      "name": "s3-ap-northeast-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007800207997207
+    },
+    {
+      "name": "ec2-me-south-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007659958006116
+    },
+    {
+      "name": "ec2-me-south-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.1416996130719781e-05
+    },
+    {
+      "name": "ec2-me-south-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7499842215329409e-06
+    },
+    {
+      "name": "ec2-me-south-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.9199873097240925e-07
+    },
+    {
+      "name": "ec2-me-south-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.340246621519327e-07
+    },
+    {
+      "name": "ec2-me-south-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00768949999474
+    },
+    {
+      "name": "ec2-me-south-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.2124975910410285e-05
+    },
+    {
+      "name": "ec2-me-south-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007628416002262
+    },
+    {
+      "name": "s3-me-south-1-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.006796542002121
+    },
+    {
+      "name": "s3-me-south-1-region",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.2042000889778137e-05
+    },
+    {
+      "name": "s3-me-south-1-service",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.7090060282498598e-06
+    },
+    {
+      "name": "s3-me-south-1-diagnostic",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 4.169996827840805e-07
+    },
+    {
+      "name": "s3-me-south-1-local",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0800507627427578e-07
+    },
+    {
+      "name": "s3-me-south-1-recovery",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007685707998462
+    },
+    {
+      "name": "s3-me-south-1-conflict",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "uncertain_dependency",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 1.0416988516226411e-05
+    },
+    {
+      "name": "s3-me-south-1-injection",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.007647624996025
+    },
+    {
+      "name": "unmapped-48",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "allow",
+        "reason": "no_affected_operation",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 8.167000487446785e-06
+    },
+    {
+      "name": "unmapped-49",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 7.080088835209608e-07
+    },
+    {
+      "name": "unmapped-50",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.3300602808594704e-07
+    },
+    {
+      "name": "unmapped-51",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.0899460650980473e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-52",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 3.329769242554903e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-53",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": true,
+      "result": {
+        "decision": "allow",
+        "reason": "protected_action",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 5.830079317092896e-07
+    },
+    {
+      "name": "protected-or-custom-endpoint-54",
+      "repeat": 2,
+      "expected_pause": false,
+      "accepted_decisions": [
+        "allow",
+        "advise"
+      ],
+      "protected": false,
+      "result": {
+        "decision": "advise",
+        "reason": "operation_unmapped",
+        "evidence_ids": [],
+        "providers": []
+      },
+      "trace": {},
+      "error": null,
+      "failure_category": null,
+      "seconds": 2.500019036233425e-07
+    },
+    {
+      "name": "multiple-services-affected",
+      "repeat": 2,
+      "expected_pause": true,
+      "accepted_decisions": [
+        "pause"
+      ],
+      "protected": false,
+      "result": null,
+      "trace": {},
+      "error": "TimeoutError",
+      "failure_category": "model_output_invalid",
+      "seconds": 4.00737087498419
+    }
+  ]
+}

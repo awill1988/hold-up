@@ -6,40 +6,29 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event PreToolUse"
+            "command": "hold-up --client claude --event PreToolUse"
           }
         ]
       }
     ],
-    "SessionStart": [
+    "PostToolUse": [
       {
-        "matcher": "",
+        "matcher": ".*",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event SessionStart"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event UserPromptSubmit"
+            "command": "hold-up --client claude --event PostToolUse"
           }
         ]
       }
     ],
     "PostToolUseFailure": [
       {
-        "matcher": "Bash",
+        "matcher": ".*",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event PostToolUseFailure"
+            "command": "hold-up --client claude --event PostToolUseFailure"
           }
         ]
       }

@@ -15,6 +15,7 @@ import shlex
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -160,7 +161,9 @@ def resolve_cache_paths(
     elif client == "claude" and os.environ.get("CLAUDE_CACHE_DIR"):
         base_dir = Path(os.environ["CLAUDE_CACHE_DIR"]) / "provider-status"
     else:
-        base_dir = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "hold-up"
+        from .locations import directory
+
+        base_dir = directory("cache")
     from .aws import VERSION
 
     digest = hashlib.sha256(
@@ -482,8 +485,9 @@ def load_configuration(
     paths = [cwd / ".hold-up" / "status_feeds.json"]
     if os.environ.get("HOLD_UP_CONFIG"):
         paths.append(Path(os.environ["HOLD_UP_CONFIG"]))
-    config_home = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
-    paths.append(config_home / "hold-up" / "status_feeds.json")
+    from .locations import directory
+
+    paths.append(directory("config") / "status_feeds.json")
     if client == "claude":
         paths.append(cwd / ".claude" / "status_feeds.json")
         if os.environ.get("CLAUDE_PROJECT_DIR"):
@@ -1007,7 +1011,7 @@ def advisory_for_context(
     )
 
 
-def process_event(
+def legacy_process_event(
     event_name: str,
     stdin_payload: Any,
     config_path: Optional[str] = None,
@@ -1090,9 +1094,32 @@ def supervise_hook(arguments: List[str], timeout: float = HOOK_TIMEOUT_SECONDS) 
     return 0
 
 
+def process_event(
+    event_name,
+    stdin_payload,
+    config_path=None,
+    cwd=None,
+    cache_file=None,
+    client="claude",
+    cache_dir=None,
+):
+    from . import adapters
+
+    if client not in ("claude", "codex", "antigravity") or not isinstance(stdin_payload, dict):
+        return None
+    if os.environ.get("HOLD_UP_MODE") == "off":
+        return None
+    payload_cwd = stdin_payload.get("cwd")
+    if isinstance(payload_cwd, str) and payload_cwd:
+        cwd = Path(payload_cwd)
+    config, _ = load_configuration(config_path, cwd or Path.cwd(), client)
+    return adapters.process(event_name, stdin_payload, client, config)
+
+
 def main(default_client: Optional[str] = None) -> int:
     if len(sys.argv) > 1 and sys.argv[1] in (
         "status",
+        "stats",
         "retry",
         "wait",
         "provision",
@@ -1107,7 +1134,9 @@ def main(default_client: Optional[str] = None) -> int:
             sys.stderr.write(f"error: hold-up: {error}\n")
             return 1
     parser = argparse.ArgumentParser(description="hold-up! cloud and vcs infrastructure status")
-    parser.add_argument("--client", choices=("claude", "codex"), default=default_client)
+    parser.add_argument(
+        "--client", choices=("claude", "codex", "antigravity"), default=default_client
+    )
     parser.add_argument("--hook-worker", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--event", default="UserPromptSubmit", help="hook event name")
     parser.add_argument("--config", help="path to status_feeds.json")
@@ -1130,8 +1159,17 @@ def main(default_client: Optional[str] = None) -> int:
     try:
         if hook_mode:
             if not args.hook_worker:
-                return supervise_hook([*sys.argv[1:], "--client", args.client])
-            raw = "" if sys.stdin.isatty() else sys.stdin.read()
+
+                def deadline():
+                    os.write(2, b"hold-up: hook_deadline_exceeded\n")
+                    os._exit(0)
+
+                watchdog = threading.Timer(HOOK_TIMEOUT_SECONDS, deadline)
+                watchdog.daemon = True
+                watchdog.start()
+            raw = "" if sys.stdin.isatty() else sys.stdin.read(MAX_FEED_BYTES + 1)
+            if len(raw.encode()) > MAX_FEED_BYTES:
+                return 0
             try:
                 payload = json.loads(raw) if raw.strip() else {}
             except ValueError:

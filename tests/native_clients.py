@@ -15,88 +15,41 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from holdup import decision as d
-from holdup import evidence
+from holdup import evidence, routes, transport
 from holdup.engine import atomic_json_write, validate_configuration
+from holdup.socket_runtime import Runtime, SocketOwner
 
 
 def hook(root):
     start = time.monotonic()
     settings = json.loads((root / "fixture.json").read_text())
-    config = settings["config"]
     payload = json.load(sys.stdin)
-    payload["client"] = settings["client"]
-    report = {
-        "id": "fixture",
-        "provider": "AWS",
-        "title": "ec2 instance launches unavailable in me-central-1",
-        "status": "resolved" if (root / "recovered").exists() else "investigating",
-        "fetched_at": time.time(),
-    }
-    atomic_json_write(
-        root / "evidence.json",
-        {
-            "version": 2,
-            "config_hash": d.digest(config),
-            "fetched_at": time.time(),
-            "reports": [report] if settings["mode"] == "contract" else settings["reports"],
-            "unavailable": [],
-        },
+    event = payload.get("hook_event_name", sys.argv[3] if len(sys.argv) > 3 else "PreToolUse")
+    completed = subprocess.run(
+        [
+            str(Path(sys.executable).with_name("hold-up")),
+            "--client",
+            settings["client"],
+            "--event",
+            event,
+            "--config",
+            str(root / "config.json"),
+        ],
+        input=json.dumps(payload),
+        capture_output=True,
+        text=True,
+        timeout=6,
+        check=True,
     )
-    if settings["mode"] == "contract":
-        atomic_json_write(
-            root / "readiness.json",
-            {
-                "passed": True,
-                "model_sha256": d.MODEL_SHA256,
-                "policy_version": d.POLICY_VERSION,
-                "policy_digest": d.policy_digest(),
-                "runtime_fingerprint": d.runtime_fingerprint(root),
-                "corpus_hash": d.corpus_hash(),
-                "qualification_version": d.QUALIFICATION_VERSION,
-            },
-        )
-    predictor = (
-        (
-            lambda *args: {
-                "decision": "allow" if report["status"] == "resolved" else "pause",
-                "reason": "fixture outage",
-                "evidence_ids": ["fixture"],
-                "providers": ["AWS"],
-            }
-        )
-        if settings["mode"] == "contract"
-        else d.infer
-    )
-    if settings["mode"] == "contract":
-        result = d.pre_tool(payload, config, root, predictor=predictor)
-    else:
-        completed = subprocess.run(
-            [
-                str(Path(sys.executable).with_name("hold-up")),
-                "--client",
-                settings["client"],
-                "--event",
-                "PreToolUse",
-                "--config",
-                str(root / "config.json"),
-            ],
-            input=json.dumps(payload),
-            capture_output=True,
-            text=True,
-            timeout=6,
-            check=True,
-        )
-        result = json.loads(completed.stdout) if completed.stdout.strip() else None
-    with (root / "hooks.jsonl").open("a") as stream:
-        stream.write(
-            json.dumps({"payload": payload, "result": result, "seconds": time.monotonic() - start})
-            + "\n"
-        )
+    result = json.loads(completed.stdout) if completed.stdout.strip() else None
+    if event == "PreToolUse":
+        with (root / "hooks.jsonl").open("a") as stream:
+            stream.write(json.dumps({"result": result, "seconds": time.monotonic() - start}) + "\n")
     if result:
         print(json.dumps(result))
 
 
-def run(client, binary, mode="contract", source="capture", output_dir=None):
+def run(client, binary, mode="contract", source="capture", output_dir=None, permission_check=False):
     runtime_root = d.state_root()
     reports = []
     region = "me-central-1"
@@ -207,6 +160,50 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                 ]
             }
         }
+        for event in ("PostToolUse", "PostToolUseFailure", "PreInvocation"):
+            handler = {"type": "command", "command": hook_command + " " + event}
+            hooks["hooks"][event] = (
+                [handler] if event == "PreInvocation" else [{"matcher": ".*", "hooks": [handler]}]
+            )
+        runtime = Runtime(root, config)
+        socket_owner = SocketOwner(runtime)
+        socket_thread = threading.Thread(
+            target=socket_owner.serve_forever, kwargs={"poll_interval": 0.01}, daemon=True
+        )
+        socket_thread.start()
+        rules = {}
+        preparation_failure = None
+        for command_arguments in (arguments, other_arguments, diagnostic):
+            route = routes.normalize(
+                {
+                    "tool_name": "Bash",
+                    "tool_input": {"command": shlex.join(["aws", *command_arguments])},
+                }
+            )
+            if mode == "contract":
+                value = {
+                    "decision": "pause",
+                    "reason": "fixture outage",
+                    "evidence_ids": ["fixture"],
+                    "providers": ["AWS"],
+                }
+            else:
+                try:
+                    value = routes.classify(
+                        route, reports, {"token_file": str(root / "inference.key")}
+                    )
+                except Exception:
+                    preparation_failure = "model_output_invalid"
+                    continue
+            rules[routes.key(route)] = value
+        runtime.snapshot = {
+            "rules": rules,
+            "qualified": not permission_check and (mode == "contract" or d.enforcement_ready(root)),
+            "fetched_at": time.time(),
+            "content": "fixture",
+            "reports": reports,
+            "failure": preparation_failure,
+        }
         calls = []
 
         class Handler(BaseHTTPRequestHandler):
@@ -217,6 +214,14 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                 body = json.loads(
                     self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}"
                 )
+                if client == "antigravity" and not body.get("tools"):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/event-stream")
+                    self.end_headers()
+                    self.wfile.write(
+                        b'data: {"candidates":[{"content":{"role":"model","parts":[{"text":"fixture"}]},"finishReason":"STOP","index":0}]}\n\n'
+                    )
+                    return
                 if self.path.endswith("count_tokens"):
                     self.send_response(200)
                     self.end_headers()
@@ -247,10 +252,15 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                         "SELECT id FROM decisions ORDER BY rowid DESC LIMIT 1"
                     ).fetchone()
                     if row:
-                        state.retry(row[0], time.time())
+                        transport.request(root, {"event": "retry", "decision_id": row[0]})
                     state.close()
                 if mode == "contract" and index == 3:
-                    (root / "recovered").touch()
+                    runtime.snapshot = {
+                        **runtime.snapshot,
+                        "rules": {
+                            key: {**rule, "decision": "allow"} for key, rule in rules.items()
+                        },
+                    }
                 commands = (
                     [[str(stub), *arguments]] * 4
                     if mode == "contract"
@@ -262,6 +272,64 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                     ]
                 )
                 command = shlex.join(commands[min(index, 3)])
+                if client == "antigravity":
+                    part = (
+                        {
+                            "functionCall": {
+                                "name": "run_command",
+                                "args": {
+                                    "CommandLine": command,
+                                    "Cwd": str(root),
+                                    "WaitMsBeforeAsync": 1000,
+                                    "toolAction": "Running fixture",
+                                    "toolSummary": "Fixture operation",
+                                },
+                            }
+                        }
+                        if index < 4
+                        else {"text": "fixture complete"}
+                    )
+                    answer = {
+                        "candidates": [
+                            {
+                                "content": {
+                                    "role": "model",
+                                    "parts": [{"text": "fixture tool action"}, part],
+                                },
+                                "index": 0,
+                            }
+                        ],
+                        "usageMetadata": {
+                            "promptTokenCount": 10,
+                            "candidatesTokenCount": 10,
+                            "totalTokenCount": 20,
+                        },
+                    }
+                    if "functionCall" in part:
+                        part["functionCall"]["id"] = f"call_{index}"
+                        part["thoughtSignature"] = "Zml4dHVyZQ=="
+                    self.send_response(200)
+                    streaming = "streamGenerateContent" in self.path
+                    self.send_header(
+                        "Content-Type", "text/event-stream" if streaming else "application/json"
+                    )
+                    self.end_headers()
+                    self.wfile.write(
+                        ("data: " + json.dumps(answer) + "\n\n").encode()
+                        if streaming
+                        else json.dumps(answer).encode()
+                    )
+                    if streaming:
+                        finish = "OTHER" if index < 4 else "STOP"
+                        self.wfile.write(
+                            (
+                                "data: "
+                                + json.dumps({"candidates": [{"finishReason": finish, "index": 0}]})
+                                + "\n\n"
+                            ).encode()
+                        )
+                        self.wfile.flush()
+                    return
                 if client == "claude":
                     item = (
                         {
@@ -408,6 +476,36 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                 "--json",
                 "run the supplied fixture actions",
             ]
+        elif client == "antigravity":
+            home = root / ".gemini/antigravity-cli"
+            home.mkdir(parents=True)
+            hook_home = root / ".gemini/config"
+            hook_home.mkdir(parents=True)
+            (hook_home / "hooks.json").write_text(json.dumps(hooks))
+            (home / "settings.json").write_text(
+                json.dumps({"modelProvider": "gemini", "privacy": {"enableTelemetry": False}})
+            )
+            env.update(
+                GEMINI_API_KEY="fixture-only",
+                GOOGLE_GEMINI_BASE_URL=endpoint,
+                AGY_CONFIG_DIR=str(home),
+            )
+            command = [
+                binary,
+                "-p",
+                "run the supplied fixture actions",
+                "--model",
+                "gemini-3.6-flash-medium",
+                "--dangerously-skip-permissions",
+                "--output-format",
+                "json",
+                "--print-timeout",
+                "30s",
+                "--log-file",
+                str(root / "agy.log"),
+            ]
+            if permission_check:
+                command.remove("--dangerously-skip-permissions")
         else:
             home = root / "claude"
             home.mkdir()
@@ -440,6 +538,15 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
             executions = (
                 (root / "executed").read_text().splitlines() if (root / "executed").exists() else []
             )
+            runtime.telemetry.close()
+            decisions = [
+                r["result"].get(
+                    "decision", r["result"].get("hookSpecificOutput", {}).get("permissionDecision")
+                )
+                if r["result"]
+                else None
+                for r in records
+            ]
             summary = {
                 "client": client,
                 "mode": mode,
@@ -455,48 +562,51 @@ def run(client, binary, mode="contract", source="capture", output_dir=None):
                 "blocking_verified": bool(
                     mode == "real"
                     and d.enforcement_ready(root)
-                    and records
-                    and (records[0]["result"] or {})
-                    .get("hookSpecificOutput", {})
-                    .get("permissionDecision")
-                    == "deny"
+                    and decisions
+                    and decisions[0] == "deny"
                 ),
+                "permission_check": permission_check,
+                "statistics": runtime.telemetry.stats(),
             }
             print(json.dumps(summary))
             if output_dir:
                 output_dir.mkdir(parents=True, exist_ok=True)
                 atomic_json_write(
-                    output_dir / f"{client}-{mode}-{source}.json", {**summary, "records": records}
+                    output_dir
+                    / f"{client}-{mode}-{source}{'-permissions' if permission_check else ''}.json",
+                    {**summary, "records": records},
                 )
+            if permission_check:
+                assert client == "antigravity" and records and not executions, (
+                    "neutral hooks must preserve native permission denial"
+                )
+                assert all(not r["result"] for r in records)
+                return
             expected_executions = (
-                2
-                if mode == "contract"
-                else sum(
-                    not (r["result"] or {}).get("hookSpecificOutput", {}).get("permissionDecision")
-                    == "deny"
-                    for r in records
-                )
+                2 if mode == "contract" else sum(decision != "deny" for decision in decisions)
             )
             if result.returncode or len(executions) != expected_executions or len(records) != 4:
+                if client == "antigravity" and (root / "agy.log").exists():
+                    shutil.copyfile(root / "agy.log", "/tmp/hold-up-agy-fixture.log")
                 print(result.stdout[-6000:])
                 print(result.stderr[-2000:])
                 raise AssertionError("native denial/retry/recovery contract failed")
-            decisions = [
-                r["result"].get("hookSpecificOutput", {}).get("permissionDecision")
-                if r["result"]
-                else None
-                for r in records
-            ]
             if mode == "contract":
                 assert decisions == ["deny", None, "deny", None], decisions
             else:
                 assert decisions[1:] == [None, None, None], decisions
-                summary["blocking_verified"] = bool(
-                    d.enforcement_ready(root) and decisions[0] == "deny"
-                )
-                print(json.dumps(summary))
+                if not summary["model_qualified"]:
+                    observed = next(
+                        row for row in summary["statistics"]["agents"] if row["agent"] == client
+                    )
+                    assert decisions[0] is None, "unqualified model must not deny"
+                    assert observed["advisories_emitted"] >= 1, "missing native advisory"
             assert all(r["seconds"] < 5 for r in records), "hook exceeded deadline"
         finally:
+            socket_owner.shutdown()
+            socket_owner.server_close()
+            socket_thread.join()
+            runtime.close()
             server.shutdown()
             server.server_close()
 
@@ -506,10 +616,13 @@ if __name__ == "__main__":
         hook(Path(sys.argv[2]))
     else:
         parser = argparse.ArgumentParser()
-        parser.add_argument("client", choices=["codex", "claude"])
+        parser.add_argument("client", choices=["codex", "claude", "antigravity"])
         parser.add_argument("binary")
         parser.add_argument("--mode", choices=["contract", "real"], default="contract")
         parser.add_argument("--source", choices=["capture", "live"], default="capture")
         parser.add_argument("--output-dir", type=Path)
+        parser.add_argument("--permission-check", action="store_true")
         args = parser.parse_args()
-        run(args.client, args.binary, args.mode, args.source, args.output_dir)
+        run(
+            args.client, args.binary, args.mode, args.source, args.output_dir, args.permission_check
+        )

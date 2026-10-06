@@ -18,9 +18,9 @@ MODEL_SHA256 = "be5d9a656a51922f24f1f09a759cebb694e1f5d9728bf0ef9f8c972c5a0b5ef2
 MAX_INPUT_BYTES = 16384  # 16 KiB
 MAX_RESPONSE_BYTES = 16384  # 16 KiB
 LEASE_SECONDS = 300
-POLICY_VERSION = 2
-QUALIFICATION_VERSION = 2
-QUALIFICATION_CORPUS = "qualification-v2.json"
+POLICY_VERSION = 3
+QUALIFICATION_VERSION = 5
+QUALIFICATION_CORPUS = "qualification-v5.json"
 INFERENCE_SETTINGS = {
     "temperature": 0,
     "max_tokens": 512,
@@ -72,12 +72,9 @@ def digest(value):
 
 
 def state_root():
-    return Path(
-        os.environ.get(
-            "HOLD_UP_STATE_DIR",
-            Path(os.environ.get("XDG_STATE_HOME", Path.home() / ".local/state")) / "hold-up",
-        )
-    )
+    from .locations import directory
+
+    return directory("state")
 
 
 def sanitize(text):
@@ -386,6 +383,11 @@ def policy_digest():
                 "engine.py",
                 "control.py",
                 "evaluate.py",
+                "routes.py",
+                "socket_runtime.py",
+                "adapters.py",
+                "transport.py",
+                "locations.py",
             )
         ]
     )

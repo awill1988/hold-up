@@ -4,6 +4,10 @@ Date: 2026-10-05
 
 ## Status
 
+The synchronous inference path is superseded by
+[ADR 0002](0002-use-local-sockets-for-hook-decisions.md). Historical qualification
+results below remain unchanged.
+
 Accepted. Model enforcement qualification is a separate evaluation gate and has
 not passed; accepting this architecture does not enable blocking.
 

@@ -6,8 +6,6 @@ import json
 import os
 import secrets
 import shutil
-import subprocess
-import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -19,6 +17,10 @@ def main(argv):
     parser = argparse.ArgumentParser(prog="hold-up")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("status")
+    stats = sub.add_parser("stats")
+    stats.add_argument("--since", default="24h")
+    stats.add_argument("--agent", choices=("claude", "codex", "antigravity", "unknown"))
+    stats.add_argument("--json", action="store_true")
     for name in ("retry", "wait"):
         sub.add_parser(name).add_argument("decision_id")
     sub.add_parser("provision")
@@ -27,9 +29,34 @@ def main(argv):
     collector = sub.add_parser("collect")
     collector.add_argument("--config")
     collector.add_argument("--once", action="store_true")
+    collector.add_argument("--prepare-once", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     root = decision.state_root()
     root.mkdir(parents=True, exist_ok=True, mode=0o700)
+    if args.command in ("status", "stats", "retry"):
+        from . import transport
+        from .telemetry import render
+
+        message = {"event": args.command}
+        if args.command == "retry":
+            message["decision_id"] = args.decision_id
+        if args.command == "stats":
+            import re
+
+            match = re.fullmatch(r"([1-9][0-9]*)(h|d)", args.since)
+            if not match:
+                raise ValueError("since must be a duration such as 24h or 7d")
+            message.update(
+                since=int(match[1]) * (3600 if match[2] == "h" else 86400), agent=args.agent
+            )
+        result = transport.request(root, message)
+        if args.command == "retry":
+            print("one retry approved; ask the agent to try the same action again")
+        elif args.command == "stats" and not args.json:
+            render(result)
+        else:
+            print(json.dumps(result, indent=2))
+        return 0
     if args.command == "provision":
         model = root / decision.MODEL_FILE
         temporary = root / (decision.MODEL_FILE + ".download")
@@ -104,59 +131,33 @@ def main(argv):
         from .engine import load_configuration
 
         config, feeds = load_configuration(args.config)
-        while True:
-            # Isolate slow-drip sockets and executor shutdown from the refresh schedule.
-            if args.once:
-                evidence.collect(config, feeds, root)
-                return 0
-            command = [sys.executable, "-m", "holdup", "collect", "--once"]
-            if args.config:
-                command += ["--config", args.config]
-            try:
-                subprocess.run(
-                    command,
-                    timeout=10,
-                    check=True,
-                    env={
-                        **os.environ,
-                        "PYTHONPATH": str(Path(__file__).resolve().parent.parent)
-                        + os.pathsep
-                        + os.environ.get("PYTHONPATH", ""),
-                    },
-                )
-            except (subprocess.TimeoutExpired, subprocess.CalledProcessError):
-                sys.stderr.write("warning: evidence refresh failed\n")
-            time.sleep(60)
+        from . import socket_runtime
+
+        if args.prepare_once:
+            socket_runtime.prepare(config, feeds, root)
+            return 0
+        if not args.once:
+            socket_runtime.serve(root, config, args.config)
+            return 0
+        evidence.collect(config, feeds, root)
+        return 0
     state = decision.State(root)
     try:
-        if args.command == "retry":
-            state.retry(args.decision_id, time.time())
-            print("one retry approved; ask the agent to try the same action again")
-        elif args.command == "status":
-            for row in state.db.execute(
-                "SELECT id,result,expires FROM decisions WHERE expires>?", (time.time(),)
+        while True:
+            row = state.db.execute(
+                "SELECT namespace,action,expires,retry_until FROM decisions WHERE id=?",
+                (args.decision_id,),
+            ).fetchone()
+            if not row:
+                raise ValueError("unknown pause decision")
+            if (
+                row[2] <= time.time()
+                or row[3] > time.time()
+                or not state.active(row[0], row[1], time.time())
             ):
-                print(json.dumps({"id": row[0], **json.loads(row[1]), "expires_at": row[2]}))
-            print(
-                "enforcement evaluation: "
-                + ("passed" if decision.enforcement_ready(root) else "not validated")
-            )
-        else:
-            while True:
-                row = state.db.execute(
-                    "SELECT namespace,action,expires,retry_until FROM decisions WHERE id=?",
-                    (args.decision_id,),
-                ).fetchone()
-                if not row:
-                    raise ValueError("unknown pause decision")
-                if (
-                    row[2] <= time.time()
-                    or row[3] > time.time()
-                    or not state.active(row[0], row[1], time.time())
-                ):
-                    print("pause released; retry requires a new pre-tool check")
-                    break
-                time.sleep(1)
+                print("pause released; retry requires a new pre-tool check")
+                break
+            time.sleep(1)
     finally:
         state.close()
     return 0

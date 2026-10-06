@@ -8,6 +8,7 @@ import urllib.request
 from pathlib import Path
 
 from . import decision as d
+from . import routes
 from .engine import atomic_json_write
 
 
@@ -181,6 +182,9 @@ def qualification_cases():
             "action": d.normalize_action(
                 {"tool_name": "Bash", "tool_input": {"command": case["command"]}}
             ),
+            "route": routes.normalize(
+                {"tool_name": "Bash", "tool_input": {"command": case["command"]}}
+            ),
         }
 
 
@@ -213,8 +217,11 @@ def run(root, repeats=3, qualification=False):
             result = None
             trace = {}
             try:
-                result = d.infer(case["action"], case["reports"], {"trace": trace})
-                d.validate_decision(result, case["action"], case["reports"])
+                if qualification:
+                    result = routes.classify(case["route"], case["reports"], {"trace": trace})
+                else:
+                    result = d.infer(case["action"], case["reports"], {"trace": trace})
+                    d.validate_decision(result, case["action"], case["reports"])
             except Exception as failure:
                 error = str(failure) if isinstance(failure, ValueError) else type(failure).__name__
                 if isinstance(failure, d.ModelOutputError):

@@ -21,15 +21,21 @@ class EvaluationGate(unittest.TestCase):
         self.root = Path(temporary.name)
         self.case = {
             "name": "affected",
+            "route": {
+                "kind": "remote",
+                "service": "ec2",
+                "operation": "run-instances",
+                "region": "us-east-1",
+            },
             "action": {"providers": ["GitHub"], "context_complete": True},
-            "reports": [{"id": "one", "provider": "GitHub"}],
+            "reports": [{"id": "one", "provider": "AWS", "fetched_at": __import__("time").time()}],
             "expected_pause": True,
         }
         self.result = {
             "decision": "pause",
             "reason": "affected operation",
             "evidence_ids": ["one"],
-            "providers": ["GitHub"],
+            "providers": ["AWS"],
         }
 
     def run_gate(self, result=None):
@@ -77,7 +83,7 @@ class EvaluationGate(unittest.TestCase):
         self.assertEqual(report["region"], "eu-central-1")
 
     def test_invalid_provider_fails_qualification(self):
-        status, ready = self.run_gate({**self.result, "providers": ["AWS"]})
+        status, ready = self.run_gate({**self.result, "providers": ["GitHub"]})
         self.assertEqual(status, 1)
         self.assertFalse(ready["passed"])
 

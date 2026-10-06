@@ -1,14 +1,15 @@
 # hold-up!
 
-Local outage advice and scoped action guards for **Codex and Claude Code**.
+Local outage advice and scoped action guards for **Codex, Claude Code, and Antigravity CLI**.
 
 A shared Python engine reads public incident feeds for AWS, Google Cloud,
 Microsoft Azure, GitHub, GitLab, and Bitbucket. Client adapters deliver relevant
 reports as hook context. A scope match is evidence to investigate, not proof that
 an incident caused a command failure.
 
-Before a tool runs, a local NVIDIA model can classify its dependency on a reported
-outage. A pause blocks that action, not the session. Blocking requires a passing
+The background collector uses a local NVIDIA model to prepare decisions for
+supported AWS operations. Before a tool runs, its hook queries those decisions
+over a local socket. A pause blocks that action, not the session. Blocking requires a passing
 local evaluation; without it, the model can only advise. Provider reports cannot
 reveal outages that providers have not reported.
 
@@ -16,29 +17,30 @@ reveal outages that providers have not reported.
 
 - Python 3.10 or later; Poetry manages packaging and development dependencies. The Python runtime uses the standard library.
 - RSS, Atom, and AWS JSON feeds, configured in [`src/holdup/data/status_feeds.json`](src/holdup/data/status_feeds.json).
-- Provider and region inference from supported commands, prompts, flags, and environment variables.
-- Region precedence: command flags, command-local environment, inherited environment, selected AWS profile.
+- Socket decisions normalize supported commands, explicit region flags, and inherited region variables.
+- Legacy inspection commands retain broader provider and profile scope discovery.
 - Unsupported shell constructs are not evaluated; command-based inference abstains.
 - Configuration-keyed cache with a default 300-second TTL and 2.5-second network timeout.
 - Hook workers have a 5-second execution deadline; feed responses are limited to 1 MiB.
 - Unavailable feeds produce diagnostics, not a healthy-status assertion.
-- No advisory output when there are no matching incidents. External report text is escaped and presented as data.
+- Unknown scope produces a fixed diagnostic. Provider narratives stay outside hook output.
 
 ## Client adapters
 
-Both adapters use the `holdup` package; the client name selects the event contract.
+All adapters use the `holdup` package; the client name selects the event contract.
 `scripts/hold_up.py` remains a checkout-compatible entry point.
 
-| Trigger | Codex | Claude Code |
-| --- | --- | --- |
-| Session start | `SessionStart` | `SessionStart` |
-| Prompt submission | `UserPromptSubmit` | `UserPromptSubmit` |
-| Before any hook-visible tool | `PreToolUse`, matcher `.*` | `PreToolUse`, matcher `.*` |
-| Shell tool event | `PostToolUse`, matcher `Bash` | `PostToolUseFailure`, matcher `Bash` |
+| Trigger | Codex | Claude Code | Antigravity CLI |
+| --- | --- | --- | --- |
+| Before a hook-visible tool | `PreToolUse` | `PreToolUse` | `PreToolUse` |
+| Tool completion | `PostToolUse` | `PostToolUse` | `PostToolUse` |
+| Tool failure | Completion status when supplied | `PostToolUseFailure` | Completion status when supplied |
+| Queued advice | Immediate context | Immediate context | `PreInvocation` |
 
 Codex tool advisories describe command scope without asserting a failure.
-Claude's failure event permits acknowledging the reported failure, but not
-attributing its cause to an incident.
+Claude's failure event permits counting a reported failure. Missing exit status
+is counted as an unknown outcome. Session and prompt hooks remain compatible
+no-ops; they do not fetch evidence.
 
 ## Installation
 
@@ -136,7 +138,7 @@ Use the same JSON structure in the active Claude `settings.json` (normally
 `~/.claude/settings.json`), with these substitutions:
 
 - Replace every `--client codex` with `--client claude`.
-- Replace the `PostToolUse` event key and its `--event` argument with `PostToolUseFailure`.
+- Also register `PostToolUseFailure` to observe failed Claude tools.
 
 `scripts/provider_status.py` remains a compatibility entry point for existing
 Claude installations; new integrations should use `scripts/hold_up.py`.
@@ -229,66 +231,109 @@ Feed inspection, status, and refresh commands can access the network.
 `--list-feeds` and `--test-scope` do not fetch feeds.
 The 5-second supervisor applies to hook mode, not inspection commands.
 
-### Local decision runtime
+### Local socket runtime
 
-Provision the pinned NVIDIA Nemotron 3 Nano 4B GGUF checkpoint, then run the
-inference server and collector in separate terminals, or use the managed Nix
-services. `llama-server` must be available when not using Nix.
+Install the Poetry wheel to obtain the platform-native `hold-up` entry point.
+The same package runs on Windows, macOS, and Linux without a shell dependency.
+Run `hold-up collect` to start the lightweight socket owner and its disposable
+background preparation process. Hooks never start it automatically.
 
-```bash
-poetry run hold-up provision
-poetry run hold-up serve --runner /absolute/path/to/llama-server
-poetry run hold-up collect
+```text
+hold-up provision
+hold-up serve --runner /absolute/path/to/llama-server
+hold-up collect
+hold-up status
+hold-up stats
+hold-up stats --since 7d --agent claude --json
+hold-up retry DECISION_ID
+hold-up wait DECISION_ID
 ```
 
-Provisioning verifies the pinned SHA-256. The inference server listens only on
-`127.0.0.1:18473`, with a local API key and prompt logging disabled. There is no
-cloud inference fallback. It receives provider reports and sanitized action
-metadata, not tool results, transcripts, or file contents. Sanitization removes
-known secret forms; arbitrary positional arguments are not a guaranteed secret
-boundary. Unknown tools and unsupported shell constructs cannot authorize a pause.
+Provisioning verifies the pinned NVIDIA checkpoint. The existing inference
+runner remains on authenticated loopback; it is used only during background
+preparation. There is no cloud inference fallback or additional HTTP service.
 
-Use `HOLD_UP_STATE_DIR` to select the runtime state directory; otherwise it is
-`$XDG_STATE_HOME/hold-up`, defaulting to `~/.local/state/hold-up`. The Nix wrapper
-and services share `~/.local/state/hold-up`. Keep the collector configuration
-consistent with the hook configuration; a mismatch produces an advisory.
+The socket owner listens on an OS-assigned IPv4 loopback TCP port. Requests and
+responses use authenticated, length-prefixed JSON with a 16 KiB frame limit and
+a 75 ms hook exchange deadline. Explicit `stats` and `status` inspection requests
+have a separate two-second deadline. An unavailable socket emits `socket_unavailable`
+and leaves native client permissions in effect. A five-second process watchdog
+bounds stalled hook input. Inspection commands such as `--refresh` retain their
+explicit network behavior.
 
-```bash
-poetry run hold-up-evaluate --qualification
-poetry run hold-up status
-poetry run hold-up retry DECISION_ID
-poetry run hold-up wait DECISION_ID
+Absolute `XDG_CONFIG_HOME`, `XDG_STATE_HOME`, `XDG_CACHE_HOME`, and
+`XDG_RUNTIME_DIR` overrides are honored on all platforms. Unix defaults are
+`~/.config/hold-up`, `~/.local/state/hold-up`, and `~/.cache/hold-up`.
+Without an XDG runtime directory, discovery metadata resides under
+`state/runtime`. Windows defaults to separate `config`, `state`, `cache`,
+and `runtime` directories under `%LOCALAPPDATA%/hold-up`.
+`HOLD_UP_STATE_DIR` overrides state and isolates runtime metadata beneath it.
+Runtime secrets are protected by Unix permissions or Windows user-only ACLs.
+
+Preparation uses a finite operation catalogue: EC2 launch/start/stop/terminate,
+S3 object put/get/delete, Lambda invoke/code update, and CloudFormation
+create/update/delete. S3 upload/download commands normalize to object operations.
+Other commands and ambiguous syntax remain advisory. Explicit regions or
+`AWS_REGION`/`AWS_DEFAULT_REGION` are required for mapped regional operations;
+the hook does not invoke credential providers or AWS configuration commands.
+
+Evidence refreshes every 60 seconds and expires after 300 seconds. Fresh
+acquisition can reuse unchanged interpretation. Full provider text stays in the
+evidence snapshot; hooks exchange normalized operation facts and opaque
+identifiers. Preparation runs outside socket handling.
+
+#### Statistics
+
+Statistics are local and best-effort, grouped by `claude`, `codex`,
+`antigravity`, and `unknown`. They report checks, advisories, issued denials,
+retry consumption, observed completions/failures, correlation gaps, and latency.
+Missing observations are labelled `not observed`.
+
+The latency in `stats` covers the instrumented adapter work, excluding Python
+process startup. The separate benchmark measures complete package processes.
+Neither hook decisions nor a later action establish successful rerouting or time
+saved. No prompts, commands, arguments, transcripts, tool output, credentials,
+paths, or resource identifiers are stored in telemetry.
+
+A bounded queue feeds SQLite outside hooks. Retention is 30 days or 100,000
+events. Queue/write losses are counted since process startup; hooks that cannot
+connect leave a local stderr diagnostic and cannot be counted centrally.
+
+#### Native adapters
+
+Use the installed executable in native hook configuration. Copy the handlers
+from [`hooks/codex.json`](hooks/codex.json), [`hooks/hooks.json`](hooks/hooks.json),
+or [`hooks/antigravity.json`](hooks/antigravity.json), preserving existing handlers.
+Antigravity `1.2.2` reads global hooks from `~/.gemini/config/hooks.json`.
+The Claude plugin also requires the installed `hold-up` executable on `PATH`.
+
+```text
+hold-up --client claude --event PreToolUse
+hold-up --client codex --event PostToolUse
+hold-up --client antigravity --event PreInvocation
 ```
 
-Qualification runs the separately frozen 48-case `qualification-v2.json` corpus
-three times. The exposed 120-case development corpus remains available through
-`hold-up-evaluate` without `--qualification`; it cannot grant readiness.
-Enforcement requires pause
-precision of at least 95%, recall of at least 90%, no protected-local-action
-pauses, no invalid outputs, and inference p95 below 5 seconds. The readiness
-record is bound to the model checksum, runner binary and launch configuration,
-inference settings, normalization and policy source digest, and qualification
-corpus hash. Changes invalidate readiness and cached pauses. Evaluation records
-the corpus hash before inference; tuning after qualification requires a new
-qualification version. These synthetic cases do not establish production
-reliability. The current model has not qualified for enforcement.
+Register `PreToolUse` and `PostToolUse` for each program; add
+`PostToolUseFailure` for Claude. Antigravity also needs `PreInvocation` for
+queued ephemeral advisories. The latter uses its native flat handler list;
+tool events use matcher/handler groups. Empty output preserves permission
+handling; an outage pass never returns an automatic native approval.
+Installation does not grant hook trust.
 
-Version `2` normalizes raw AWS event logs and supplies acquisition time at each
-evaluation, separately from deliberately old publication/update timestamps.
-Version `1` is retained as diagnostic evidence because its zero acquisition
-timestamps made the fresh-evidence labels invalid.
+#### Qualification
 
-The October 5, 2026 v2 run failed qualification: 144 attempts across three
-repetitions produced 119 inference timeouts and no pause predictions. Recall
-was `0%`; protected-action pauses were `0`. Attempt-duration p95 was `4.012 s`,
-including timed-out requests, so this is not a successful-inference latency
-claim. Both native clients passed deterministic contracts and permitted all
-sentinel actions in separately captured and live AWS tests. Complete real-model
-hook invocations remained below the five-second deadline, with a maximum of
-`4.557 s`. Real-model blocking verification was unsuccessful.
+Qualification v5 evaluates normalization, finite operation classification, and
+model decisions against a separately frozen corpus. Existing v1/v2 results are
+preserved. Qualification requires three repetitions, precision ≥95%, recall
+≥90%, zero invalid outputs, zero protected-action pauses, and inference p95
+below five seconds. Readiness binds the checkpoint, runner, inference settings,
+policy source, and corpus; older readiness cannot authorize socket decisions.
 
-See the [verification record](verification/2026-10-05/README.md) for raw synthetic
-responses, validation categories, acquisition metadata, and runner measurements.
+The original v2 run failed with 119 timeouts in 144 attempts and zero recall.
+Version 5 also failed: 56 timeouts in 168 attempts, zero pause recall, and no
+protected-action pauses. Blocking remains disabled. Moving inference into the
+background does not waive qualification; deterministic socket tests do not
+establish real-model blocking readiness.
 
 ### AWS evidence contract
 
@@ -345,8 +390,8 @@ region precedence, malformed feeds and caches, response limits, and blocked
 workers. Dotfiles additionally tests hook ownership, idempotency, interrupted
 activation, destination conflicts, and profile eligibility through its Nix check.
 
-`tests/native_clients.py` exercises real Codex `0.154.0` and Claude Code
-`2.1.282` clients with temporary homes and an installed wheel. `--mode contract`
+`tests/native_clients.py` exercises installed Codex `0.154.0`, Claude Code
+`2.1.282`, and Antigravity CLI `1.2.2` on macOS with temporary homes and an installed wheel. `--mode contract`
 verifies denial, one-shot retry, renewed denial, and recovery with isolated
 synthetic readiness. `--mode real --source live` fetches public AWS evidence and
 uses the pinned local model and its actual readiness. `--source capture` replays
@@ -361,8 +406,11 @@ and AWS diagnostics. An unqualified model must permit execution with advice;
 passing client mechanics does not qualify it for blocking. A feed without a
 suitable scoped incident is unavailable for the live test, not a passing replay.
 
-The [architecture decision](docs/adr/0001-local-outage-decisions.md) records the
-evidence and enforcement boundaries.
+Portable socket tests run on Windows, macOS, and Linux in CI. Native-client
+tests currently use a POSIX sentinel harness; Windows native-client execution
+has not been verified. The [socket architecture decision](docs/adr/0002-use-local-sockets-for-hook-decisions.md)
+records runtime boundaries. [Measured results](verification/2026-10-05-sockets/README.md)
+separate client mechanics, process latency, and model qualification.
 
 ## License
 

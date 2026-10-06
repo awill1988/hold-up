@@ -59,7 +59,7 @@ class TestContracts(unittest.TestCase):
     def event(self, client, event, payload=None, incidents=None):
         data = {"active_incidents": [INCIDENT] if incidents is None else incidents}
         with patch.object(hold_up, "get_status_data", return_value=data):
-            return hold_up.process_event(
+            return hold_up.legacy_process_event(
                 event, payload or {}, str(self.config), cwd=self.root, client=client
             )
 
@@ -112,7 +112,7 @@ class TestContracts(unittest.TestCase):
         with patch.object(hold_up, "get_status_data") as fetch:
             for event, payload in cases:
                 self.assertIsNone(
-                    hold_up.process_event(event, payload, str(self.config), client="codex")
+                    hold_up.legacy_process_event(event, payload, str(self.config), client="codex")
                 )
             fetch.assert_not_called()
 
@@ -120,7 +120,7 @@ class TestContracts(unittest.TestCase):
         with patch.dict(os.environ, {"AWS_REGION": "us-east-1", "AWS_PROFILE": "example"}):
             with patch.object(hold_up, "get_status_data") as fetch:
                 self.assertIsNone(
-                    hold_up.process_event(
+                    hold_up.legacy_process_event(
                         "PostToolUse",
                         {"tool_name": "Bash", "tool_input": {"command": "ls"}},
                         str(self.config),
@@ -155,7 +155,7 @@ class TestContracts(unittest.TestCase):
         with patch.object(
             hold_up, "get_status_data", return_value={"active_incidents": []}
         ) as fetch:
-            hold_up.process_event(
+            hold_up.legacy_process_event(
                 "SessionStart", {"cwd": str(project)}, cwd=self.root, client="codex"
             )
             self.assertEqual(fetch.call_args.args[0], [])
@@ -264,7 +264,7 @@ class TestContracts(unittest.TestCase):
         self.assertEqual(cli.returncode, 1)
         self.assertIn("invalid configuration", cli.stderr)
 
-    def test_real_cli_uses_seeded_cache_and_emits_event_envelope(self):
+    def test_post_events_never_fall_back_to_legacy_feed_cache(self):
         config, feeds = hold_up.load_configuration(str(self.config))
         _, cache_file = hold_up.resolve_cache_paths(config=config)
         with patch.object(hold_up, "fetch_feed", return_value=[INCIDENT]):
@@ -282,9 +282,8 @@ class TestContracts(unittest.TestCase):
                 ),
             )
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertEqual(
-                json.loads(result.stdout)["hookSpecificOutput"]["hookEventName"], event
-            )
+            self.assertEqual(result.stdout, "")
+            self.assertIn("socket_unavailable", result.stderr)
 
     def test_scope_inspection_never_executes_command(self):
         target = self.root / "must-not-exist"
