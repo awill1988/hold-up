@@ -23,9 +23,16 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Install Poetry project
+        run: |
+          python -m pip install poetry==2.2.1
+          poetry install --no-interaction
+          poetry check --lock --strict
+
       - name: Run unit test suite
         run: |
-          python3 -m unittest discover -s tests -p "test_*.py" -v
+          poetry run python -m unittest discover -s tests -p "test_*.py" -v
+          poetry run hold-up --list-feeds
 
   lint-and-validate:
     name: Lint & Schema Validation
@@ -39,16 +46,34 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install Poetry project
+        run: |
+          python -m pip install poetry==2.2.1
+          poetry install --no-interaction
+          poetry check --lock --strict
+          poetry build
+          poetry run ruff check src scripts tests
+          poetry run ruff format --check src scripts tests
+
       - name: Validate JSON syntax
         run: |
-          python3 -c "import json; from pathlib import Path; [json.loads(p.read_text()) for p in Path('.').rglob('*.json') if '.git' not in p.parts]"
+          poetry run python -c "import json; from pathlib import Path; [json.loads(p.read_text()) for p in Path('.').rglob('*.json') if not {'.git', '.venv', 'dist'}.intersection(p.parts)]"
+
+      - name: Verify isolated wheel installation
+        run: |
+          python -m venv "$RUNNER_TEMP/hold-up-wheel"
+          "$RUNNER_TEMP/hold-up-wheel/bin/python" -m pip install --no-deps dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/hold-up-wheel/bin/python" -c 'from importlib.resources import files; import json; assert json.loads(files("holdup").joinpath("data/status_feeds.json").read_text())["feeds"]'
+          "$RUNNER_TEMP/hold-up-wheel/bin/hold-up" --list-feeds
+          "$RUNNER_TEMP/hold-up-wheel/bin/hold-up-evaluate" --help
 
       - name: Verify Python syntax
         run: |
-          python3 -m compileall -q scripts tests
+          poetry run python -m compileall -q src scripts tests
 
       - name: Test hook CLI flags
         run: |
-          python3 scripts/provider_status.py --list-feeds
-          python3 scripts/hold_up.py --list-feeds
-          python3 -m unittest discover -s tests -p 'test_contracts.py' -v
+          poetry run python scripts/provider_status.py --list-feeds
+          poetry run hold-up --list-feeds
+          poetry run python -m unittest discover -s tests -p 'test_contracts.py' -v

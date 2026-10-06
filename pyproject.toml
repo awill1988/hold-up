@@ -1,0 +1,40 @@
+[project]
+name = "hold-up"
+version = "2.0.0"
+description = "Local provider outage decisions and scoped agent action guards"
+authors = [{ name = "Adam Williams", email = "adam@williams.engineer" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/awill1988/hold-up"
+
+[project.scripts]
+hold-up = "holdup.engine:main"
+hold-up-evaluate = "holdup.evaluate:main"
+
+[tool.poetry]
+packages = [{ include = "holdup", from = "src" }]
+include = [{ path = "hooks", format = "sdist" }, { path = "scripts", format = "sdist" }, { path = "tests", format = "sdist" }]
+
+[build-system]
+requires = ["poetry-core>=2.2,<3"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]
+"tests/*.py" = ["E402"]
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.14,<1)"
+]

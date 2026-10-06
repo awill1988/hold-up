@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event PreToolUse"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "",

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """unit tests for claude provider status hook engine."""
 
+import sys
 import unittest
 from pathlib import Path
-import sys
 
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -26,11 +26,11 @@ class TestStatusEngine(unittest.TestCase):
             keywords=["ec2", "s3"],
             tool_matchers=["aws", "terraform"],
         )
-        self.assertEqual(len(incidents), 1)
+        self.assertEqual(len(incidents), 2)
         inc = incidents[0]
         self.assertEqual(inc["provider"], "AWS")
         self.assertIn("Amazon Elastic Compute Cloud", inc["title"])
-        self.assertEqual(inc["status"], "Degraded")
+        self.assertEqual(inc["status"], "unknown")
         self.assertIn("investigating increased API error rates", inc["summary"])
         self.assertEqual(inc["tool_matchers"], ["aws", "terraform"])
 

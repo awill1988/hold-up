@@ -23,6 +23,8 @@ wheels/
 .cache/
 .pytest_cache/
 .ruff_cache/
+.venv/
+tests/results/
 *.json.tmp
 status_cache.json
 .DS_Store
