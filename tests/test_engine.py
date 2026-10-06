@@ -240,7 +240,7 @@ class TestStatusEngine(unittest.TestCase):
             scope=scope,
         )
         self.assertIn("<provider_status_advisory>", context)
-        self.assertIn("[DIRECT IMPACT]", context)
+        self.assertIn("[SCOPE MATCH]", context)
         self.assertIn("aws --region us-east-1 s3 ls", context)
         self.assertIn("us-east-1", context)
         self.assertIn("</provider_status_advisory>", context)
