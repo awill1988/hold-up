@@ -339,7 +339,7 @@ Installation does not grant hook trust.
 
 #### Qualification
 
-Qualification v6 evaluates normalization, finite operation classification, and
+Qualification v7 evaluates normalization, finite operation classification, and
 model decisions against a separately frozen corpus. Existing v1/v2 results are
 preserved. Qualification requires three repetitions, precision ≥95%, recall
 ≥90%, zero invalid outputs, zero protected-action pauses, and inference p95
@@ -347,7 +347,7 @@ below five seconds. Readiness binds the checkpoint, runner, inference settings,
 policy source, and corpus; older readiness cannot authorize socket decisions.
 
 The original v2 run failed with 119 timeouts in 144 attempts and zero recall.
-Version 6 also failed: 56 timeouts in 168 attempts, zero pause recall, and no
+Version 7 also failed: 57 timeouts in 168 attempts, zero pause recall, and no
 protected-action pauses. Blocking remains disabled. Moving inference into the
 background does not waive qualification; deterministic socket tests do not
 establish real-model blocking readiness.

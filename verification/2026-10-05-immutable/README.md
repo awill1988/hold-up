@@ -24,7 +24,25 @@ retry consumption again exercises actual sockets. A separate regression verifies
 advisory output for an unavailable socket. Production deadlines were not relaxed.
 Windows performance under load is not qualified by these correctness tests.
 
-## Qualification v6
+## Final qualification v7
+
+The Windows decision-ID fix changes policy identity. Version 7 freezes the same
+56-case corpus against policy
+`693240f7a439e013942467cbeef125216860f4576971fc91fc97387acbf9bce3`.
+It failed with 57 timeouts in 168 attempts, zero pause recall, zero protected
+pauses, and 4.008-second attempt p95. Blocking remains disabled. The full report,
+start record, runner metadata, and repeated native checks are under [`final/`](final/).
+
+The source fix passes [all eight CI jobs](https://github.com/awill1988/hold-up/actions/runs/37411823733),
+including Windows, macOS, and Linux socket/immutability/demo checks and Python
+3.10–3.13 unit tests. Native agent programs were exercised on macOS only.
+
+Final captured and live AWS tests each emitted one advisory and permitted four
+sentinel operations per program. Contract tests again verified two denials, one
+retry, recovery, and exactly two executions. Real-model blocking verification
+remains unsuccessful.
+
+## Historical qualification v6
 
 The same 56-case corpus was frozen against the changed policy before three
 repetitions. The run failed with 56 timeouts in 168 attempts, zero pause recall,
@@ -40,6 +58,17 @@ results remain separate; passing advisory behavior does not establish blocking
 readiness. No synthetic readiness is written for real-model runs.
 
 ## Latency
+
+The final policy's 600 complete hook-process samples are in `final/`. They use
+prepared fixture decisions, with the temporary inference runner stopped:
+
+| Program | Sequential p95 | Four-way p95 | Socket failures |
+| --- | ---: | ---: | ---: |
+| Claude Code | 56.09 ms | 72.22 ms | 0 |
+| Codex | 56.90 ms | 68.14 ms | 0 |
+| Antigravity CLI | 57.38 ms | 67.76 ms | 0 |
+
+### Earlier measurements
 
 `latency-mixed-load.json` preserves a run concurrent with native-client and
 media verification: Claude p95 was 120.84 ms, Codex 69.44 ms, and Antigravity

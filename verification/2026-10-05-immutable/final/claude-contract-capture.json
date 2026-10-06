@@ -1,0 +1,130 @@
+{
+  "client": "claude",
+  "mode": "contract",
+  "source": "synthetic",
+  "model_qualified": null,
+  "exit_code": 0,
+  "model_requests": 5,
+  "hook_calls": 4,
+  "executions": 2,
+  "hook_p95_seconds": 0.05983791599282995,
+  "blocking_verified": false,
+  "permission_check": false,
+  "statistics": {
+    "agents": [
+      {
+        "agent": "claude",
+        "coverage": "observed",
+        "checks": 4,
+        "decision_reasons": {
+          "affected_operation": 2,
+          "retry_consumed": 1,
+          "no_affected_operation": 1
+        },
+        "routing_follow_through": "not measured",
+        "advisories_emitted": 0,
+        "advisories_suppressed": 0,
+        "advisories_queued": 0,
+        "denials_issued": 2,
+        "retries": 1,
+        "completions": 2,
+        "failures": 0,
+        "outcome_unknown": 0,
+        "unmatched": 0,
+        "p50_ms": 2.4013750080484897,
+        "p95_ms": 2.5038330059032887,
+        "last_activity": 1791259360.040231
+      },
+      {
+        "agent": "codex",
+        "coverage": "not observed",
+        "checks": 0,
+        "decision_reasons": {},
+        "routing_follow_through": "not measured",
+        "advisories_emitted": 0,
+        "advisories_suppressed": 0,
+        "advisories_queued": 0,
+        "denials_issued": 0,
+        "retries": 0,
+        "completions": 0,
+        "failures": 0,
+        "outcome_unknown": 0,
+        "unmatched": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "last_activity": null
+      },
+      {
+        "agent": "antigravity",
+        "coverage": "not observed",
+        "checks": 0,
+        "decision_reasons": {},
+        "routing_follow_through": "not measured",
+        "advisories_emitted": 0,
+        "advisories_suppressed": 0,
+        "advisories_queued": 0,
+        "denials_issued": 0,
+        "retries": 0,
+        "completions": 0,
+        "failures": 0,
+        "outcome_unknown": 0,
+        "unmatched": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "last_activity": null
+      },
+      {
+        "agent": "unknown",
+        "coverage": "not observed",
+        "checks": 0,
+        "decision_reasons": {},
+        "routing_follow_through": "not measured",
+        "advisories_emitted": 0,
+        "advisories_suppressed": 0,
+        "advisories_queued": 0,
+        "denials_issued": 0,
+        "retries": 0,
+        "completions": 0,
+        "failures": 0,
+        "outcome_unknown": 0,
+        "unmatched": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "last_activity": null
+      }
+    ],
+    "dropped_events_since_start": 0,
+    "best_effort": true,
+    "latency_scope": "adapter_processing_excludes_process_startup"
+  },
+  "records": [
+    {
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: affected_operation; human retry: hold-up retry 23a0501f7eb23e614ca4fe4778a1a23b"
+        }
+      },
+      "seconds": 0.05983791599282995
+    },
+    {
+      "result": null,
+      "seconds": 0.05809941602637991
+    },
+    {
+      "result": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "permissionDecision": "deny",
+          "permissionDecisionReason": "hold-up: affected_operation; human retry: hold-up retry 90d58a50f165e6ae0e7f978a993b9168"
+        }
+      },
+      "seconds": 0.056978790991706774
+    },
+    {
+      "result": null,
+      "seconds": 0.05748637500801124
+    }
+  ]
+}
