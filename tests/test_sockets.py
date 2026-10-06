@@ -91,8 +91,20 @@ class SocketContracts(unittest.TestCase):
         self.request(event="retry", decision_id=denied["decision_id"])
         self.assertEqual(self.request(namespace="4" * 64)["decision"], "pause")
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-            results = list(pool.map(lambda _: self.request(), range(4)))
-        self.assertEqual(sum(r["reason"] == "retry_consumed" for r in results), 1)
+            results = tuple(pool.map(lambda _: self.runtime.dispatch(self.message), range(4)))
+        self.assertEqual(sum(r.get("reason") == "retry_consumed" for r in results), 1)
+        self.assertEqual(self.request()["decision"], "pause")
+
+    def test_unavailable_socket_emits_advice_without_denial(self):
+        payload = {
+            "tool_name": "Bash",
+            "tool_input": {"command": "aws --region us-east-1 ec2 run-instances"},
+        }
+        with patch.object(self.runtime, "dispatch", return_value={"error": "runtime_busy"}):
+            response = adapters.process("PreToolUse", payload, "codex", self.config, self.root)
+        envelope = response["hookSpecificOutput"]
+        self.assertNotIn("permissionDecision", envelope)
+        self.assertIn("socket_unavailable", envelope["additionalContext"])
 
     def test_invalid_readiness_scope_and_freshness_cannot_deny(self):
         self.runtime.snapshot = {**self.runtime.snapshot, "qualified": False}
