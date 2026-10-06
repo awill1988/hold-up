@@ -91,9 +91,18 @@ class SocketContracts(unittest.TestCase):
         self.request(event="retry", decision_id=denied["decision_id"])
         self.assertEqual(self.request(namespace="4" * 64)["decision"], "pause")
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-            results = tuple(pool.map(lambda _: self.runtime.dispatch(self.message), range(4)))
+            results = tuple(pool.map(lambda _: self.request(), range(4)))
         self.assertEqual(sum(r.get("reason") == "retry_consumed" for r in results), 1)
         self.assertEqual(self.request()["decision"], "pause")
+
+    def test_decision_identity_does_not_depend_on_clock_resolution(self):
+        now = time.time()
+        rule = self.runtime.snapshot["rules"][routes.key(self.route)]
+        identifiers = frozenset(
+            self.runtime.state.save("namespace", "action", "evidence", rule, now, now + 300)
+            for _ in range(10)
+        )
+        self.assertEqual(len(identifiers), 10)
 
     def test_unavailable_socket_emits_advice_without_denial(self):
         payload = {

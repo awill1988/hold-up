@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import re
+import secrets
 import sqlite3
 import time
 import urllib.request
@@ -21,8 +22,8 @@ MAX_INPUT_BYTES = 16384  # 16 KiB
 MAX_RESPONSE_BYTES = 16384  # 16 KiB
 LEASE_SECONDS = 300
 POLICY_VERSION = 3
-QUALIFICATION_VERSION = 6
-QUALIFICATION_CORPUS = "qualification-v6.json"
+QUALIFICATION_VERSION = 7
+QUALIFICATION_CORPUS = "qualification-v7.json"
 INFERENCE_SETTINGS = freeze(
     {
         "temperature": 0,
@@ -228,7 +229,7 @@ class State:
         return None
 
     def save(self, namespace, action, evidence, result, now, expires):
-        identifier = digest([namespace, action, evidence, now])[:16]
+        identifier = secrets.token_hex(16)
         with self.db:
             self.db.execute(
                 "INSERT INTO decisions(id,namespace,action,evidence,result,expires) VALUES(?,?,?,?,?,?)",

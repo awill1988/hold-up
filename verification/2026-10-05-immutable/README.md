@@ -11,18 +11,18 @@ Sets use `frozenset`. The implementation uses only standard-library types.
 JSON encoding is explicit; authentication no longer removes fields from a
 received message. Runtime snapshots are replaced rather than edited in place.
 
-103 unit tests pass, including nested mutation rejection, input-alias isolation,
+104 unit tests pass, including nested mutation rejection, input-alias isolation,
 JSON serialization, and non-mutating message authentication. Poetry lock checks,
 Ruff, wheel/source builds, and isolated installation pass. Native contract tests
 pass for Claude Code `2.1.282`, Codex `0.154.0`, and Antigravity CLI `1.2.2`.
 Antigravity's separate neutral-permission test prevents execution as expected.
 
-The first Windows CI run disconnected one of four concurrent socket requests.
-All other Windows socket cases passed. Retry atomicity now exercises concurrent
-owner dispatch independently of the socket deadline; renewal still crosses the
-actual socket. A separate regression verifies advisory output for an unavailable
-socket. Production deadlines were not relaxed. Windows performance under load
-is not qualified by these correctness tests.
+Windows CI exposed duplicate decision IDs when clock resolution produced the
+same timestamp for concurrent decisions. IDs now use 128 bits of randomness.
+A fixed-time regression verifies distinct persisted decisions, and concurrent
+retry consumption again exercises actual sockets. A separate regression verifies
+advisory output for an unavailable socket. Production deadlines were not relaxed.
+Windows performance under load is not qualified by these correctness tests.
 
 ## Qualification v6
 
