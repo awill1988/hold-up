@@ -5,6 +5,8 @@ monitors upstream status feeds for cloud providers (aws, gcp, azure)
 and vcs providers (github, gitlab, bitbucket) configured in status_feeds.json.
 maintains an atomic disk cache and injects advisory context into claude code
 lifecycle events (SessionStart, UserPromptSubmit, PostToolUseFailure).
+intercepts CLI flags, subcommands, prompt tokens, and canonical environment
+variables to perform precision scope and regional relevance filtering.
 """
 
 from __future__ import annotations
@@ -22,11 +24,45 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 DEFAULT_CACHE_TTL_SECONDS = 300
 DEFAULT_TIMEOUT_SECONDS = 2.5
 MAX_INCIDENT_AGE_HOURS = 72
+
+AWS_REGION_ALIASES = {
+    "n. virginia": "us-east-1",
+    "northern virginia": "us-east-1",
+    "ohio": "us-east-2",
+    "oregon": "us-west-2",
+    "n. california": "us-west-1",
+    "northern california": "us-west-1",
+    "ireland": "eu-west-1",
+    "london": "eu-west-2",
+    "paris": "eu-west-3",
+    "frankfurt": "eu-central-1",
+    "tokyo": "ap-northeast-1",
+    "seoul": "ap-northeast-2",
+    "singapore": "ap-southeast-1",
+    "sydney": "ap-southeast-2",
+    "sao paulo": "sa-east-1",
+    "mumbai": "ap-south-1",
+}
+
+AZURE_LOCATION_ALIASES = {
+    "east us": "eastus",
+    "east us 2": "eastus2",
+    "west us": "westus",
+    "west us 2": "westus2",
+    "west us 3": "westus3",
+    "central us": "centralus",
+    "north central us": "northcentralus",
+    "south central us": "southcentralus",
+    "west europe": "westeurope",
+    "north europe": "northeurope",
+    "uk south": "uksouth",
+    "uk west": "ukwest",
+}
 
 EMBEDDED_DEFAULT_FEEDS = [
     {
@@ -102,6 +138,312 @@ def resolve_cache_paths(explicit_dir: Optional[str] = None) -> Tuple[Path, Path]
         base_dir.mkdir(parents=True, exist_ok=True)
 
     return base_dir, base_dir / "status_cache.json"
+
+
+def resolve_aws_profile_region(profile_name: str, config_path: Optional[Path] = None) -> Optional[str]:
+    """parses ~/.aws/config to resolve default region for a specified profile."""
+    if not profile_name:
+        return None
+    cfg_file = config_path or Path(os.environ.get("AWS_CONFIG_FILE", Path.home() / ".aws" / "config"))
+    if not cfg_file.is_file():
+        return None
+    try:
+        import configparser
+        parser = configparser.RawConfigParser()
+        parser.read(str(cfg_file), encoding="utf-8")
+        section = f"profile {profile_name}" if profile_name != "default" else "default"
+        if parser.has_section(section) and parser.has_option(section, "region"):
+            return parser.get(section, "region").strip()
+    except Exception:
+        pass
+    return None
+
+
+def extract_scope_from_command(
+    command: str = "",
+    prompt: str = "",
+    env: Optional[Dict[str, str]] = None,
+    aws_config_path: Optional[Path] = None,
+) -> Dict[str, Any]:
+    """intercepts CLI tokens, flags, and canonical environment variables to infer target scope."""
+    if env is None:
+        env = dict(os.environ)
+
+    scope: Dict[str, Any] = {
+        "providers": set(),
+        "services": set(),
+        "regions": set(),
+        "profiles": set(),
+        "projects": set(),
+        "detected_via": [],
+    }
+
+    full_text = f"{command} {prompt}".strip()
+    full_lower = full_text.lower()
+
+    # 1. Detect Primary CLI Binary
+    cmd_tokens = [tok.lower().strip() for tok in re.split(r"[\s/]+", command) if tok.strip()]
+    primary_cli = None
+    if "aws" in cmd_tokens:
+        primary_cli = "AWS"
+        scope["providers"].add("AWS")
+    elif any(tok in cmd_tokens for tok in ("gcloud", "gsutil", "bq")):
+        primary_cli = "Google Cloud"
+        scope["providers"].add("Google Cloud")
+    elif "az" in cmd_tokens:
+        primary_cli = "Microsoft Azure"
+        scope["providers"].add("Microsoft Azure")
+    elif any(tok in cmd_tokens for tok in ("git", "gh")):
+        primary_cli = "GitHub"
+        scope["providers"].add("GitHub")
+    elif "glab" in cmd_tokens:
+        primary_cli = "GitLab"
+        scope["providers"].add("GitLab")
+    elif "bb" in cmd_tokens:
+        primary_cli = "Bitbucket"
+        scope["providers"].add("Bitbucket")
+
+    # 2. Inspect Environment Variables (scoped to primary_cli if known, else check all)
+    # AWS
+    if primary_cli in (None, "AWS"):
+        aws_env_reg = env.get("AWS_REGION") or env.get("AWS_DEFAULT_REGION")
+        if aws_env_reg:
+            reg_clean = aws_env_reg.lower().strip()
+            scope["regions"].add(reg_clean)
+            if not primary_cli:
+                scope["providers"].add("AWS")
+            scope["detected_via"].append(f"env:AWS_REGION={reg_clean}")
+
+        aws_env_prof = env.get("AWS_PROFILE") or env.get("AWS_DEFAULT_PROFILE")
+        if aws_env_prof:
+            prof_clean = aws_env_prof.strip()
+            scope["profiles"].add(prof_clean)
+            if not primary_cli:
+                scope["providers"].add("AWS")
+            resolved_reg = resolve_aws_profile_region(prof_clean, aws_config_path)
+            if resolved_reg:
+                scope["regions"].add(resolved_reg.lower().strip())
+                scope["detected_via"].append(f"env:AWS_PROFILE={prof_clean} -> region:{resolved_reg}")
+
+    # Google Cloud
+    if primary_cli in (None, "Google Cloud"):
+        gcp_env_reg = env.get("CLOUDSDK_COMPUTE_REGION") or env.get("CLOUDSDK_CORE_REGION")
+        if gcp_env_reg:
+            reg_clean = gcp_env_reg.lower().strip()
+            scope["regions"].add(reg_clean)
+            if not primary_cli:
+                scope["providers"].add("Google Cloud")
+            scope["detected_via"].append(f"env:CLOUDSDK_COMPUTE_REGION={reg_clean}")
+
+        gcp_env_proj = env.get("CLOUDSDK_CORE_PROJECT") or env.get("GOOGLE_CLOUD_PROJECT") or env.get("GCP_PROJECT")
+        if gcp_env_proj:
+            proj_clean = gcp_env_proj.strip()
+            scope["projects"].add(proj_clean)
+            if not primary_cli:
+                scope["providers"].add("Google Cloud")
+            scope["detected_via"].append(f"env:GCP_PROJECT={proj_clean}")
+
+    # Azure
+    if primary_cli in (None, "Microsoft Azure"):
+        az_env_loc = env.get("AZURE_DEFAULTS_LOCATION") or env.get("AZURE_DEFAULT_LOCATION") or env.get("ARM_LOCATION")
+        if az_env_loc:
+            norm_az = az_env_loc.lower().replace(" ", "").strip()
+            scope["regions"].add(norm_az)
+            if not primary_cli:
+                scope["providers"].add("Microsoft Azure")
+            scope["detected_via"].append(f"env:AZURE_DEFAULTS_LOCATION={az_env_loc}")
+
+    # 3. Extract Flags & Services based on context
+    # AWS
+    if primary_cli == "AWS" or (primary_cli is None and "aws" in full_lower):
+        aws_flags_prof = re.findall(r"--profile[ =]([a-zA-Z0-9._-]+)", command)
+        for p in aws_flags_prof:
+            scope["profiles"].add(p)
+            scope["providers"].add("AWS")
+            resolved = resolve_aws_profile_region(p, aws_config_path)
+            if resolved:
+                scope["regions"].add(resolved.lower().strip())
+                scope["detected_via"].append(f"flag:--profile {p} -> region:{resolved}")
+            else:
+                scope["detected_via"].append(f"flag:--profile {p}")
+
+        aws_flags_reg = re.findall(r"(?:--region|-r)[ =]([a-z0-9-]+)", command)
+        for r in aws_flags_reg:
+            scope["regions"].add(r.lower().strip())
+            scope["providers"].add("AWS")
+            scope["detected_via"].append(f"flag:--region {r}")
+
+        aws_services = [
+            "s3", "ec2", "lambda", "ecs", "eks", "rds", "dynamodb", "iam",
+            "route53", "cloudformation", "sqs", "sns", "sts", "secretsmanager",
+            "ssm", "stepfunctions", "bedrock", "vpc",
+        ]
+        for s in aws_services:
+            if s in cmd_tokens:
+                scope["services"].add(s)
+
+    # Google Cloud
+    if primary_cli == "Google Cloud" or (primary_cli is None and any(t in full_lower for t in ("gcloud", "gcp", "google cloud"))):
+        gcp_flags_proj = re.findall(r"--project[ =]([a-zA-Z0-9._-]+)", command)
+        for proj in gcp_flags_proj:
+            scope["projects"].add(proj)
+            scope["providers"].add("Google Cloud")
+            scope["detected_via"].append(f"flag:--project {proj}")
+
+        gcp_flags_reg = re.findall(r"--region[ =]([a-z0-9-]+)", command)
+        for r in gcp_flags_reg:
+            scope["regions"].add(r.lower().strip())
+            scope["providers"].add("Google Cloud")
+            scope["detected_via"].append(f"flag:--region {r}")
+
+        gcp_flags_zone = re.findall(r"--zone[ =]([a-z0-9-]+)", command)
+        for z in gcp_flags_zone:
+            reg_part = re.sub(r"-[a-z]$", "", z.lower().strip())
+            scope["regions"].add(reg_part)
+            scope["providers"].add("Google Cloud")
+            scope["detected_via"].append(f"flag:--zone {z} -> region:{reg_part}")
+
+        gcp_services = {
+            "compute": "compute engine", "container": "gke", "gke": "gke",
+            "storage": "cloud storage", "gsutil": "cloud storage", "run": "cloud run",
+            "bigquery": "bigquery", "bq": "bigquery", "iam": "iam",
+            "functions": "cloud functions", "pubsub": "pubsub",
+        }
+        for tok in cmd_tokens:
+            if tok in gcp_services:
+                scope["services"].add(gcp_services[tok])
+
+    # Azure
+    if primary_cli == "Microsoft Azure" or (primary_cli is None and any(t in full_lower for t in ("azure", " az "))):
+        az_flags_loc = re.findall(r"(?:--location|-l)[ =]([a-zA-Z0-9-]+)", command)
+        for loc in az_flags_loc:
+            norm_l = loc.lower().replace(" ", "").strip()
+            scope["regions"].add(norm_l)
+            scope["providers"].add("Microsoft Azure")
+            scope["detected_via"].append(f"flag:--location {loc}")
+
+        az_services = {
+            "vm": "virtual machines", "aks": "aks", "storage": "storage",
+            "cosmosdb": "cosmos", "functionapp": "functions", "webapp": "app service",
+        }
+        for tok in cmd_tokens:
+            if tok in az_services:
+                scope["services"].add(az_services[tok])
+
+    # VCS
+    if primary_cli == "GitHub":
+        if "gh" in cmd_tokens:
+            if any(t in cmd_tokens for t in ("run", "workflow", "actions")):
+                scope["services"].add("actions")
+            if "pr" in cmd_tokens:
+                scope["services"].add("pull requests")
+            if "issue" in cmd_tokens:
+                scope["services"].add("issues")
+
+    # IaC & Containers (if no primary_cli)
+    if primary_cli is None:
+        if any(tok in cmd_tokens for tok in ("terraform", "tofu", "terragrunt", "pulumi")):
+            if not scope["providers"]:
+                scope["providers"].update(["AWS", "Google Cloud", "Microsoft Azure"])
+        if any(tok in cmd_tokens for tok in ("kubectl", "helm")):
+            if not scope["providers"]:
+                scope["providers"].update(["AWS", "Google Cloud", "Microsoft Azure"])
+
+    # 4. Extract standard region regex patterns from prompt / text if still unscoped
+    if not scope["regions"]:
+        aws_pattern = re.findall(r"\b([a-z]{2}-(?:north|south|east|west|central)-\d+)\b", full_lower)
+        for r in aws_pattern:
+            scope["regions"].add(r)
+            if not primary_cli:
+                scope["providers"].add("AWS")
+
+        gcp_pattern = re.findall(r"\b([a-z]+-(?:central|east|west|north|south|northeast|southeast)\d+)\b", full_lower)
+        for r in gcp_pattern:
+            scope["regions"].add(r)
+            if not primary_cli:
+                scope["providers"].add("Google Cloud")
+
+        for alias, slug in AWS_REGION_ALIASES.items():
+            if alias in full_lower:
+                scope["regions"].add(slug)
+                if not primary_cli:
+                    scope["providers"].add("AWS")
+
+        for alias, slug in AZURE_LOCATION_ALIASES.items():
+            if alias in full_lower:
+                scope["regions"].add(slug)
+                if not primary_cli:
+                    scope["providers"].add("Microsoft Azure")
+
+    return scope
+
+
+def extract_incident_regions(incident: Dict[str, Any]) -> List[str]:
+    """extracts region identifiers from incident title, summary, or metadata."""
+    found: List[str] = []
+    haystack = f"{incident.get('title', '')} {incident.get('summary', '')}".lower()
+
+    aws_matches = re.findall(r"\b([a-z]{2}-(?:north|south|east|west|central)-\d+)\b", haystack)
+    found.extend(aws_matches)
+    for alias, slug in AWS_REGION_ALIASES.items():
+        if alias in haystack:
+            found.append(slug)
+
+    gcp_matches = re.findall(r"\b([a-z]+-(?:central|east|west|north|south|northeast|southeast)\d+)\b", haystack)
+    found.extend(gcp_matches)
+
+    for alias, slug in AZURE_LOCATION_ALIASES.items():
+        if alias in haystack:
+            found.append(slug)
+    az_slug_matches = re.findall(r"\b(eastus2?|westus[23]?|centralus|westeurope|northeurope|uksouth|ukwest)\b", haystack)
+    found.extend(az_slug_matches)
+
+    return list(dict.fromkeys(found))
+
+
+def is_global_infrastructure_incident(incident: Dict[str, Any]) -> bool:
+    """checks if the incident affects global, cross-region infrastructure (IAM, DNS, Route53, etc.)."""
+    haystack = f"{incident.get('title', '')} {incident.get('summary', '')}".lower()
+    global_terms = [
+        "iam", "route53", "route 53", "cloudfront", "global", "entra",
+        "active directory", "dns", "billing", "management console", "sts",
+    ]
+    return any(term in haystack for term in global_terms)
+
+
+def classify_incident_relevance(incident: Dict[str, Any], scope: Dict[str, Any]) -> Tuple[str, str]:
+    """classifies incident relevance against target scope."""
+    prov = incident.get("provider", "")
+    target_providers = scope.get("providers", set())
+
+    if target_providers and prov not in target_providers:
+        return "unrelated", f"provider mismatch (incident: {prov}, target: {', '.join(target_providers)})"
+
+    if is_global_infrastructure_incident(incident):
+        return "provider_global", "global infrastructure dependency"
+
+    target_regions = scope.get("regions", set())
+    incident_regions = extract_incident_regions(incident)
+
+    if target_regions:
+        if incident_regions:
+            matching_regions = set(incident_regions) & target_regions
+            if matching_regions:
+                return "direct", f"region match: {', '.join(matching_regions)}"
+            else:
+                return "disjoint_region", f"incident in {', '.join(incident_regions)}, target is {', '.join(target_regions)}"
+
+    target_services = scope.get("services", set())
+    if target_services:
+        haystack = f"{incident.get('title', '')} {incident.get('summary', '')}".lower()
+        matching_services = [s for s in target_services if s in haystack]
+        if matching_services:
+            return "direct", f"service match: {', '.join(matching_services)}"
+
+    if not target_regions:
+        return "provider_regional", "matches provider scope"
+
+    return "provider_regional", "provider incident (region unconfirmed)"
 
 
 def load_configuration(
@@ -490,37 +832,57 @@ def get_status_data(
     return refresh_cache(feeds, timeout, cache_file)
 
 
-def filter_incidents_for_command(command: str, incidents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """matches failed bash command tokens with provider tool matchers and keywords."""
-    if not command:
-        return incidents
+def filter_incidents_for_command(
+    command: str,
+    incidents: List[Dict[str, Any]],
+    prompt: str = "",
+    env: Optional[Dict[str, str]] = None,
+    aws_config_path: Optional[Path] = None,
+) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+    """matches failed bash command tokens with provider tool matchers and keywords using scope inference."""
+    if not command and not prompt:
+        return incidents, {}
 
-    cmd_tokens = [tok.lower().strip() for tok in re.split(r"[\s/]+", command) if tok.strip()]
-    if not cmd_tokens:
-        return incidents
+    scope = extract_scope_from_command(command, prompt, env, aws_config_path)
 
-    matched = []
-    for inc in incidents:
-        tool_matchers = [m.lower() for m in inc.get("tool_matchers", [])]
-        if any(tok in tool_matchers for tok in cmd_tokens):
-            matched.append(inc)
-            continue
-
-        prov_lower = inc.get("provider", "").lower()
-        if any(prov_lower in tok for tok in cmd_tokens):
-            matched.append(inc)
-            continue
-
-        if inc.get("category") == "cloud":
-            cloud_indicators = ["terraform", "tofu", "terragrunt", "kubectl", "helm", "docker", "cdk", "pulumi"]
-            if any(ind in cmd_tokens for ind in cloud_indicators):
+    if not scope["providers"] and not scope["regions"]:
+        cmd_tokens = [tok.lower().strip() for tok in re.split(r"[\s/]+", command) if tok.strip()]
+        matched = []
+        for inc in incidents:
+            tool_matchers = [m.lower() for m in inc.get("tool_matchers", [])]
+            if any(tok in tool_matchers for tok in cmd_tokens):
                 matched.append(inc)
                 continue
+            prov_lower = inc.get("provider", "").lower()
+            if any(prov_lower in tok for tok in cmd_tokens):
+                matched.append(inc)
+                continue
+            if inc.get("category") == "cloud":
+                cloud_indicators = ["terraform", "tofu", "terragrunt", "kubectl", "helm", "docker", "cdk", "pulumi"]
+                if any(ind in cmd_tokens for ind in cloud_indicators):
+                    matched.append(inc)
+        return (matched if matched else incidents), scope
 
-    return matched if matched else incidents
+    kept = []
+    for inc in incidents:
+        tier, reason = classify_incident_relevance(inc, scope)
+        if tier in ("direct", "provider_global", "provider_regional"):
+            inc_copy = dict(inc)
+            inc_copy["_relevance_tier"] = tier
+            inc_copy["_relevance_reason"] = reason
+            kept.append(inc_copy)
+
+    tier_order = {"direct": 0, "provider_global": 1, "provider_regional": 2}
+    kept.sort(key=lambda x: tier_order.get(x.get("_relevance_tier", "provider_regional"), 3))
+
+    return kept, scope
 
 
-def format_advisory_context(incidents: List[Dict[str, Any]], trigger_context: Optional[str] = None) -> str:
+def format_advisory_context(
+    incidents: List[Dict[str, Any]],
+    trigger_context: Optional[str] = None,
+    scope: Optional[Dict[str, Any]] = None,
+) -> str:
     """formats structured, authoritative markdown advisory for claude code."""
     if not incidents:
         return ""
@@ -531,14 +893,32 @@ def format_advisory_context(incidents: List[Dict[str, Any]], trigger_context: Op
         "",
     ]
     if trigger_context:
-        lines.append(f"**Trigger**: Tool failure detected on {trigger_context}.")
+        lines.append(f"**Trigger**: Tool failure detected on `{trigger_context}`.")
+        if scope and (scope.get("regions") or scope.get("profiles") or scope.get("services")):
+            parts = []
+            if scope.get("providers"):
+                parts.append(f"Provider: **{', '.join(sorted(scope['providers']))}**")
+            if scope.get("regions"):
+                parts.append(f"Target Region: **{', '.join(sorted(scope['regions']))}**")
+            if scope.get("services"):
+                parts.append(f"Service: **{', '.join(sorted(scope['services']))}**")
+            if scope.get("profiles"):
+                parts.append(f"Profile: **{', '.join(sorted(scope['profiles']))}**")
+            lines.append(f"**Inferred Scope**: {', '.join(parts)}")
         lines.append("Active upstream cloud/VCS incidents were identified that may explain this failure:")
     else:
         lines.append("The following active upstream incidents were detected on monitored providers:")
     lines.append("")
 
     for inc in incidents:
-        lines.append(f"- **[{inc['provider']} ({inc.get('category', 'infra')})]** {inc['title']}")
+        tier = inc.get("_relevance_tier")
+        badge = ""
+        if tier == "direct":
+            badge = " [DIRECT IMPACT]"
+        elif tier == "provider_global":
+            badge = " [GLOBAL DEPENDENCY]"
+
+        lines.append(f"- **[{inc['provider']} ({inc.get('category', 'infra')})]{badge}** {inc['title']}")
         lines.append(f"  - **Status**: {inc['status']}")
         if inc.get("summary"):
             lines.append(f"  - **Details**: {inc['summary']}")
@@ -570,25 +950,44 @@ def process_event(
         sys.exit(0)
 
     if event_name in ("SessionStart", "UserPromptSubmit"):
-        context = format_advisory_context(incidents)
-        response = {
-            "hookSpecificOutput": {
-                "hookEventName": event_name,
-                "additionalContext": context,
+        prompt_text = stdin_payload.get("prompt", "")
+        scope = extract_scope_from_command(command="", prompt=prompt_text)
+        matched_incidents: List[Dict[str, Any]] = []
+
+        if scope.get("regions") or scope.get("providers"):
+            for inc in incidents:
+                tier, reason = classify_incident_relevance(inc, scope)
+                if tier != "unrelated":
+                    inc_copy = dict(inc)
+                    inc_copy["_relevance_tier"] = tier
+                    inc_copy["_relevance_reason"] = reason
+                    matched_incidents.append(inc_copy)
+            tier_order = {"direct": 0, "provider_global": 1, "provider_regional": 2, "disjoint_region": 3}
+            matched_incidents.sort(key=lambda x: tier_order.get(x.get("_relevance_tier", "provider_regional"), 4))
+        else:
+            matched_incidents = incidents
+
+        if matched_incidents:
+            context = format_advisory_context(matched_incidents, scope=scope if scope.get("regions") else None)
+            response = {
+                "hookSpecificOutput": {
+                    "hookEventName": event_name,
+                    "additionalContext": context,
+                }
             }
-        }
-        print(json.dumps(response))
-        sys.exit(0)
+            print(json.dumps(response))
+            sys.exit(0)
 
     elif event_name == "PostToolUseFailure":
         tool_input = stdin_payload.get("tool_input", {})
         command = tool_input.get("command", "")
 
-        matched_incidents = filter_incidents_for_command(command, incidents)
+        matched_incidents, scope = filter_incidents_for_command(command, incidents)
         if matched_incidents:
             context = format_advisory_context(
                 matched_incidents,
-                trigger_context=f"failed command `{command}`",
+                trigger_context=command,
+                scope=scope,
             )
             response = {
                 "hookSpecificOutput": {
@@ -611,10 +1010,24 @@ def main() -> None:
     parser.add_argument("--status", action="store_true", help="print active incidents summary and exit")
     parser.add_argument("--list-feeds", action="store_true", help="list configured feeds and exit")
     parser.add_argument("--test-feed", help="test fetching and parsing a specific feed by name")
+    parser.add_argument("--test-scope", help="test CLI scope and regional inference from a command string")
     args = parser.parse_args()
 
     _, cache_file = resolve_cache_paths(args.cache_dir)
     config, feeds = load_configuration(args.config, Path.cwd())
+
+    if args.test_scope:
+        scope = extract_scope_from_command(args.test_scope)
+        print("detected scope:")
+        print(f"  providers: {', '.join(sorted(scope['providers'])) or 'none'}")
+        print(f"  regions:   {', '.join(sorted(scope['regions'])) or 'none'}")
+        print(f"  services:  {', '.join(sorted(scope['services'])) or 'none'}")
+        print(f"  profiles:  {', '.join(sorted(scope['profiles'])) or 'none'}")
+        print(f"  projects:  {', '.join(sorted(scope['projects'])) or 'none'}")
+        print("  detected via:")
+        for d in scope["detected_via"]:
+            print(f"    - {d}")
+        sys.exit(0)
 
     if args.list_feeds:
         print(f"loaded {len(feeds)} feeds from configuration:")
