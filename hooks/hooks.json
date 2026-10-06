@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/provider_status.py\" --event SessionStart --config \"${CLAUDE_PLUGIN_ROOT}/config/status_feeds.json\""
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event SessionStart"
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/provider_status.py\" --event UserPromptSubmit --config \"${CLAUDE_PLUGIN_ROOT}/config/status_feeds.json\""
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event UserPromptSubmit"
           }
         ]
       }
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/provider_status.py\" --event PostToolUseFailure --config \"${CLAUDE_PLUGIN_ROOT}/config/status_feeds.json\""
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/hold_up.py\" --client claude --event PostToolUseFailure"
           }
         ]
       }

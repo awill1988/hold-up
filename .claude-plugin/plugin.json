@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin.json",
   "name": "provider-status",
-  "version": "1.0.0",
-  "description": "Real-time VCS and Cloud infrastructure status awareness for Claude Code with curated feeds for AWS, GCP, Azure, GitHub, GitLab, and more.",
+  "version": "1.1.0",
+  "description": "hold-up! cloud and VCS infrastructure status advisories — Claude Code adapter.",
   "author": {
     "name": "Adam Williams",
     "url": "https://github.com/awill1988"
   },
-  "homepage": "https://github.com/awill1988/claude-provider-status",
-  "repository": "https://github.com/awill1988/claude-provider-status",
+  "homepage": "https://github.com/awill1988/hold-up",
+  "repository": "https://github.com/awill1988/hold-up",
   "license": "MIT",
   "keywords": [
     "aws",

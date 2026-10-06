@@ -41,13 +41,14 @@ jobs:
 
       - name: Validate JSON syntax
         run: |
-          python3 -c "import json, glob; [json.load(open(f)) for f in glob.glob('**/*.json', recursive=True)]"
+          python3 -c "import json; from pathlib import Path; [json.loads(p.read_text()) for p in Path('.').rglob('*.json') if '.git' not in p.parts]"
 
       - name: Verify Python syntax
         run: |
-          python3 -m py_compile scripts/provider_status.py tests/test_engine.py
+          python3 -m compileall -q scripts tests
 
       - name: Test hook CLI flags
         run: |
           python3 scripts/provider_status.py --list-feeds
-          python3 scripts/provider_status.py --event SessionStart
+          python3 scripts/hold_up.py --list-feeds
+          python3 -m unittest discover -s tests -p 'test_contracts.py' -v

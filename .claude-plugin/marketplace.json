@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "awill1988",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "owner": {
     "name": "Adam Williams",
     "url": "https://github.com/awill1988"
@@ -12,11 +12,11 @@
   "plugins": [
     {
       "name": "provider-status",
-      "description": "Real-time VCS and Cloud infrastructure status awareness for Claude Code with curated feeds for AWS, GCP, Azure, GitHub, GitLab, and more",
-      "version": "1.0.0",
+      "description": "hold-up! cloud and VCS status advisories — Claude Code adapter",
+      "version": "1.1.0",
       "source": {
         "source": "git",
-        "url": "https://github.com/awill1988/claude-provider-status.git"
+        "url": "https://github.com/awill1988/hold-up.git"
       }
     }
   ]
